@@ -4,9 +4,16 @@
 A brief description outlining what the project
 
 ## Table of Contents
-<p>
-You can link to the different sections below
-</p>
+<ul>
+<li><p>Description</p></li>
+<li><p>Installation</p></li>
+<li><p>Usage</p></li>
+<li><p>Related Projects</p></li>
+<li><p>Team Members</p></li>
+<li><p>Contributing</p></li>
+<li><p>Roadmap</p></li>
+<li><p>License</p></li>
+</ul>
 
 ## Description
 <p>
@@ -57,4 +64,4 @@ What future enhancements are planned? What is the current status of the project?
 </p>
 
 ## License
-[Unlicensed]
+Unlicensed
