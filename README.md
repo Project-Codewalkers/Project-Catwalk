@@ -1,6 +1,6 @@
 # Project-Catwalk
 
-
+added the linter
 
 
 What should be included in a README?
