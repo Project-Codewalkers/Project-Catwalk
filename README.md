@@ -51,6 +51,7 @@ Add the names of your team members. Describe roles on the team such as "Product 
 </p>
 <ul>
 <li><p>Brenton Hershner</p></li>
+<li><p>Elijiah Davis</p></li>
 </ul>
 
 ## Contributing
