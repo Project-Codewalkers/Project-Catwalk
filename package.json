@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "start:dev": "npx nodemon server/index.js",
-    "test": "jest --ci --coverage && codecov",
+    "test": "jest && codecov",
     "build:dev": "webpack --mode development --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js"
   },
@@ -20,6 +20,10 @@
     "url": "https://github.com/Project-Codewalkers/Project-Catwalk/issues"
   },
   "homepage": "https://github.com/Project-Codewalkers/Project-Catwalk#readme",
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.15",
