@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "start:dev": "npx nodemon server/index.js",
-    "test": "jest",
+    "test": "jest --ci --coverage && codecov",
     "build:dev": "webpack --mode development --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js"
   },
@@ -28,6 +28,7 @@
     "@babel/preset-react": "^7.13.13",
     "@testing-library/react": "^11.2.6",
     "babel-loader": "^8.2.2",
+    "codecov": "^3.8.1",
     "cypress": "^7.1.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",

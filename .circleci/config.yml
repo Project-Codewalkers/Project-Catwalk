@@ -1,7 +1,15 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
+# workflows:
+#   node-tests:
+#     jobs:
+#       - node/test
+  codecov: codecov/codecov@1.1.4
+jobs:
+  build:
+    steps:
+      - checkout
+      - run: echo "A first hello"
+      # - codecov/upload:
+      #     file: {{ ../coverage/ }}
