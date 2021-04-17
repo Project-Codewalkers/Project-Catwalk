@@ -1,11 +1,17 @@
 version: 2
 jobs:
+  Hello-World:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Hello World
+          command: |
+            echo 'Hello World!'
+            echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
       - image: alpine:3.7
-
-    working_directory: ~/Project-Catwalk
-
     steps:
       - checkout
       - run:
@@ -13,13 +19,11 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-  Run-With-Node:
+Run-With-Node:
     docker:
       - image: circleci/node:10-browsers
-
-    working_directory: ~/Project-Catwalk
-    
     steps:
+      - checkout
       - run:
           name: install and run tests
           command: |
@@ -37,10 +41,13 @@ workflows:
   version: 2
   Example_Workflow:
     jobs:
-      - I-Have-Code
+      - Hello-World
+      - I-Have-Code:
+          requires:
+            - Hello-World
       - Run-With-Node:
           requires:
-            - I-Have-Code
+            - Hello-World
       - Hold-For-Approval:
           type: approval
           requires:
