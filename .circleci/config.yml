@@ -3,6 +3,9 @@ jobs:
   I-Have-Code:
     docker:
       - image: alpine:3.7
+
+    working_directory: ~/Project-Catwalk
+
     steps:
       - checkout
       - run:
@@ -17,7 +20,7 @@ jobs:
       - run:
           name: install and run tests
           command: |
-            yarn install && yarn test
+            npm install && npm test
   Now-Complete:
     docker:
       - image: alpine:3.7
