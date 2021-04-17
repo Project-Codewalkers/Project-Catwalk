@@ -1,7 +1,47 @@
 version: 2.1
 orbs:
-  node: circleci/node@3.0.0
+  codecov: codecov/codecov@1.0.2
+jobs:
+  I-Have-Code:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - checkout
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+  Run-With-Node:
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - checkout
+      - run:
+          name: install and run tests
+          command: |
+            npm install && npm test
+      - codecov/upload:
+          file: '.coverage/clover.xml'
+          token: a34a87f1-c93f-46e5-9c38-64cb91b76324
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Complete
+          command: |
+            echo 'CI checks complete'
+
 workflows:
-  node-tests:
+  version: 2
+  Example_Workflow:
     jobs:
-      - node/test
+      - I-Have-Code
+      - Run-With-Node:
+          requires:
+            - I-Have-Code
+      - Now-Complete:
+          requires:
+            - Run-With-Node
+            - I-Have-Code

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "start:dev": "npx nodemon server/index.js",
-    "test": "jest",
+    "test": "jest && codecov",
     "build:dev": "webpack --mode development --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js"
   },
@@ -20,6 +20,10 @@
     "url": "https://github.com/Project-Codewalkers/Project-Catwalk/issues"
   },
   "homepage": "https://github.com/Project-Codewalkers/Project-Catwalk#readme",
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
+  },
   "devDependencies": {
     "@babel/cli": "^7.13.14",
     "@babel/core": "^7.13.15",
@@ -28,6 +32,7 @@
     "@babel/preset-react": "^7.13.13",
     "@testing-library/react": "^11.2.6",
     "babel-loader": "^8.2.2",
+    "codecov": "^3.8.1",
     "cypress": "^7.1.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",
