@@ -19,7 +19,7 @@ jobs:
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-Run-With-Node:
+  Run-With-Node:
     docker:
       - image: circleci/node:10-browsers
     steps:
@@ -28,7 +28,7 @@ Run-With-Node:
           name: install and run tests
           command: |
             npm install && npm test
-Now-Complete:
+  Now-Complete:
     docker:
       - image: alpine:3.7
     steps:
