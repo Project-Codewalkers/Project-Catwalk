@@ -1,28 +1,45 @@
 version: 2
 jobs:
-  build:
+  I-Have-Code:
     docker:
       - image: alpine:3.7
     steps:
       - checkout
       - run:
-          name: The First Step
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
-      - run:
-          name: Code has arrived
+          name: Code Has Arrived
           command: |
             ls -al
             echo '^^^That should look familiar^^^'
-      # - codecov/upload:
-      #     file: {{ ../coverage/ }}
+  Run-With-Node:
+    docker:
+      - image: circleci/node:10-browsers
+    steps:
+      - run:
+          name: install and run tests
+          command: |
+            npm install && npm test
+  Now-Complete:
+    docker:
+      - image: alpine:3.7
+    steps:
+      - run:
+          name: Approval Complete
+          command: |
+            echo 'Do work once the approval has completed'
 
-# version: 2.1
-# orbs:
-#   node: circleci/node@3.0.0
-#   codecov: codecov/codecov@1.0.2
-# workflows:
-#   node-tests:
-#     jobs:
-#       - node/test
+workflows:
+  version: 2
+  Example_Workflow:
+    jobs:
+      - I-Have-Code
+      - Run-With-Node:
+          requires:
+            - I-Have-Code
+      - Hold-For-Approval:
+          type: approval
+          requires:
+            - Run-With-Node
+            - I-Have-Code
+      - Now-Complete:
+          requires:
+            - Hold-For-Approval
