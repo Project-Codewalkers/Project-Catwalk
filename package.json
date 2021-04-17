@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/index.js",
     "start:dev": "npx nodemon server/index.js",
-    "test": "jest && codecov",
+    // "test": "jest && codecov",
+    "test": "jest",
     "build:dev": "webpack --mode development --config webpack.config.js --watch",
     "build": "webpack --config webpack.config.js"
   },
