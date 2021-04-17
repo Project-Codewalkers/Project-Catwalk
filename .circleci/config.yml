@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   Hello-World:
     docker:
@@ -28,6 +30,9 @@ jobs:
           name: install and run tests
           command: |
             npm install && npm test
+      - codecov/upload:
+          file: '.coverage/clover.xml'
+          token: a34a87f1-c93f-46e5-9c38-64cb91b76324
   Now-Complete:
     docker:
       - image: alpine:3.7

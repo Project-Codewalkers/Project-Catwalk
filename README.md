@@ -1,4 +1,4 @@
-# Project-Catwalk &middot; [![Project-Codewalkers](https://circleci.com/gh/Project-Codewalkers/Project-Catwalk.svg?style=svg)](https://app.circleci.com/pipelines/github/Project-Codewalkers)
+# Project-Catwalk &middot; [![Project-Codewalkers](https://circleci.com/gh/Project-Codewalkers/Project-Catwalk.svg?style=svg)](https://app.circleci.com/pipelines/github/Project-Codewalkers) [![codecov](https://codecov.io/gh/Project-Codewalkers/Project-Catwalk/branch/main/graph/badge.svg?token=GPB0Y087O7)](https://codecov.io/gh/Project-Codewalkers/Project-Catwalk)
 
 ## Overview
 A brief description outlining what the project
