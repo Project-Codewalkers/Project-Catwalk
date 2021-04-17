@@ -2,15 +2,6 @@ version: 2.1
 orbs:
   codecov: codecov/codecov@1.0.2
 jobs:
-  Hello-World:
-    docker:
-      - image: alpine:3.7
-    steps:
-      - run:
-          name: Hello World
-          command: |
-            echo 'Hello World!'
-            echo 'This is the delivery pipeline'
   I-Have-Code:
     docker:
       - image: alpine:3.7
@@ -38,26 +29,19 @@ jobs:
       - image: alpine:3.7
     steps:
       - run:
-          name: Approval Complete
+          name: Complete
           command: |
-            echo 'Do work once the approval has completed'
+            echo 'CI checks complete'
 
 workflows:
   version: 2
   Example_Workflow:
     jobs:
-      - Hello-World
-      - I-Have-Code:
-          requires:
-            - Hello-World
+      - I-Have-Code
       - Run-With-Node:
           requires:
-            - Hello-World
-      - Hold-For-Approval:
-          type: approval
-          requires:
-            - Run-With-Node
             - I-Have-Code
       - Now-Complete:
           requires:
-            - Hold-For-Approval
+            - Run-With-Node
+            - I-Have-Code
