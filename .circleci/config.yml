@@ -17,7 +17,7 @@ jobs:
       - run:
           name: install and run tests
           command: |
-            npm install && npm test
+            yarn install && yarn test
   Now-Complete:
     docker:
       - image: alpine:3.7
