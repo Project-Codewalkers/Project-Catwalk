@@ -28,7 +28,7 @@ Run-With-Node:
           name: install and run tests
           command: |
             npm install && npm test
-  Now-Complete:
+Now-Complete:
     docker:
       - image: alpine:3.7
     steps:
