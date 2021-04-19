@@ -1,24 +1,26 @@
 const express = require('express');
 const path = require('path');
+const morgan = require('morgan');
+const cors = require('cors');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const Authentication = require('./config.js');
 
 const app = express();
-const PORT = 3000;
-const { getAllProducts } = require('../helpers/atelier');
 
+const PORT = 3000;
+const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sea/';
 const fullPath = path.join(__dirname, '/../client/dist');
-// console.log(fullPath);
+
+app.use(cors());
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(fullPath));
 
-app.get('/products', (req, res) => {
-  getAllProducts()
-    .then((response) => {
-      res.status(201).send(response.data);
-    })
-    .catch((error) => {
-      res.status(400).send(error);
-    });
-});
+app.use('/(\\w)+', createProxyMiddleware({
+  target: API_URL,
+  changeOrigin: true,
+  headers: Authentication,
+}));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

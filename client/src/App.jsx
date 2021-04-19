@@ -1,9 +1,15 @@
 // App.jsx
 import React from 'react';
+import ProductDetail from './Components/ProductDetail/ProductDetail';
 
 const App = () => (
   <div>
-    Hello World!
+    <div>
+      Hello World!
+    </div>
+    <div>
+      <ProductDetail />
+    </div>
   </div>
 );
 
