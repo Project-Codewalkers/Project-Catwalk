@@ -1,3 +1,3 @@
 module.exports = {
-  Authorization: 'YOUR_TOKEN_HERE',
+  Authorization: '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',
 };
