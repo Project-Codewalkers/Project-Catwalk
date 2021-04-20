@@ -1,8 +1,16 @@
 const baseURL = 'http://localhost:3000';
 // const PORT = 3000;
 
-const defaultOptions = {
+const defaultGetOptions = {
   method: 'get',
+};
+
+const defaultPostOptions = {
+  method: 'post',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
 };
 
 function fetchCall(resource, options) {
@@ -18,7 +26,7 @@ function fetchCall(resource, options) {
  * @returns {Promise<object>} Promise which resolves to an array of items as objects.
  */
 function listProducts(page, count) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const params = {};
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
@@ -32,7 +40,7 @@ function listProducts(page, count) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function productInformation(productId) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const resource = `${baseURL}/products/${productId}`;
   return fetchCall(resource, options);
 }
@@ -43,7 +51,7 @@ function productInformation(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function productStyles(productId) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const resource = `${baseURL}/products/${productId}/styles`;
   return fetchCall(resource, options)
     .then(({ results }) => results);
@@ -55,7 +63,7 @@ function productStyles(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function relatedProducts(productId) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const resource = `${baseURL}/products/${productId}/related`;
   return fetchCall(resource, options);
 }
@@ -70,7 +78,7 @@ function relatedProducts(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function listReviews(productId, sort = 'relevant', page, count) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const params = {
     product_id: productId,
     sort,
@@ -88,9 +96,32 @@ function listReviews(productId, sort = 'relevant', page, count) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function getReviewMetadata(productId) {
-  const options = defaultOptions;
+  const options = defaultGetOptions;
   const params = { product_id: productId };
   const resource = `${baseURL}/reviews/meta?${new URLSearchParams(params)}`;
+  return fetchCall(resource, options);
+}
+
+/**
+ * Returns all product level information for a specified product id.
+ * @param {Object} reviewObj Object containing information about the review.
+ * @param {number} reviewObj.product_id Required ID of the product to post the review for.
+ * @param {number} reviewObj.rating Integer (1-5) indicating the review rating.
+ * @param {string} reviewObj.summary Summary text of the review.
+ * @param {string} reviewObj.body Continued or full text of the review.
+ * @param {boolean} reviewObj.recommend Value indicating if the reviewer recommends the product.
+ * @param {string} reviewObj.name Username for reviewer.
+ * @param {string} reviewObj.email Email address for reviewer.
+ * @param {string} reviewObj.photos Array of text urls that link to images to be shown.
+ // eslint-disable-next-line max-len
+ * @param {Object} reviewObj.characteristics Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+ * @returns {Promise<object>} Promise which resolves to an object representing the given product.
+ */
+function addAReview(reviewObj) {
+  const options = defaultPostOptions;
+  options.body = JSON.stringify(reviewObj);
+  // const params = { product_id: productId };
+  const resource = `${baseURL}/reviews`;
   return fetchCall(resource, options);
 }
 
@@ -109,7 +140,7 @@ module.exports = {
   relatedProducts,
   listReviews,
   getReviewMetadata,
-  // addAReview,
+  addAReview,
   // markReviewAsHelpful,
   // reportReview,
   // listQuestions,
