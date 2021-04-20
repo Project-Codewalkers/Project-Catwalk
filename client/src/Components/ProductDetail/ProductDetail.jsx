@@ -1,14 +1,20 @@
 /* eslint-disable no-console */
 import React from 'react';
+import PropTypes from 'prop-types';
 // import api from '../../lib/api';
-import Product from './Product';
+// import Product from './Product';
 
-const ProductDetail = () => (
+const ProductDetail = ({ productId }) => (
   <div>
-    ProductDetail
-    <div><Product /></div>
+    {`ProductDetail of ${productId}`}
+    {/* <div><Product /></div> */}
   </div>
 );
+
+ProductDetail.propTypes = {
+  productId: PropTypes.number.isRequired,
+};
+
 // api.listProducts()
 //   .then((products) => {
 //     console.log('listProducts');
