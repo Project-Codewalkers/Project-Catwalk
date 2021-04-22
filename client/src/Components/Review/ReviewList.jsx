@@ -18,7 +18,7 @@ const ReviewList = ({ id }) => {
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        console.log(meta)
+        console.log(meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));

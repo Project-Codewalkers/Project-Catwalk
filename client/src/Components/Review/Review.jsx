@@ -18,7 +18,10 @@ const Review = ({
         summary:
         {summary}
       </h3>
-      <em>Recommended: {`${rec}`}</em>
+      <em>
+        Recommended:
+        {`${rec}`}
+      </em>
       <p>
         {' '}
         Body:
