@@ -1,7 +1,8 @@
 // App.jsx
 import React from 'react';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
-import RelatedItems from './Components/RelatedItems/RelatedItems';
+
+import Carousel from './Components/RelatedItems/Carousel';
 
 const App = () => {
   const productId = 20101;
@@ -9,7 +10,8 @@ const App = () => {
     <div>
       Hello World!
       <ProductDetail productId={productId} />
-      <RelatedItems />
+      {/* <RelatedItems /> */}
+      <Carousel productId={productId} />
     </div>
   );
 };

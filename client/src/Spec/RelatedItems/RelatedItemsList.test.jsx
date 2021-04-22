@@ -2,13 +2,13 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import RelatedItems from '../../Components/RelatedItems/RelatedItems';
+import RelatedItemsList from '../../Components/RelatedItems/RelatedItemsList';
 // import ReactTestUtils from 'react-test-utils';
 
 global.fetch = jest.fn().mockResolvedValue('fakeData');
-describe('RelatedItems', () => {
+describe('RelatedItemsList', () => {
   test('it should render Related Items', () => {
-    render(<RelatedItems />);
+    render(<RelatedItemsList />);
     expect(screen.getByText('Related Items')).toBeInTheDocument();
   });
 });
