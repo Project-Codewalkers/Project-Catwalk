@@ -1,19 +1,54 @@
-/* eslint-disable no-console */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+// import PropTypes from 'prop-types';
+
+import ImageGallery from './ImageGallery/ImageGallery';
+import ProductInfo from './ProductInfo/ProductInfo';
+import StyleSelector from './StyleSelector/StyleSelector';
+import AddToCart from './AddToCart/AddToCart';
+import ProductOverview from './ProductOverview/ProductOverview';
+
+import { exampleProductStyles, exampleProductInformation } from '../../Example';
+
 // import api from '../../lib/api';
-// import Product from './Product';
 
-const ProductDetail = ({ productId }) => (
-  <div>
-    {`ProductDetail of ${productId}`}
-    {/* <div><Product /></div> */}
-  </div>
-);
+const ProductDetail = () => {
+  // TODO: pass productId in as a prop to this component
+  // console.log(productId);
+  // const [product, setProduct] = useState(exampleProductInformation);  // TODO: Put this in App
+  const product = exampleProductInformation;
+  const styles = exampleProductStyles.results;
+  const [selectedStyle, setStyle] = useState(styles.find((eachStyle) => eachStyle['default?']));
+  const [selectedPhoto, setPhoto] = useState(selectedStyle.photos[0]);
 
-ProductDetail.propTypes = {
-  productId: PropTypes.number.isRequired,
+  return (
+    <div style={{ display: 'inline-flex' }}>
+      <div>
+        <ImageGallery
+          selectedPhoto={selectedPhoto}
+          setPhoto={setPhoto}
+          photos={selectedStyle.photos}
+        />
+      </div>
+      <div>
+        <div><ProductInfo product={product} /></div>
+        <div>
+          <StyleSelector
+            styles={styles}
+            selectedStyle={selectedStyle}
+            setStyle={setStyle}
+            setPhoto={setPhoto}
+          />
+        </div>
+        <div><AddToCart skus={selectedStyle.skus} /></div>
+        <div><ProductOverview product={product} /></div>
+      </div>
+    </div>
+  );
 };
+
+// ProductDetail.propTypes = {
+//   productId: PropTypes.number.isRequired,
+// };
 
 // api.listProducts()
 //   .then((products) => {
@@ -65,12 +100,6 @@ ProductDetail.propTypes = {
 //   photos: 'https://images.unsplash.com/photo-1481349518771-20055b2a7b24?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2009&q=80',
 //   characteristics: { 14: 5, 15: 5 },
 // };
-
-// api.addAReview(testReviewObj)
-//   .then((product) => {
-//     console.log('getReviewMetadata');
-//     console.log(product);
-//   });
 
 // api.listQuestions(20101, 1, 5)
 //   .then((questions) => {
