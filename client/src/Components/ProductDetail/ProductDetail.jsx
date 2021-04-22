@@ -21,27 +21,29 @@ const ProductDetail = () => {
   const [selectedPhoto, setPhoto] = useState(selectedStyle.photos[0]);
 
   return (
-    <div style={{ display: 'inline-flex' }}>
-      <div>
-        <ImageGallery
-          selectedPhoto={selectedPhoto}
-          setPhoto={setPhoto}
-          photos={selectedStyle.photos}
-        />
-      </div>
-      <div>
-        <div><ProductInfo product={product} /></div>
+    <div>
+      <div style={{ display: 'inline-flex' }}>
         <div>
-          <StyleSelector
-            styles={styles}
-            selectedStyle={selectedStyle}
-            setStyle={setStyle}
+          <ImageGallery
+            selectedPhoto={selectedPhoto}
             setPhoto={setPhoto}
+            photos={selectedStyle.photos}
           />
         </div>
-        <div><AddToCart skus={selectedStyle.skus} /></div>
-        <div><ProductOverview product={product} /></div>
+        <div>
+          <div><ProductInfo product={product} /></div>
+          <div>
+            <StyleSelector
+              styles={styles}
+              selectedStyle={selectedStyle}
+              setStyle={setStyle}
+              setPhoto={setPhoto}
+            />
+          </div>
+          <div><AddToCart skus={selectedStyle.skus} /></div>
+        </div>
       </div>
+      <div><ProductOverview product={product} /></div>
     </div>
   );
 };
