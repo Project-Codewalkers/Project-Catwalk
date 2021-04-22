@@ -56,7 +56,7 @@ const exampleProduct = [
   },
 ];
 
-const exampleProducts = [
+const exampleListProducts = [
   {
     id: 20100,
     campus: 'hr-sea',
@@ -114,7 +114,29 @@ const exampleProducts = [
   },
 ];
 
-const exampleStyles = {
+const exampleProductInformation = {
+  id: 20102,
+  campus: 'hr-sea',
+  name: 'Morning Joggers',
+  slogan: 'Make yourself a morning person',
+  description: "Whether you're a morning person or not.  Whether you're gym bound or not.  Everyone looks good in joggers.",
+  category: 'Pants',
+  default_price: '40.00',
+  created_at: '2021-02-24T19:34:41.004Z',
+  updated_at: '2021-02-24T19:34:41.004Z',
+  features: [
+    {
+      feature: 'Fabric',
+      value: '100% Cotton',
+    },
+    {
+      feature: 'Cut',
+      value: 'Skinny',
+    },
+  ],
+};
+
+const exampleProductStyles = {
   product_id: '20102',
   results: [
     {
@@ -474,6 +496,121 @@ const exampleStyles = {
   ],
 };
 
+const exampleRelatedProducts = [
+  20104,
+  20108,
+  20106,
+  20101,
+  20100,
+];
+
+const exampleListReviews = {
+  product: '20101',
+  page: 0,
+  count: 5,
+  results: [
+    {
+      review_id: 248268,
+      rating: 4,
+      summary: 'I am liking these glasses',
+      recommend: true,
+      response: "Glad you're enjoying the product!",
+      body: "They are very dark. But that's good because I'm in very sunny spots",
+      date: '2019-06-23T00:00:00.000Z',
+      reviewer_name: 'bigbrotherbenjamin',
+      helpfulness: 29,
+      photos: [],
+    },
+    {
+      review_id: 248270,
+      rating: 3,
+      summary: "I'm enjoying wearing these shades",
+      recommend: true,
+      response: '',
+      body: 'Comfortable and practical.',
+      date: '2019-04-14T00:00:00.000Z',
+      reviewer_name: 'shortandsweeet',
+      helpfulness: 14,
+      photos: [
+        {
+          id: 417326,
+          url: 'https://images.unsplash.com/photo-1560570803-7474c0f9af99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80',
+        },
+        {
+          id: 417327,
+          url: 'https://images.unsplash.com/photo-1561693532-9ff59442a7db?ixlib=rb-1.2.1&auto=format&fit=crop&w=975&q=80',
+        },
+        {
+          id: 417328,
+          url: 'https://images.unsplash.com/photo-1487349384428-12b47aca925e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80',
+        },
+      ],
+    },
+    {
+      review_id: 248272,
+      rating: 2,
+      summary: 'This product was ok!',
+      recommend: false,
+      response: '',
+      body: "They're fine but I wouldn't buy again.",
+      date: '2019-05-23T00:00:00.000Z',
+      reviewer_name: 'anyone',
+      helpfulness: 7,
+      photos: [],
+    },
+    {
+      review_id: 248269,
+      rating: 4,
+      summary: 'They look good on me',
+      recommend: true,
+      response: '',
+      body: 'I so stylish and just my aesthetic.',
+      date: '2019-03-12T00:00:00.000Z',
+      reviewer_name: 'fashionperson',
+      helpfulness: 5,
+      photos: [],
+    },
+    {
+      review_id: 288688,
+      rating: 5,
+      summary: 'fe',
+      recommend: false,
+      response: null,
+      body: 'heywhat;kjdf lkasdkfjlasd;fkljadsfjjdasfa;sdlfkjlkj',
+      date: '2021-03-11T00:00:00.000Z',
+      reviewer_name: 'what',
+      helpfulness: 0,
+      photos: [
+        {
+          id: 496658,
+          url: 'https://louisajeseetest.blob.core.windows.net/louisaandjesse/imge02d3160-821e-11eb-b84c-b3b99091defa.dimmed_monokai.itermcolors.png',
+        },
+      ],
+    },
+  ],
+};
+
+const exampleGetReviewMetadata = {
+  product_id: '20101',
+  ratings: {
+    1: '1',
+    2: '3',
+    3: '3',
+    4: '4',
+    5: '26',
+  },
+  recommended: {
+    false: '12',
+    true: '25',
+  },
+  characteristics: {
+    Quality: {
+      id: 67501,
+      value: '3.4285714285714286',
+    },
+  },
+};
+
 const reviewExample = {
   product: '2',
   page: 0,
@@ -516,7 +653,11 @@ const reviewExample = {
 
 module.exports = {
   exampleProduct,
-  exampleProducts,
-  exampleStyles,
+  exampleListProducts,
+  exampleProductInformation,
+  exampleProductStyles,
+  exampleRelatedProducts,
+  exampleListReviews,
+  exampleGetReviewMetadata,
   reviewExample,
 };

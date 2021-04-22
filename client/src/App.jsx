@@ -7,7 +7,6 @@ const App = () => {
   const productId = 20101;
   return (
     <div>
-      Hello World!
       <ProductDetail productId={productId} />
       <RelatedItems />
     </div>
