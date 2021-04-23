@@ -38,7 +38,7 @@ const OneItem = ({ item }) => (
         {item.category}
       </div>
       <Name>{item.product_name}</Name>
-      <Price>{`Today: ${item.price}`}</Price>
+      <Price>{`Today: $${item.price}`}</Price>
       <Stars stars={item.stars} />
     </div>
     {/* <Modal description={description} /> */}
@@ -46,7 +46,14 @@ const OneItem = ({ item }) => (
 );
 
 OneItem.propTypes = {
-  item: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    category: PropTypes.string,
+    product_name: PropTypes.string,
+    price: PropTypes.number,
+    stars: PropTypes.number,
+    image: PropTypes.string,
+  }).isRequired,
 };
 
 export default OneItem;

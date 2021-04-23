@@ -2,13 +2,13 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import RelatedItemsList from '../../Components/RelatedItems/RelatedItemsList';
+import Carousel from '../../Components/RelatedItems/Carousel';
 // import ReactTestUtils from 'react-test-utils';
 
 global.fetch = jest.fn().mockResolvedValue('fakeData');
-describe('RelatedItemsList', () => {
+describe('Carousel', () => {
   test('it should render Related Items', () => {
-    render(<RelatedItemsList />);
+    render(<Carousel />);
     expect(screen.getByText('Related Items')).toBeInTheDocument();
   });
 });

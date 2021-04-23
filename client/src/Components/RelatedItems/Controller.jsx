@@ -58,7 +58,7 @@ const RightArrow = styled.svg`
   height: 24px;
 `;
 
-const Controller = ({ sample }) => {
+const Controller = ({ data }) => {
   const [left, setLeft] = useState(0);
 
   // refactor into separate components later
@@ -88,7 +88,7 @@ const Controller = ({ sample }) => {
 
   function rightBtn() {
     let btn = '';
-    if (left === -1350) {
+    if (left === -2350) {
       btn = (
         <RightBtn disabled onClick={() => setLeft(left - 450)} type="button">
           <svg id="carousel-right-arrow" viewBox="0 0 24 24">
@@ -113,8 +113,8 @@ const Controller = ({ sample }) => {
   return (
     <CarouselController role="group">
       {leftBtn()}
-      <CarouselList style={{ left: `${`${left}px`}` }} role="list">
-        <RelatedItemsList sample={sample} />
+      <CarouselList id="carousel-list" style={{ left: `${`${left}px`}` }} role="list">
+        <RelatedItemsList data={data} />
       </CarouselList>
       {rightBtn()}
     </CarouselController>
@@ -122,7 +122,14 @@ const Controller = ({ sample }) => {
 };
 
 Controller.propTypes = {
-  sample: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sample: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    category: PropTypes.string,
+    product_name: PropTypes.string,
+    price: PropTypes.number,
+    stars: PropTypes.number,
+    image: PropTypes.string,
+  })).isRequired,
 };
 
 export default Controller;
