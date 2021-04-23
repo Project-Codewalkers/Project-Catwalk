@@ -22,8 +22,8 @@ const App = () => {
   )
 };
 
-App.defaultProps = {
+// App.defaultProps = {
   
-};
+// };
 
 export default App;
