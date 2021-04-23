@@ -28,9 +28,9 @@ const ProductDetail = ({ productId, setProductId }) => {
 
     api.productStyles(productId)
       .then((productStyles) => {
+        // defaultStyle = productStyles[0];
         [defaultStyle] = productStyles;
-        defaultStyle = productStyles ? productStyles
-          .find((eachStyle) => eachStyle['default?']) : {};
+        defaultStyle = productStyles ? productStyles.find((eachStyle) => eachStyle['default?']) : {};
         setStyles(productStyles);
       })
       .then(() => {
@@ -52,6 +52,7 @@ const ProductDetail = ({ productId, setProductId }) => {
 
   return (
     <div>
+
       <div>
         <form
           onSubmit={onSubmitSetProductId}
@@ -62,6 +63,7 @@ const ProductDetail = ({ productId, setProductId }) => {
           <p>↑This is just for testing. Will delete later.↑</p>
         </form>
       </div>
+
       <div style={{ display: 'inline-flex' }}>
         <div>
           <ImageGallery
@@ -83,6 +85,7 @@ const ProductDetail = ({ productId, setProductId }) => {
           <div><AddToCart skus={selectedStyle ? selectedStyle.skus : []} /></div>
         </div>
       </div>
+
       <div><ProductOverview product={product} /></div>
     </div>
   );

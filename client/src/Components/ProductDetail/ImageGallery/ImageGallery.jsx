@@ -26,12 +26,13 @@ ImageGallery.propTypes = {
     url: PropTypes.string,
     thumbnail_url: PropTypes.string,
   }),
-  setSelectedPhoto: PropTypes.func.isRequired,
+  setSelectedPhoto: PropTypes.func,
 };
 
 ImageGallery.defaultProps = {
   photos: [],
   selectedPhoto: {},
+  setSelectedPhoto: () => {},
 };
 
 export default ImageGallery;
