@@ -26,10 +26,11 @@ How can another developer get your project up and running on their own? What dep
 </p>
 
 ```
-javascript
 npm install
-npm run // more tbd
+npm build
+npm start
 ```
+<p>Then navigate to http://localhost:3000 in your browser</p>
 
 ## Usage
 <p>
