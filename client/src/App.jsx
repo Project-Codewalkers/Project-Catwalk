@@ -8,8 +8,7 @@ import api from './lib/api';
 
 const App = () => {
 
-  const productId = 20100;
-  const [id, setId] = useState(productId);
+  const [id, setId] = useState(20100);
   const [productId, setProductId] = useState(20100);
   // set product id and set as state
 
