@@ -1,33 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import Stars from './Stars';
 
-const Carousel = styled.div`
+const ListItem = styled.div`
   padding: 10px;
   margin: 10px;
-  background-color: #decddd;
-  float: left;
+  background-color: lightgrey;
   border: black solid 0.1em;
+  flex: 0 0 225px;
+  height: 340px;
+  margin: 5px;
+`;
+
+const Image = styled.img`
+  height: 225px;
+  width: 225px;
+  border: 0px;
+  vertical-align: middle;
+`;
+
+const Name = styled.div`
+  font-size: 15px;
+  max-height: 45px;
+  overflow: hidden;
+`;
+
+const Price = styled.div`
+  font-size: small;
 `;
 
 const OneItem = ({ item }) => (
-  <Carousel>
-    <img src={item.image} alt="related-items-list" />
-    <br />
-    {item.category}
-    <br />
-    {item.product_name}
-    <br />
-    {item.price}
-    <br />
-    {item.stars}
-    <br />
-    <br />
-  </Carousel>
+  <ListItem role="listitem">
+    <Image src={item.image} alt="carousel-item" />
+    <div className="carousel-item-body">
+      <div className="item-body-category">
+        {item.category}
+      </div>
+      <Name>{item.product_name}</Name>
+      <Price>{`Today: $${item.price}`}</Price>
+      <Stars stars={item.stars} />
+    </div>
+    {/* <Modal description={description} /> */}
+  </ListItem>
 );
 
-// OneItem.propTypes = {
-//   image: PropTypes.string.isRequired,
-// };
+OneItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number,
+    category: PropTypes.string,
+    product_name: PropTypes.string,
+    price: PropTypes.number,
+    stars: PropTypes.number,
+    image: PropTypes.string,
+  }).isRequired,
+};
 
 export default OneItem;

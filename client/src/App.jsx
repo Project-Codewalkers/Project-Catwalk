@@ -1,14 +1,24 @@
 // App.jsx
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
-import RelatedItems from './Components/RelatedItems/RelatedItems';
+import Carousel from './Components/RelatedItems/Carousel';
+// import RelatedItems from './Components/RelatedItems/RelatedItems';
+import ReviewList from './Components/Review/ReviewList';
+// import api from './lib/api';
 
 const App = () => {
-  const [productId, setProductId] = useState(20100);
+  const productId = 20101;
+  const [id, setId] = useState(20100);
+
   return (
     <div>
-      <ProductDetail productId={productId} setProductId={setProductId} />
-      <RelatedItems setProduct={setProductId} />
+      Hello World!
+      <p>{console.log(id)}</p>
+      <ProductDetail productId={id} setProductId={setId} />
+      {/* <RelatedItems /> */}
+      <Carousel productId={productId} />
+      <ReviewList id={id} setId={setId} />
     </div>
   );
 };
