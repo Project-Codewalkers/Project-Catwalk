@@ -7,7 +7,6 @@ import ReviewList from './Components/Review/ReviewList';
 import api from './lib/api';
 
 const App = () => {
-
   const [id, setId] = useState(20100);
   const [productId, setProductId] = useState(20100);
   // set product id and set as state
@@ -18,12 +17,9 @@ const App = () => {
       <p>{console.log(id)}</p>
       <ProductDetail productId={productId} setProductId={setProductId} />
       <RelatedItems setProduct={setProductId} />
-      <ReviewList id={id} />
-  )
+      <ReviewList id={id} setId={setId} />
+    </div>
+  );
 };
-
-// App.defaultProps = {
-  
-// };
 
 export default App;
