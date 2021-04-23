@@ -30,7 +30,8 @@ const ProductDetail = ({ productId, setProductId }) => {
       .then((productStyles) => {
         // defaultStyle = productStyles[0];
         [defaultStyle] = productStyles;
-        defaultStyle = productStyles ? productStyles.find((eachStyle) => eachStyle['default?']) : {};
+        defaultStyle = productStyles ? productStyles
+          .find((eachStyle) => eachStyle['default?']) : {};
         setStyles(productStyles);
       })
       .then(() => {
@@ -58,7 +59,7 @@ const ProductDetail = ({ productId, setProductId }) => {
           onSubmit={onSubmitSetProductId}
           onChange={(e) => setSearchText(e.target.value)}
         >
-          <input type="text" placeholder="product id" />
+          <input type="text" placeholder="product_id" />
           <input type="submit" />
           <p>↑This is just for testing. Will delete later.↑</p>
         </form>

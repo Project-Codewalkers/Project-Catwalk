@@ -4,16 +4,19 @@ import PropTypes from 'prop-types';
 const ProductInfo = ({ product }) => (
   <div>
     <div>
-      ProductInfo
+      ★★★☆☆
     </div>
     <div>
-      <strong>CATEGORY</strong>
+      Read all reviews
+    </div>
+    <div>
+      <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
     </div>
     <h1 className="ProductName">
       {product.name}
     </h1>
     <div>
-      {product.default_price}
+      {`$${product.default_price}`}
     </div>
   </div>
 );
