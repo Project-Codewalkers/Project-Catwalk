@@ -6,7 +6,11 @@ const ImageDefault = ({ imageURL }) => (
 );
 
 ImageDefault.propTypes = {
-  imageURL: PropTypes.string.isRequired,
+  imageURL: PropTypes.string,
+};
+
+ImageDefault.defaultProps = {
+  imageURL: '',
 };
 
 export default ImageDefault;

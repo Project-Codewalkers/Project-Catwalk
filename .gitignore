@@ -4,6 +4,9 @@ logs
 *.log
 npm-debug.log*
 
+# Code Coverage
+coverage/
+
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 /client/dist/bundle.js
 
