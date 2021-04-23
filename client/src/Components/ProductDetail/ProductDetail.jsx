@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import ImageGallery from './ImageGallery/ImageGallery';
 import ProductInfo from './ProductInfo/ProductInfo';
@@ -7,44 +7,96 @@ import StyleSelector from './StyleSelector/StyleSelector';
 import AddToCart from './AddToCart/AddToCart';
 import ProductOverview from './ProductOverview/ProductOverview';
 
-import { exampleProductStyles, exampleProductInformation } from '../../Example';
+import api from '../../lib/api';
 
-// import api from '../../lib/api';
+const ProductDetail = ({ productId, setProductId }) => {
+  let defaultStyle = {};
 
-const ProductDetail = () => {
-  // TODO: pass productId in as a prop to this component
-  // console.log(productId);
-  // const [product, setProduct] = useState(exampleProductInformation);  // TODO: Put this in App
-  const product = exampleProductInformation;
-  const styles = exampleProductStyles.results;
-  const [selectedStyle, setStyle] = useState(styles.find((eachStyle) => eachStyle['default?']));
-  const [selectedPhoto, setPhoto] = useState(selectedStyle.photos[0]);
+  const [product, setProduct] = useState({});
+  const [styles, setStyles] = useState([]);
+  const [selectedStyle, setSelectedStyle] = useState({});
+  const [selectedPhoto, setSelectedPhoto] = useState({});
+
+  const [searchText, setSearchText] = useState('');
+
+  useEffect(() => {
+    api.productInformation(productId)
+      .then((productInformation) => setProduct(productInformation))
+      .catch(() => {
+        setProduct({});
+      });
+
+    api.productStyles(productId)
+      .then((productStyles) => {
+        // defaultStyle = productStyles[0];
+        [defaultStyle] = productStyles;
+        defaultStyle = productStyles ? productStyles.find((eachStyle) => eachStyle['default?']) : {};
+        setStyles(productStyles);
+      })
+      .then(() => {
+        setSelectedStyle(defaultStyle);
+      })
+      .then(() => {
+        if (defaultStyle.photos && defaultStyle.photos[0]) {
+          setSelectedPhoto(defaultStyle.photos[0]);
+        } else { setSelectedPhoto({}); }
+      })
+      .catch(() => setSelectedStyle(defaultStyle));
+  }, [productId]);
+
+  const onSubmitSetProductId = (e) => {
+    e.preventDefault();
+    setSearchText('');
+    setProductId(Number(searchText));
+  };
 
   return (
-    <div style={{ display: 'inline-flex' }}>
+    <div>
+
       <div>
-        <ImageGallery
-          selectedPhoto={selectedPhoto}
-          setPhoto={setPhoto}
-          photos={selectedStyle.photos}
-        />
+        <form
+          onSubmit={onSubmitSetProductId}
+          onChange={(e) => setSearchText(e.target.value)}
+        >
+          <input type="text" placeholder="product id" />
+          <input type="submit" />
+          <p>↑This is just for testing. Will delete later.↑</p>
+        </form>
       </div>
-      <div>
-        <div><ProductInfo product={product} /></div>
+
+      <div style={{ display: 'inline-flex' }}>
         <div>
-          <StyleSelector
-            styles={styles}
-            selectedStyle={selectedStyle}
-            setStyle={setStyle}
-            setPhoto={setPhoto}
+          <ImageGallery
+            selectedPhoto={selectedPhoto}
+            setSelectedPhoto={setSelectedPhoto}
+            photos={selectedStyle ? selectedStyle.photos : []}
           />
         </div>
-        <div><AddToCart skus={selectedStyle.skus} /></div>
-        <div><ProductOverview product={product} /></div>
+        <div>
+          <div><ProductInfo product={product} /></div>
+          <div>
+            <StyleSelector
+              styles={styles}
+              selectedStyle={selectedStyle}
+              setSelectedStyle={setSelectedStyle}
+              setSelectedPhoto={setSelectedPhoto}
+            />
+          </div>
+          <div><AddToCart skus={selectedStyle ? selectedStyle.skus : []} /></div>
+        </div>
       </div>
+
+      <div><ProductOverview product={product} /></div>
     </div>
   );
 };
+
+ProductDetail.propTypes = {
+  productId: PropTypes.number.isRequired,
+  setProductId: PropTypes.func.isRequired,
+};
+
+export default ProductDetail;
 
 // ProductDetail.propTypes = {
 //   productId: PropTypes.number.isRequired,
@@ -54,12 +106,6 @@ const ProductDetail = () => {
 //   .then((products) => {
 //     console.log('listProducts');
 //     console.log(products);
-//   });
-
-// api.productInformation(20101)
-//   .then((product) => {
-//     console.log('productInformation');
-//     console.log(product);
 //   });
 
 // api.productStyles(20101)
@@ -106,5 +152,3 @@ const ProductDetail = () => {
 //     console.log('listQuestions');
 //     console.log(questions);
 //   });
-
-export default ProductDetail;

@@ -9,7 +9,7 @@ const ProductInfo = ({ product }) => (
     <div>
       <strong>CATEGORY</strong>
     </div>
-    <h1>
+    <h1 className="ProductName">
       {product.name}
     </h1>
     <div>
@@ -20,17 +20,21 @@ const ProductInfo = ({ product }) => (
 
 ProductInfo.propTypes = {
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slogan: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    default_price: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    default_price: PropTypes.string,
     features: PropTypes.arrayOf(PropTypes.shape({
-      feature: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      feature: PropTypes.string,
+      value: PropTypes.string,
     })),
-  }).isRequired,
+  }),
+};
+
+ProductInfo.defaultProps = {
+  product: {},
 };
 
 export default ProductInfo;
