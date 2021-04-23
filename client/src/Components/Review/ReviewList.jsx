@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Review from '/home/elijiah/SEI/projects/Project-Catwalk/client/src/Components/Review/Review.jsx';
+import PropTypes from 'prop-types';
+import Review from './Review';
+import AvgRating from './AvgRating';
 import api from '../../lib/api';
 
 const ReviewList = ({ id }) => {
@@ -13,12 +15,13 @@ const ReviewList = ({ id }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, count)
       .then((product) => {
+        console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        console.log(meta);
+        console.log('this is meta', meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));
@@ -28,7 +31,7 @@ const ReviewList = ({ id }) => {
       <p> Reviews go here: </p>
       {reviews.map((item) => (
         <Review
-          rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
+          rec={item.recommend}
           key={item.review_id}
           summary={item.summary}
           body={item.body}
@@ -38,8 +41,16 @@ const ReviewList = ({ id }) => {
           rating={item.rating}
         />
       ))}
-
+      <AvgRating
+        key={metaReview.product_id}
+        //  rating={metaReview.ratings}// object
+        character={metaReview}// object
+        rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
+      />
     </div>
   );
+};
+ReviewList.propTypes = {
+  id: PropTypes.number.isRequired,
 };
 export default ReviewList;

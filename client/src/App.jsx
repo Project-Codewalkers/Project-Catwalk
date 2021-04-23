@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
 import RelatedItems from './Components/RelatedItems/RelatedItems';
-import { reviewExample } from './Example';
 import ReviewList from './Components/Review/ReviewList';
 import api from './lib/api';
 
