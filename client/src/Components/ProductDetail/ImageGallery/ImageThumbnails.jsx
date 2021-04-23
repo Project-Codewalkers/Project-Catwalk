@@ -4,7 +4,7 @@ import ImageThumbnail from './ImageThumbnail';
 
 // eslint-disable-next-line padded-blocks
 // eslint-disable-next-line arrow-body-style
-const ImageThumbnails = ({ photos, setPhoto }) => (
+const ImageThumbnails = ({ photos, setSelectedPhoto }) => (
   <ul style={{ listStyleType: 'none', padding: '0' }}>
     {
       photos.map((photo, index) => (
@@ -12,7 +12,7 @@ const ImageThumbnails = ({ photos, setPhoto }) => (
           key={photo.url}
           index={index + 1}
           photo={photo}
-          setPhoto={setPhoto}
+          setSelectedPhoto={setSelectedPhoto}
         />
       ))
     }
@@ -21,10 +21,14 @@ const ImageThumbnails = ({ photos, setPhoto }) => (
 
 ImageThumbnails.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.shape({
-    thumbnail_url: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  })).isRequired,
-  setPhoto: PropTypes.func.isRequired,
+    thumbnail_url: PropTypes.string,
+    url: PropTypes.string,
+  })),
+  setSelectedPhoto: PropTypes.func.isRequired,
+};
+
+ImageThumbnails.defaultProps = {
+  photos: [],
 };
 
 export default ImageThumbnails;

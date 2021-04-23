@@ -1,15 +1,14 @@
 // App.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
 import RelatedItems from './Components/RelatedItems/RelatedItems';
 
 const App = () => {
-  const productId = 20101;
+  const [productId, setProductId] = useState(20100);
   return (
     <div>
-      Hello World!
-      <ProductDetail productId={productId} />
-      <RelatedItems />
+      <ProductDetail productId={productId} setProductId={setProductId} />
+      <RelatedItems setProduct={setProductId} />
     </div>
   );
 };

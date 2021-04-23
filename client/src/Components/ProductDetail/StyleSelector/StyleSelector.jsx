@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Style from './Style';
 
 const StyleSelector = ({
-  styles, selectedStyle, setStyle, setPhoto,
+  styles, selectedStyle, setSelectedStyle, setSelectedPhoto,
 }) => (
   <div>
     <div>{`STYLE > ${selectedStyle.name}`}</div>
@@ -14,8 +14,8 @@ const StyleSelector = ({
           key={each.style_id}
           index={index + 1}
           style={each}
-          setStyle={setStyle}
-          setPhoto={setPhoto}
+          setSelectedStyle={setSelectedStyle}
+          setSelectedPhoto={setSelectedPhoto}
           selected={each.style_id === selectedStyle.style_id}
         />
       ))}
@@ -25,47 +25,52 @@ const StyleSelector = ({
 
 StyleSelector.propTypes = {
   styles: PropTypes.arrayOf(PropTypes.shape({
-    style_id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    original_price: PropTypes.string.isRequired,
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
     sale_price: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
     ]),
-    'default?': PropTypes.bool.isRequired,
+    'default?': PropTypes.bool,
     photos: PropTypes.arrayOf(PropTypes.shape(
       {
-        thumbnail_url: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
       },
-    )).isRequired,
+    )),
     skus: PropTypes.objectOf(PropTypes.shape({
-      quantity: PropTypes.number.isRequired,
-      size: PropTypes.string.isRequired,
+      quantity: PropTypes.number,
+      size: PropTypes.string,
     })),
-  })).isRequired,
+  })),
   selectedStyle: PropTypes.shape({
-    style_id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    original_price: PropTypes.string.isRequired,
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
     sale_price: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object,
     ]),
-    'default?': PropTypes.bool.isRequired,
+    'default?': PropTypes.bool,
     photos: PropTypes.arrayOf(PropTypes.shape(
       {
-        thumbnail_url: PropTypes.string.isRequired,
-        url: PropTypes.string.isRequired,
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
       },
-    )).isRequired,
+    )),
     skus: PropTypes.objectOf(PropTypes.shape({
-      quantity: PropTypes.number.isRequired,
-      size: PropTypes.string.isRequired,
+      quantity: PropTypes.number,
+      size: PropTypes.string,
     })),
-  }).isRequired,
-  setStyle: PropTypes.func.isRequired,
-  setPhoto: PropTypes.func.isRequired,
+  }),
+  setSelectedStyle: PropTypes.func.isRequired,
+  setSelectedPhoto: PropTypes.func.isRequired,
+};
+
+StyleSelector.defaultProps = {
+  styles: [],
+  selectedStyle: {},
 };
 
 export default StyleSelector;
