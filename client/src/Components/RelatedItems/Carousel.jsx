@@ -134,7 +134,7 @@ const Carousel = ({ productId }) => {
           console.log(err);
         })
     ));
-  });
+  }, [productId]);
 
   return (
     <CarouselMain role="main">
