@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RelatedItemsList from './RelatedItemsList';
 
@@ -121,15 +122,15 @@ const Controller = ({ data }) => {
   );
 };
 
-Controller.propTypes = {
-  sample: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    category: PropTypes.string,
-    product_name: PropTypes.string,
-    price: PropTypes.number,
-    stars: PropTypes.number,
-    image: PropTypes.string,
-  })).isRequired,
-};
+// Controller.propTypes = {
+//   data: PropTypes.arrayOf(PropTypes.shape({
+//     'default?': PropTypes.bool,
+//     category: PropTypes.string,
+//     product_name: PropTypes.string,
+//     price: PropTypes.number,
+//     stars: PropTypes.number,
+//     image: PropTypes.string,
+//   })).isRequired,
+// };
 
 export default Controller;

@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Stars from './Stars';
 
@@ -30,30 +31,47 @@ const Price = styled.div`
   font-size: small;
 `;
 
-const OneItem = ({ item }) => (
-  <ListItem role="listitem">
-    <Image src={item.image} alt="carousel-item" />
-    <div className="carousel-item-body">
-      <div className="item-body-category">
-        {item.category}
+const OneItem = ({ item }) => {
+  // url
+  let defaultStyle;
+  if (item && item[0]) {
+    defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
+    if (!defaultStyle) {
+      defaultStyle = item[0][0];
+    }
+  }
+  // defaultStyle = defaultStyle ? item[0][0] : {};
+  const url = defaultStyle ? defaultStyle.photos[0].url : '';
+  console.log(defaultStyle);
+  // cat
+  // name
+  // price
+  // stars
+  return (
+    <ListItem role="listitem">
+      <Image src={url} alt="carousel-item" />
+      <div className="carousel-item-body">
+        <div className="item-body-category">
+          {item.category}
+        </div>
+        <Name>{item.product_name}</Name>
+        <Price>{`Today: $${item.price}`}</Price>
+        <Stars stars={item.stars} />
       </div>
-      <Name>{item.product_name}</Name>
-      <Price>{`Today: $${item.price}`}</Price>
-      <Stars stars={item.stars} />
-    </div>
-    {/* <Modal description={description} /> */}
-  </ListItem>
-);
-
-OneItem.propTypes = {
-  item: PropTypes.shape({
-    id: PropTypes.number,
-    category: PropTypes.string,
-    product_name: PropTypes.string,
-    price: PropTypes.number,
-    stars: PropTypes.number,
-    image: PropTypes.string,
-  }).isRequired,
+      {/* <Modal description={description} /> */}
+    </ListItem>
+  );
 };
+
+// OneItem.propTypes = {
+//   item: PropTypes.shape({
+//     id: PropTypes.number,
+//     category: PropTypes.string,
+//     product_name: PropTypes.string,
+//     price: PropTypes.number,
+//     stars: PropTypes.number,
+//     image: PropTypes.string,
+//   }).isRequired,
+// };
 
 export default OneItem;
