@@ -1,14 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
 import ImageThumbnail from './ImageThumbnail';
+
+const StyledThumbnails = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0;
+  position:relative;
+  top: 10px;
+  left: 50px;
+  z-index: 1;
+`;
 
 // eslint-disable-next-line padded-blocks
 // eslint-disable-next-line arrow-body-style
 const ImageThumbnails = ({ photos, setSelectedPhoto }) => (
-  <ul
-    style={{ listStyleType: 'none', padding: '0' }}
-    data-testid="thumbnails"
-  >
+  <StyledThumbnails data-testid="thumbnails">
     {photos.slice(0, 7).map((photo, index) => (
       <ImageThumbnail
         data-testid="thumbnail"
@@ -18,7 +28,7 @@ const ImageThumbnails = ({ photos, setSelectedPhoto }) => (
         setSelectedPhoto={setSelectedPhoto}
       />
     ))}
-  </ul>
+  </StyledThumbnails>
 );
 
 ImageThumbnails.propTypes = {

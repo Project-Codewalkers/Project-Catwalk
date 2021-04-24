@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import ImageGallery from './ImageGallery/ImageGallery';
 import ProductInfo from './ProductInfo/ProductInfo';
@@ -8,6 +9,33 @@ import AddToCart from './AddToCart/AddToCart';
 import ProductOverview from './ProductOverview/ProductOverview';
 
 import api from '../../lib/api';
+
+const StyledProductDetail = styled.div`
+  width: clamp(320px, 100%, 1280px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid black;
+  padding: 0;
+  position: relative;
+  top: 0;
+  left: 0;
+`;
+
+const ImagesInfoStyleCart = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid black;
+  height: 1256px;
+`;
+
+const InfoStyleCart = styled.div`
+flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+`;
 
 const ProductDetail = ({ productId, setProductId }) => {
   let defaultStyle = {};
@@ -52,28 +80,26 @@ const ProductDetail = ({ productId, setProductId }) => {
   };
 
   return (
-    <div>
-
+    <StyledProductDetail>
       <div>
         <form
           onSubmit={onSubmitSetProductId}
           onChange={(e) => setSearchText(e.target.value)}
         >
+          <div>Product Detail</div>
           <input type="text" placeholder="product_id" />
           <input type="submit" />
-          <p>↑This is just for testing. Will delete later.↑</p>
+          <span>This is just for testing. Will delete later.</span>
         </form>
       </div>
 
-      <div style={{ display: 'inline-flex' }}>
-        <div>
-          <ImageGallery
-            selectedPhoto={selectedPhoto}
-            setSelectedPhoto={setSelectedPhoto}
-            photos={selectedStyle ? selectedStyle.photos : []}
-          />
-        </div>
-        <div>
+      <ImagesInfoStyleCart>
+        <ImageGallery
+          selectedPhoto={selectedPhoto}
+          setSelectedPhoto={setSelectedPhoto}
+          photos={selectedStyle ? selectedStyle.photos : []}
+        />
+        <InfoStyleCart>
           <div><ProductInfo product={product} /></div>
           <div>
             <StyleSelector
@@ -84,11 +110,11 @@ const ProductDetail = ({ productId, setProductId }) => {
             />
           </div>
           <div><AddToCart skus={selectedStyle ? selectedStyle.skus : []} /></div>
-        </div>
-      </div>
+        </InfoStyleCart>
+      </ImagesInfoStyleCart>
 
       <div><ProductOverview product={product} /></div>
-    </div>
+    </StyledProductDetail>
   );
 };
 
