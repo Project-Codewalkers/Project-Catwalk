@@ -19,21 +19,41 @@ const Front = styled.div`
   margin-top: -22px;
 `;
 
-const Stars = ({ stars }) => (
-  <StarsBody>
-    <div id="stars-container">
-      <Background>
-        &#9733;&#9733;&#9733;&#9733;&#9733;
-      </Background>
-      <Front style={{ width: `${stars * 20}%` }}>
-        &#9733;&#9733;&#9733;&#9733;&#9733;
-      </Front>
-    </div>
-  </StarsBody>
-);
+const avgStars = (ratings) => {
+  let ratingCount = 0;
+  let totalStars = 0;
+  Object.keys(ratings).forEach((starValue) => {
+    ratingCount += Number(ratings[starValue]);
+    totalStars += Number(starValue) * Number(ratings[starValue]);
+  });
+  if (ratingCount === 0 || totalStars === 0) { return 0; }
+  return totalStars / ratingCount;
+};
+
+const Stars = ({ stars }) => {
+  let rating = 0;
+  if (typeof stars === 'object') {
+    rating = avgStars(stars);
+  } else {
+    rating = stars;
+  }
+
+  return (
+    <StarsBody>
+      <div id="stars-container">
+        <Background>
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+        </Background>
+        <Front style={{ width: `${rating * 20}%` }}>
+          &#9733;&#9733;&#9733;&#9733;&#9733;
+        </Front>
+      </div>
+    </StarsBody>
+  );
+};
 
 // Stars.propTypes = {
 //   stars: PropTypes.number.isRequired,
 // };
 
-export default Stars;
+export { Stars as default, avgStars };
