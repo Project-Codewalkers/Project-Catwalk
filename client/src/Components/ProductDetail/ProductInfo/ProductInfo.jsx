@@ -1,21 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const StyledProductInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+
+const ProductName = styled.h1`
+  margin: 0.2em;
+`;
 
 const ProductInfo = ({ product }) => (
-  <div>
+  <StyledProductInfo>
     <div>
-      ProductInfo
+      <span>
+        ★★★☆☆
+      </span>
+      <a href="#reviews">
+        Read all reviews
+      </a>
     </div>
     <div>
-      <strong>CATEGORY</strong>
+      <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
     </div>
-    <h1 className="ProductName">
-      {product.name}
-    </h1>
+    <ProductName className="ProductName">
+      {product.name ? product.name : ''}
+    </ProductName>
     <div>
-      {product.default_price}
+      {product.default_price ? `$${product.default_price}` : ''}
     </div>
-  </div>
+  </StyledProductInfo>
 );
 
 ProductInfo.propTypes = {

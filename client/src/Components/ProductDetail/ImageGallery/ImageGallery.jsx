@@ -1,21 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageDefault from './ImageDefault';
+import styled from 'styled-components';
+
 import ImageThumbnails from './ImageThumbnails';
 
-const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => (
-  <div>
-    <span style={{ display: 'inline-block' }}>
+const StyledDefaultImage = styled.div`
+  flex: 2;
+  min-width: 480px;
+  max-height: 628px;
+  background: center / contain no-repeat url(${(props) => (props.imgURL)}), #EBEBEB;
+`;
+
+const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => {
+  const imgURL = selectedPhoto.url ? selectedPhoto.url : '';
+  return (
+    <StyledDefaultImage imgURL={imgURL} data-testid="defaultImage">
       <ImageThumbnails
         photos={photos.filter((photo) => photo.thumbnail_url)}
         setSelectedPhoto={setSelectedPhoto}
       />
-    </span>
-    <span style={{ display: 'inline-block' }}>
-      <ImageDefault imageURL={selectedPhoto.url} />
-    </span>
-  </div>
-);
+    </StyledDefaultImage>
+  );
+};
 
 ImageGallery.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.shape({
@@ -31,8 +37,8 @@ ImageGallery.propTypes = {
 
 ImageGallery.defaultProps = {
   photos: [],
-  selectedPhoto: {},
-  setSelectedPhoto: () => {},
+  selectedPhoto: { url: '', thumbnail_url: '' },
+  setSelectedPhoto: () => { },
 };
 
 export default ImageGallery;
