@@ -1,8 +1,16 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const StyledStarButton = styled.button`
+  height: 64px;
+  width: 64px;
+  margin: 12px;
+  border: 1px solid #525252;
+  background: #FFF;
+`;
 
 const StarButton = () => (
-  <button type="button">⭐️</button>
+  <StyledStarButton type="button">⭐️</StyledStarButton>
 );
 
 export default StarButton;

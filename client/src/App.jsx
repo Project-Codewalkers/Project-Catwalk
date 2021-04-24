@@ -11,7 +11,7 @@ const StyledApp = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
+  font-family: Helvetica, sans-serif;
 `;
 
 const App = () => {

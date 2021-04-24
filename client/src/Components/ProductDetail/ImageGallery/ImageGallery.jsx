@@ -2,30 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ImageDefault from './ImageDefault';
 import ImageThumbnails from './ImageThumbnails';
 
-const StyledImageGallery = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  border: 1px solid black;
-  position: relative;
-  top: 0;
-  left: 0;
-  /* background-image: url('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'); */
-
-  background: url(${(props) => (props.imgURL)});
-  /* background-image: url(selectedPhoto); */
+const StyledDefaultImage = styled.div`
+  flex: 2;
+  min-width: 480px;
+  max-height: 628px;
+  background: center / contain no-repeat url(${(props) => (props.imgURL)}), #EBEBEB;
 `;
 
-const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => (
-  <ImageDefault selectedPhoto={selectedPhoto}>
-    <ImageThumbnails
-      photos={photos.filter((photo) => photo.thumbnail_url)}
-      setSelectedPhoto={setSelectedPhoto}
-    />
-  </ImageDefault>
-);
+const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => {
+  const imgURL = selectedPhoto.url ? selectedPhoto.url : '';
+  return (
+    <StyledDefaultImage imgURL={imgURL} data-testid="defaultImage">
+      <ImageThumbnails
+        photos={photos.filter((photo) => photo.thumbnail_url)}
+        setSelectedPhoto={setSelectedPhoto}
+      />
+    </StyledDefaultImage>
+  );
+};
 
 ImageGallery.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.shape({
@@ -41,7 +37,7 @@ ImageGallery.propTypes = {
 
 ImageGallery.defaultProps = {
   photos: [],
-  selectedPhoto: {},
+  selectedPhoto: { url: '', thumbnail_url: '' },
   setSelectedPhoto: () => { },
 };
 

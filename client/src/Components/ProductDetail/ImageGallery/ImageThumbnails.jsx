@@ -5,18 +5,17 @@ import styled from 'styled-components';
 import ImageThumbnail from './ImageThumbnail';
 
 const StyledThumbnails = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: grid;
+  grid-template: repeat(7, 84px) / repeat(1, 64px);
+  /* justify-content: flex-start;
+  align-content: flex-start; */
   padding: 0;
   position:relative;
-  top: 10px;
-  left: 50px;
+  top: 32px;
+  left: 32px;
   z-index: 1;
 `;
 
-// eslint-disable-next-line padded-blocks
-// eslint-disable-next-line arrow-body-style
 const ImageThumbnails = ({ photos, setSelectedPhoto }) => (
   <StyledThumbnails data-testid="thumbnails">
     {photos.slice(0, 7).map((photo, index) => (

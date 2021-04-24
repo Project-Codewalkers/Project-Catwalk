@@ -7,13 +7,13 @@ import StarButton from './StarButton';
 
 const AddToCart = () => (
   <div>
-    <div>
-      <SizeSelector />
-      <QtySelector />
+    <div style={{ display: 'flex', width: '100%' }}>
+      <SizeSelector style={{ flexGrow: '3' }} />
+      <QtySelector style={{ flexGrow: '1' }} />
     </div>
-    <div>
-      <AddToBagButton />
-      <StarButton />
+    <div style={{ display: 'flex', width: '100%' }}>
+      <AddToBagButton style={{ flexGrow: '1' }} />
+      <StarButton style={{ flexGrow: '0' }} />
     </div>
   </div>
 );

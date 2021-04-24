@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 import Style from './Style';
+
+const StyledStyleThumbnails = styled.div`
+  display: grid;
+  grid-template: repeat(2, auto) / repeat(4, auto);
+
+`;
 
 const StyleSelector = ({
   styles, selectedStyle, setSelectedStyle, setSelectedPhoto,
@@ -10,10 +17,10 @@ const StyleSelector = ({
   return (
     <div>
       <div>
-        <b>{'STYLE > '}</b>
+        <b>{'STYLE  >  '}</b>
         {styleName}
       </div>
-      <ul style={{ display: 'inline-flex' }}>
+      <StyledStyleThumbnails>
         {styles.map((each, index) => (
           <Style
             key={each.style_id}
@@ -24,7 +31,7 @@ const StyleSelector = ({
             selected={each.style_id === selectedStyle.style_id}
           />
         ))}
-      </ul>
+      </StyledStyleThumbnails>
     </div>
   )
 };
