@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StarsBody = styled.div`
@@ -31,8 +32,8 @@ const Stars = ({ stars }) => (
   </StarsBody>
 );
 
-Stars.propTypes = {
-  stars: PropTypes.number.isRequired,
-};
+// Stars.propTypes = {
+//   stars: PropTypes.number.isRequired,
+// };
 
 export default Stars;

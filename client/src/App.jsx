@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
-// import Carousel from './Components/RelatedItems/Carousel';
+import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
 import ReviewList from './Components/Review/ReviewList';
 // import api from './lib/api';
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <StyledApp>
       <ProductDetail productId={productId} setProductId={setProductId} />
-      {/* <Carousel productId={productId} /> */}
+      <Carousel productId={productId} />
       <ReviewList id={productId} />
     </StyledApp>
   );
