@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StarsBody = styled.div`
@@ -52,8 +51,19 @@ const Stars = ({ stars }) => {
   );
 };
 
-// Stars.propTypes = {
-//   stars: PropTypes.number.isRequired,
-// };
+Stars.propTypes = {
+  stars: PropTypes.oneOfType([
+    PropTypes.number.isRequired,
+    PropTypes.shape({
+      ratings: PropTypes.shape({
+        1: PropTypes.string,
+        2: PropTypes.string,
+        3: PropTypes.string,
+        4: PropTypes.string,
+        5: PropTypes.string,
+      }),
+    }),
+  ]).isRequired,
+};
 
 export { Stars as default, avgStars };
