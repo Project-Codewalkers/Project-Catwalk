@@ -15,19 +15,19 @@ const ReviewList = ({ id }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, count)
       .then((product) => {
-        console.log('list Reviews', product);
+        // console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        console.log('this is meta', meta);
+        // console.log('this is meta', meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));
   }, [id, sort, page, count]);
   return (
-    <div>
+    <div id="reviews">
       <p> Reviews go here: </p>
       {reviews.map((item) => (
         <Review
