@@ -3,22 +3,14 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 import OneItem from './OneItem';
 
-const RelatedItemsList = ({ data }) => data.map((item, i) => {
-  // url
-
-  // cat
-  // name
-  // price
-  // stars
-  return (
-    <div>
-      <OneItem
-        key={item.id}
-        item={item}
-      />
-    </div>
-  );
-});
+const RelatedItemsList = ({ data }) => data.map((item) => (
+  <div>
+    <OneItem
+      key={item[1].product_id}
+      item={item}
+    />
+  </div>
+));
 
 // RelatedItemsList.propTypes = {
 //   data: PropTypes.arrayOf(PropTypes.shape({
