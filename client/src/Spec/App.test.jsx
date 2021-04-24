@@ -41,6 +41,6 @@ describe('App', () => {
     // });
     // render(<App />);
     // debug();
-    expect(getByText('ProductInfo')).toBeInTheDocument();
+    expect(getByText('Read all reviews')).toBeInTheDocument();
   });
 });

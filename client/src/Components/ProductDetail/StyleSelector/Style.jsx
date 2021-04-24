@@ -1,31 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const StyledStyleThumbnail = styled.img`
+  height: 64px;
+  width: 64px;
+  justify-self: center;
+  align-self: center;
+  border: 1px solid #525252;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
 
 const Style = ({
   style, selected, setSelectedStyle, index, setSelectedPhoto,
 }) => (
-  <li style={{ display: 'inline' }}>
-    <div
-      role="button"
-      tabIndex={index + 10}
-      onClick={() => {
-        setSelectedStyle(style);
-        setSelectedPhoto(style.photos[0]);
-      }}
-      onKeyDown={(e) => {
-        if (e.code !== 'Enter' && e.code !== 'Space') { return; }
-        setSelectedStyle(style);
-        setSelectedPhoto(style.photos[0]);
-      }}
-    >
-      <img
-        height="50"
-        border={selected ? '2px solid black' : '0'}
-        src={style.photos[0].thumbnail_url}
-        alt={style.name}
-      />
-    </div>
-  </li>
+  <div
+    role="button"
+    tabIndex={index + 10}
+    onClick={() => {
+      setSelectedStyle(style);
+      setSelectedPhoto(style.photos[0]);
+    }}
+    onKeyDown={(e) => {
+      if (e.code !== 'Enter' && e.code !== 'Space') { return; }
+      setSelectedStyle(style);
+      setSelectedPhoto(style.photos[0]);
+    }}
+  >
+    <StyledStyleThumbnail
+      src={style.photos[0].thumbnail_url}
+      alt={style.name}
+    />
+  </div>
 );
 
 Style.propTypes = {
