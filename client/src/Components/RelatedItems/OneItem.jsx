@@ -16,19 +16,24 @@ const ListItem = styled.div`
 
 const Image = styled.img`
   height: 225px;
-  width: 225px;
+  width: 305px;
   border: 0px;
   vertical-align: middle;
 `;
 
 const Name = styled.div`
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: bold;
   max-height: 45px;
   overflow: hidden;
 `;
 
 const Price = styled.div`
-  font-size: small;
+  font-size: 12px;
+`;
+
+const Category = styled.div`
+  font-size: 13px;
 `;
 
 const OneItem = ({ item }) => {
@@ -42,19 +47,17 @@ const OneItem = ({ item }) => {
     }
   }
   // defaultStyle = defaultStyle ? item[0][0] : {};
-  const url = defaultStyle ? defaultStyle.photos[0].url : 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
-  console.log(defaultStyle);
-  // cat
-  // name
-  // price
-  // stars
+  const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
+  const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
+  // console.log(defaultStyle);
+
   return (
     <ListItem role="listitem">
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
-        <div className="item-body-category">
+        <Category className="item-body-category">
           {item[2].category}
-        </div>
+        </Category>
         <Name>{item[2].name}</Name>
         <Price>{`Today: $${item[2].default_price}`}</Price>
         <Stars stars={item[1].ratings} />
