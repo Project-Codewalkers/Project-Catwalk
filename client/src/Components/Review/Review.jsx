@@ -11,7 +11,7 @@ flex-direction: column;
 `;
 
 const Review = ({
-  summary, body, date, name, helpful, rating, rec,
+  summary, body, date, name, helpful, rating, rec, pics, res,
 }) => (
   <StyledReview>
 
@@ -38,6 +38,15 @@ const Review = ({
       {' '}
       {body}
     </p>
+    {res !== null ? (
+      <p>
+        {' '}
+        Response:
+        {' '}
+        {}
+      </p>
+    ) : ''}
+    {pics.map((photos) => (<img id="reviewPic" src={`${photos.url}`} alt="" key={photos.id} height="100" width="100" />))}
     <footer>
       {' '}
       helpful:

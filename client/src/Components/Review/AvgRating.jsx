@@ -10,8 +10,8 @@ const AvgRating = ({ rating, character, rec }) =>
         {/* {rating} */}
       </p>
       <p>
-        characteristics
-        {character.characteristics ? `${character.characteristics}` : `${character}`}
+        characteristics:
+        {character.characteristics ? ` Fit: ${character.characteristics.Fit.value} , Comfort: ${character.characteristics.Comfort.value}, Length: ${character.characteristics.Length.value}, Quality: ${character.characteristics.Quality.value} ` : `${character}`}
       </p>
       <p>
         Recommended:

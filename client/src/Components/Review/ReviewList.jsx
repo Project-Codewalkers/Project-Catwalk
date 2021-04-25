@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Review from './Review';
 import AvgRating from './AvgRating';
 import api from '../../lib/api';
+import AddReview from './AddReview';
 
 const ReviewList = ({ id }) => {
   // Hooks state goes here map over the list and render pass down into the review
@@ -15,13 +16,13 @@ const ReviewList = ({ id }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, count)
       .then((product) => {
-        // console.log('list Reviews', product);
+        console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        // console.log('this is meta', meta);
+        console.log('this is meta', meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));
@@ -31,7 +32,9 @@ const ReviewList = ({ id }) => {
       <p> Reviews go here: </p>
       {reviews.map((item) => (
         <Review
+          res={item.response}
           rec={item.recommend}
+          pics={item.photos}
           key={item.review_id}
           summary={item.summary}
           body={item.body}
@@ -47,6 +50,8 @@ const ReviewList = ({ id }) => {
         character={metaReview}// object
         rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
       />
+      {/* <AddReview /> */}
+      <button type='button' >MORE REVIEWS</button>
     </div>
   );
 };
