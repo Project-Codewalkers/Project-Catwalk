@@ -16,10 +16,16 @@ const StyledApp = styled.div`
 
 const App = () => {
   const [productId, setProductId] = useState(20100);
+  const [selectedStyle, setSelectedStyle] = useState(undefined);
 
   return (
     <StyledApp>
-      <ProductDetail productId={productId} setProductId={setProductId} />
+      <ProductDetail
+        productId={productId}
+        setProductId={setProductId}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+      />
       <Carousel productId={productId} />
       <ReviewList id={productId} />
     </StyledApp>
