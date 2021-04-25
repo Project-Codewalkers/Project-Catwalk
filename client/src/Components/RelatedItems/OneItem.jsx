@@ -37,11 +37,12 @@ const OneItem = ({ item }) => {
   if (item && item[0]) {
     defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
     if (!defaultStyle) {
+      // eslint-disable-next-line prefer-destructuring
       defaultStyle = item[0][0];
     }
   }
   // defaultStyle = defaultStyle ? item[0][0] : {};
-  const url = defaultStyle ? defaultStyle.photos[0].url : '';
+  const url = defaultStyle ? defaultStyle.photos[0].url : 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
   console.log(defaultStyle);
   // cat
   // name
@@ -52,11 +53,11 @@ const OneItem = ({ item }) => {
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <div className="item-body-category">
-          {item.category}
+          {item[2].category}
         </div>
-        <Name>{item.product_name}</Name>
-        <Price>{`Today: $${item.price}`}</Price>
-        <Stars stars={item.stars} />
+        <Name>{item[2].name}</Name>
+        <Price>{`Today: $${item[2].default_price}`}</Price>
+        <Stars stars={item[1].ratings} />
       </div>
       {/* <Modal description={description} /> */}
     </ListItem>

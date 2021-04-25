@@ -40,12 +40,14 @@ const InfoStyleCart = styled.div`
   /* border: 1px solid black; */
 `;
 
-const ProductDetail = ({ productId, setProductId }) => {
+const ProductDetail = ({
+  productId, setProductId, selectedStyle, setSelectedStyle,
+}) => {
   let defaultStyle = {};
 
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState({});
+  // const [selectedStyle, setSelectedStyle] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState({});
 
   const [searchText, setSearchText] = useState('');
@@ -122,6 +124,31 @@ const ProductDetail = ({ productId, setProductId }) => {
 ProductDetail.propTypes = {
   productId: PropTypes.number.isRequired,
   setProductId: PropTypes.func.isRequired,
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(PropTypes.shape({
+      quantity: PropTypes.number,
+      size: PropTypes.string,
+    })),
+  }),
+  setSelectedStyle: PropTypes.func.isRequired,
+};
+
+ProductDetail.defaultProps = {
+  selectedStyle: undefined,
 };
 
 export default ProductDetail;
