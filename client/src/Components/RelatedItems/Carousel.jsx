@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Controller from './Controller';
+import RelatedController from './RelatedController';
+import OutfitController from './OutfitController';
 import api from '../../lib/api';
 
 const CarouselMain = styled.div`
@@ -23,6 +24,8 @@ const CarouselTitle = styled.h2`
 
 const Carousel = ({ productId }) => {
   const [items, setItems] = useState([]);
+  const [outfit, setOutfit] = useState([]);
+
   useEffect(() => {
     api.relatedProducts(productId)
       .then((related) => {
@@ -44,10 +47,31 @@ const Carousel = ({ productId }) => {
       });
   }, [productId]);
 
+  useEffect(() => {
+    api.productInformation(productId)
+      .then((viewedProduct) => {
+        const outfitPromises = viewedProduct.map((itemId) => (
+          Promise.all([
+            api.productStyles(itemId),
+            api.getReviewMetadata(itemId),
+          ])
+        ));
+        Promise.all(outfitPromises)
+          .then((outfitSelection) => {
+            setOutfit(outfitSelection);
+          });
+      })
+      .catch(() => {
+        setOutfit([]);
+      });
+  }, [productId]);
+
   return (
     <CarouselMain role="main">
       <CarouselTitle>Related Items</CarouselTitle>
-      <Controller data={items} />
+      <RelatedController data={items} />
+      <CarouselTitle>Outfit Items</CarouselTitle>
+      <OutfitController closet={outfit} />
     </CarouselMain>
   );
 };

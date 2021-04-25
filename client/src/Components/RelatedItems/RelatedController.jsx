@@ -1,15 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RelatedItemsList from './RelatedItemsList';
-import OutfitList from './OutfitList';
 
-const CarouselController = styled.div`
+const CarouselControllerRelated = styled.div`
   overflow: hidden;
 `;
 
-const CarouselList = styled.div`
+const CarouselListRelated = styled.div`
   display: flex;
   position: relative;
   transition: left .50s ease-out 0s;
@@ -17,7 +15,7 @@ const CarouselList = styled.div`
   left: max(0px, -3050px);
 `;
 
-const LeftBtn = styled.button`
+const LeftBtnRelated = styled.button`
   display:flex;
   background-color: #fff;
   border: 1px solid #dadcdf;
@@ -34,7 +32,7 @@ const LeftBtn = styled.button`
   z-index: 1;
 `;
 
-const RightBtn = styled.button`
+const RightBtnRelated = styled.button`
   display:flex;
   background-color: #fff;
   border: 1px solid #dadcdf;
@@ -50,83 +48,80 @@ const RightBtn = styled.button`
   right: -10px;
 `;
 
-const LeftArrow = styled.svg`
+const LeftArrowRelated = styled.svg`
   width: 24px;
   height: 24px;
 `;
 
-const RightArrow = styled.svg`
+const RightArrowRelated = styled.svg`
   width: 24px;
   height: 24px;
 `;
 
-const Controller = ({ data }) => {
-  const [left, setLeft] = useState(0);
+const RelatedController = ({ data }) => {
+  const [leftRelated, setLeftRelated] = useState(0);
 
   // refactor into separate components later
-  function leftBtn() {
+  function leftBtnRelated() {
     let btn = '';
-    if (left === 0) {
+    if (leftRelated === 0) {
       btn = (
-        <LeftBtn disabled onClick={() => setLeft(left + 420)} type="button">
-          <LeftArrow viewBox="0 0 24 24">
-            <title>Left Scroll</title>
+        <LeftBtnRelated disabled onClick={() => setLeftRelated(leftRelated + 420)} type="button">
+          <LeftArrowRelated viewBox="0 0 24 24">
+            <title>Left Scroll Related</title>
             <path d="M 17 2 L7 12 l 10 10" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
-          </LeftArrow>
-        </LeftBtn>
+          </LeftArrowRelated>
+        </LeftBtnRelated>
       );
     } else {
       btn = (
-        <LeftBtn onClick={() => setLeft(left + 420)} type="button">
-          <svg id="carousel-left-arrow" viewBox="0 0 24 24">
-            <title>Left Scroll</title>
+        <LeftBtnRelated onClick={() => setLeftRelated(leftRelated + 420)} type="button">
+          <LeftArrowRelated viewBox="0 0 24 24">
+            <title>Left Scroll Related</title>
             <path d="M 17 2 L7 12 l 10 10" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </LeftBtn>
+          </LeftArrowRelated>
+        </LeftBtnRelated>
       );
     }
     return btn;
   }
 
-  function rightBtn() {
+  function rightBtnRelated() {
     let btn = '';
-    if (left === -1350) {
+    if (leftRelated === -1350) {
       btn = (
-        <RightBtn disabled onClick={() => setLeft(left - 420)} type="button">
-          <svg id="carousel-right-arrow" viewBox="0 0 24 24">
-            <title>Right Scroll</title>
+        <RightBtnRelated disabled onClick={() => setLeftRelated(leftRelated - 420)} type="button">
+          <RightArrowRelated id="carousel-right-arrow" viewBox="0 0 24 24">
+            <title>Right Scroll Related</title>
             <path d="M 7 2 l 10 10 L 7 22" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </RightBtn>
+          </RightArrowRelated>
+        </RightBtnRelated>
       );
     } else {
       btn = (
-        <RightBtn onClick={() => setLeft(left - 420)} type="button">
-          <RightArrow viewBox="0 0 24 24">
-            <title>Right Scroll</title>
+        <RightBtnRelated onClick={() => setLeftRelated(leftRelated - 420)} type="button">
+          <RightArrowRelated viewBox="0 0 24 24">
+            <title>Right Scroll Related</title>
             <path d="M 7 2 l 10 10 L 7 22" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
-          </RightArrow>
-        </RightBtn>
+          </RightArrowRelated>
+        </RightBtnRelated>
       );
     }
     return btn;
   }
 
   return (
-    <CarouselController role="group">
-      {leftBtn()}
-      <CarouselList
+    <CarouselControllerRelated role="group">
+      {leftBtnRelated()}
+      <CarouselListRelated
         id="carousel-list"
-        style={{ left: `${`${left}px`}` }}
+        style={{ left: `${`${leftRelated}px`}` }}
         role="list"
       >
         <RelatedItemsList data={data} />
-      </CarouselList>
-      {rightBtn()}
-      {leftBtn()}
-      <OutfitList data={data} />
-      {rightBtn()}
-    </CarouselController>
+      </CarouselListRelated>
+      {rightBtnRelated()}
+    </CarouselControllerRelated>
   );
 };
 
@@ -141,4 +136,4 @@ const Controller = ({ data }) => {
 //   })).isRequired,
 // };
 
-export default Controller;
+export default RelatedController;

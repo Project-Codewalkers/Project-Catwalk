@@ -7,6 +7,7 @@ import Stars from './Stars';
 const ListItem = styled.div`
   padding: 10px;
   margin: 10px;
+  width: 302px;
   background-color: lightgrey;
   border: black solid 0.1em;
   flex: 0 0 225px;
@@ -16,9 +17,10 @@ const ListItem = styled.div`
 
 const Image = styled.img`
   height: 225px;
-  width: 305px;
+  width: 300px;
   border: 0px;
   vertical-align: middle;
+  align: center;
 `;
 
 const Name = styled.div`
