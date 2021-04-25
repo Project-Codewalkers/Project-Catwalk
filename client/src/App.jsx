@@ -32,8 +32,4 @@ const App = () => {
   );
 };
 
-App.defaultProps = {
-  productId: 20101,
-};
-
 export default App;
