@@ -37,6 +37,14 @@ const avgStars = (ratings) => {
   return totalStars / ratingCount;
 };
 
+const totalReviews = (ratings) => {
+  let ratingCount = 0;
+  Object.keys(ratings).forEach((starValue) => {
+    ratingCount += Number(ratings[starValue]);
+  });
+  return ratingCount;
+};
+
 const Stars = ({ stars }) => {
   let rating = 0;
   if (typeof stars === 'object') {
@@ -74,4 +82,4 @@ Stars.propTypes = {
   ]).isRequired,
 };
 
-export { Stars as default, avgStars };
+export { Stars as default, avgStars, totalReviews };
