@@ -33,7 +33,7 @@ const StyleSelector = ({
         ))}
       </StyledStyleThumbnails>
     </div>
-  )
+  );
 };
 
 StyleSelector.propTypes = {
@@ -57,7 +57,27 @@ StyleSelector.propTypes = {
       size: PropTypes.string,
     })),
   })),
-
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(PropTypes.shape({
+      quantity: PropTypes.number,
+      size: PropTypes.string,
+    })),
+  }),
+  setSelectedStyle: PropTypes.func.isRequired,
   setSelectedPhoto: PropTypes.func.isRequired,
 };
 
