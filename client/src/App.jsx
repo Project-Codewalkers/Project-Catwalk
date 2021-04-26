@@ -19,7 +19,7 @@ const App = () => {
   const [selectedStyle, setSelectedStyle] = useState(undefined);
 
   return (
-    <StyledApp>
+    <StyledApp data-testid="appComponent">
       <ProductDetail
         productId={productId}
         setProductId={setProductId}
