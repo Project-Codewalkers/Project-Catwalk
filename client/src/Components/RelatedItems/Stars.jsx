@@ -29,11 +29,12 @@ const Front = styled.div`
 const avgStars = (ratings) => {
   let ratingCount = 0;
   let totalStars = 0;
+  if (!ratings) { return null; }
   Object.keys(ratings).forEach((starValue) => {
     ratingCount += Number(ratings[starValue]);
     totalStars += Number(starValue) * Number(ratings[starValue]);
   });
-  if (ratingCount === 0 || totalStars === 0) { return 0; }
+  if (ratingCount === 0) { return null; }
   return totalStars / ratingCount;
 };
 
@@ -47,6 +48,7 @@ const totalReviews = (ratings) => {
 
 const Stars = ({ stars }) => {
   let rating = 0;
+  if (!stars) { return <div />; }
   if (typeof stars === 'object') {
     rating = avgStars(stars);
   } else {
@@ -79,7 +81,11 @@ Stars.propTypes = {
         5: PropTypes.string,
       }),
     }),
-  ]).isRequired,
+  ]),
+};
+
+Stars.defaultProps = {
+  stars: null,
 };
 
 export { Stars as default, avgStars, totalReviews };

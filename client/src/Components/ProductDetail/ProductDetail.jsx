@@ -87,7 +87,7 @@ const ProductDetail = ({
           photos={selectedStyle ? selectedStyle.photos : []}
         />
         <InfoStyleCart>
-          <ProductInfo product={product} />
+          <ProductInfo product={product} productId={productId} />
           <StyleSelector
             styles={styles}
             selectedStyle={selectedStyle}
