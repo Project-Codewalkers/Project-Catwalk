@@ -19,7 +19,7 @@ const App = () => {
   const [selectedStyle, setSelectedStyle] = useState(undefined);
 
   return (
-    <StyledApp>
+    <StyledApp data-testid="appComponent">
       <ProductDetail
         productId={productId}
         setProductId={setProductId}
@@ -30,10 +30,6 @@ const App = () => {
       <ReviewList id={productId} />
     </StyledApp>
   );
-};
-
-App.defaultProps = {
-  productId: 20101,
 };
 
 export default App;

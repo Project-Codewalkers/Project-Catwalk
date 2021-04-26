@@ -7,6 +7,7 @@ import ProductInfo from './ProductInfo/ProductInfo';
 import StyleSelector from './StyleSelector/StyleSelector';
 import AddToCart from './AddToCart/AddToCart';
 import ProductOverview from './ProductOverview/ProductOverview';
+import TopBar from './TopBar';
 
 import api from '../../lib/api';
 
@@ -15,7 +16,7 @@ const StyledProductDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
   position: relative;
   top: 0;
@@ -50,8 +51,6 @@ const ProductDetail = ({
   // const [selectedStyle, setSelectedStyle] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState({});
 
-  const [searchText, setSearchText] = useState('');
-
   useEffect(() => {
     api.productInformation(productId)
       .then((productInformation) => setProduct(productInformation))
@@ -78,26 +77,9 @@ const ProductDetail = ({
       .catch(() => setSelectedStyle(defaultStyle));
   }, [productId]);
 
-  const onSubmitSetProductId = (e) => {
-    e.preventDefault();
-    setSearchText('');
-    setProductId(Number(searchText));
-  };
-
   return (
     <StyledProductDetail>
-      <div>
-        <form
-          onSubmit={onSubmitSetProductId}
-          onChange={(e) => setSearchText(e.target.value)}
-        >
-          <div>Product Detail</div>
-          <input type="text" placeholder="product_id" />
-          <input type="submit" />
-          <span>This is just for testing. Will delete later.</span>
-        </form>
-      </div>
-
+      <TopBar productId={productId} setProductId={setProductId} />
       <ImagesInfoStyleCart>
         <ImageGallery
           selectedPhoto={selectedPhoto}
@@ -105,7 +87,7 @@ const ProductDetail = ({
           photos={selectedStyle ? selectedStyle.photos : []}
         />
         <InfoStyleCart>
-          <ProductInfo product={product} />
+          <ProductInfo product={product} productId={productId} />
           <StyleSelector
             styles={styles}
             selectedStyle={selectedStyle}

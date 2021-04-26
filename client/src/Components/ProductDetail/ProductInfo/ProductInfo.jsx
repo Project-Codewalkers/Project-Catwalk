@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ReadReviews from './ReadReviews';
 
 const StyledProductInfo = styled.div`
   display: flex;
@@ -12,16 +13,9 @@ const ProductName = styled.h1`
   margin: 0.2em;
 `;
 
-const ProductInfo = ({ product }) => (
+const ProductInfo = ({ product, productId }) => (
   <StyledProductInfo>
-    <div>
-      <span>
-        ★★★☆☆
-      </span>
-      <a href="#reviews">
-        Read all reviews
-      </a>
-    </div>
+    <ReadReviews productId={productId} />
     <div>
       <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
     </div>

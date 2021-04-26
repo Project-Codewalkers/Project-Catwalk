@@ -33,7 +33,7 @@ const StyleSelector = ({
         ))}
       </StyledStyleThumbnails>
     </div>
-  )
+  );
 };
 
 StyleSelector.propTypes = {
