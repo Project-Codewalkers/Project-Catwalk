@@ -5,17 +5,25 @@ import styled from 'styled-components';
 const StarsBody = styled.div`
   margin: 6px 0px 5px;
   font-size: 18px;
+  height: 25px;
   width: 83px;
+  position: relative;
 `;
 
 const Background = styled.div`
-  color: rgb(210, 210, 210);
+  color: rgba(244,186,49,0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const Front = styled.div`
   color: rgb(244, 186, 49);
   overflow: hidden;
-  margin-top: -22px;
+  /* margin-top: -22px; */
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const avgStars = (ratings) => {
@@ -38,16 +46,16 @@ const Stars = ({ stars }) => {
   }
 
   return (
-    <StarsBody>
-      <div id="stars-container">
+    <div id="stars-container" style={{ position: 'relative' }}>
+      <StarsBody>
         <Background>
           &#9733;&#9733;&#9733;&#9733;&#9733;
         </Background>
         <Front style={{ width: `${rating * 20}%` }}>
           &#9733;&#9733;&#9733;&#9733;&#9733;
         </Front>
-      </div>
-    </StarsBody>
+      </StarsBody>
+    </div>
   );
 };
 

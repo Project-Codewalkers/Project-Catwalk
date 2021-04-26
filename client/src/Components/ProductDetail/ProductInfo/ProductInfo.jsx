@@ -34,9 +34,7 @@ const ProductInfo = ({ product }) => {
     <StyledProductInfo>
       <div>
         <Stars stars={rating} />
-        <a href="#reviews">
-          Read all reviews
-        </a>
+        <a href="#reviews">Read all reviews</a>
       </div>
       <div>
         <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
