@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StarsBody = styled.div`
-  margin: 6px 0px 5px;
+  margin: 5px 0px 5px;
   font-size: 18px;
   height: 25px;
   width: 83px;
