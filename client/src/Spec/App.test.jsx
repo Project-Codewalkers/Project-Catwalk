@@ -34,13 +34,13 @@ api.getReviewMetadata = jest.fn().mockResolvedValue(exampleData.exampleGetReview
 describe('App', () => {
   test('it should render the App component', () => {
     // render(<App />);
-    const { getByText } = render(<App />);
+    const { getByTestId } = render(<App />);
     // act(() => {
     //   ReactDOM.render(<App />, container);
     //   jest.advanceTimersByTime(1000);
     // });
     // render(<App />);
     // debug();
-    expect(getByText('Read all reviews')).toBeInTheDocument();
+    expect(getByTestId('appComponent')).toBeInTheDocument();
   });
 });
