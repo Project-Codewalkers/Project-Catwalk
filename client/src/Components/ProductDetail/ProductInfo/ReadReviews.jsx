@@ -33,15 +33,13 @@ const ReadReviews = ({ productId }) => {
 
   return (
     <StyledReadReviews>
-      <div style={{ display: 'flex', alignContent: 'center' }}>
-        <span>
-          <Stars stars={rating} />
-        </span>
-        <span style={{ display: 'flex', alignContent: 'center', height: 'min-content' }}>
-          <a href="#reviews">
-            {`Read all ${reviewCount} reviews`}
-          </a>
-        </span>
+      <div style={{ margin: '5px 10px 5px 0', width: '83px' }}>
+        <Stars stars={rating} />
+      </div>
+      <div style={{ margin: '5px' }}>
+        <a href="#reviews">
+          {`Read all ${reviewCount} reviews`}
+        </a>
       </div>
     </StyledReadReviews>
   );
