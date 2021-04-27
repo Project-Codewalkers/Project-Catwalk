@@ -46,7 +46,7 @@ const ProductDetail = ({
 }) => {
   let defaultStyle = {};
 
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [styles, setStyles] = useState([]);
   // const [selectedStyle, setSelectedStyle] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState({});

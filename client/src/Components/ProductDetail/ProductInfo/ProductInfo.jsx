@@ -14,21 +14,24 @@ const ProductName = styled.h1`
   margin: 0.2em;
 `;
 
-const ProductInfo = ({ product, productId, selectedStyle }) => (
-  <StyledProductInfo>
-    <ReadReviews productId={productId} />
-    <div>
-      <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
-    </div>
-    <ProductName className="ProductName">
-      {product.name ? product.name : ''}
-    </ProductName>
-    <Price
-      product={product}
-      selectedStyle={selectedStyle}
-    />
-  </StyledProductInfo>
-);
+const ProductInfo = ({ product, productId, selectedStyle }) => {
+  if (!product) { return <div />; }
+  return (
+    <StyledProductInfo>
+      <ReadReviews productId={productId} />
+      <div>
+        <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
+      </div>
+      <ProductName className="ProductName">
+        {product.name ? product.name : ''}
+      </ProductName>
+      <Price
+        product={product}
+        selectedStyle={selectedStyle}
+      />
+    </StyledProductInfo>
+  );
+};
 
 ProductInfo.propTypes = {
   product: PropTypes.shape({

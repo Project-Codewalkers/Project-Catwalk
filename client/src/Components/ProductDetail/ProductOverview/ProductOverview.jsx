@@ -1,7 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { exampleProductInformation } from '../../../Example';
 
 const StyledProductOverview = styled.div`
   border: 1px solid black;
@@ -21,8 +20,9 @@ const Features = styled.span`
   min-width: 160px;
 `;
 
-const ProductOverview = () => {
-  const { slogan, description, features } = exampleProductInformation;
+const ProductOverview = ({ product }) => {
+  if (!product) { return <div />; }
+  const { slogan, description, features } = product;
   return (
     <StyledProductOverview>
       <SloganDescription>
@@ -37,4 +37,24 @@ const ProductOverview = () => {
     </StyledProductOverview>
   );
 };
+
+ProductOverview.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    default_price: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.shape({
+      feature: PropTypes.string,
+      value: PropTypes.string,
+    })),
+  }),
+};
+
+ProductOverview.defaultProps = {
+  product: null,
+};
+
 export default ProductOverview;
