@@ -87,7 +87,11 @@ const ProductDetail = ({
           photos={selectedStyle ? selectedStyle.photos : []}
         />
         <InfoStyleCart>
-          <ProductInfo product={product} productId={productId} />
+          <ProductInfo
+            product={product}
+            productId={productId}
+            selectedStyle={selectedStyle}
+          />
           <StyleSelector
             styles={styles}
             selectedStyle={selectedStyle}
@@ -130,7 +134,7 @@ ProductDetail.propTypes = {
 };
 
 ProductDetail.defaultProps = {
-  selectedStyle: undefined,
+  selectedStyle: null,
 };
 
 export default ProductDetail;
