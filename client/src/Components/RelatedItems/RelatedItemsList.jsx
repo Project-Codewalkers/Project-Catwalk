@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import PropTypes from 'prop-types';
 import OneItem from './OneItem';
 
 const RelatedItemsList = ({ data }) => data.map((item) => (

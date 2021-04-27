@@ -1,10 +1,7 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
-// import PropTypes from 'prop-types';
+import React from 'react';
 import styled from 'styled-components';
 import Stars from './Stars';
-import Modal from './Modal';
 
 const ListItem = styled.div`
   padding: 10px;
@@ -39,14 +36,8 @@ const Price = styled.div`
 const Category = styled.div`
   font-size: 13px;
 `;
-const Button = styled.button`
-  vertical-align: top;
-  text-align: right;
-  color: rgb(244, 186, 49);
-`;
 
-const OneItem = ({ item }) => {
-  const [modalSwitch, setModalSwitch] = useState(false);
+const Outfit = ({ item }) => {
   // url
   let defaultStyle;
   if (item && item[0]) {
@@ -61,14 +52,9 @@ const OneItem = ({ item }) => {
   const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
   console.log(defaultStyle);
 
-  const switcher = () => {
-    modalSwitch === true ? setModalSwitch(false) : setModalSwitch(true);
-    console.log(modalSwitch);
-  };
-
   return (
     <ListItem role="listitem">
-      <Button onClick={switcher}>&#9733;</Button>
+      {/* <div>+ Add to Outfit</div> */}
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
@@ -77,30 +63,10 @@ const OneItem = ({ item }) => {
         <Name>{item[2].name}</Name>
         <Price>{`Today: $${item[2].default_price}`}</Price>
         <Stars stars={item[1].ratings} />
-        <Modal
-          url={url}
-          category={item.category}
-          name={item.name}
-          price={item[2].default_price}
-          stars={item[1].ratings}
-          modalSwitch={modalSwitch}
-          setModalSwitch={setModalSwitch}
-        />
       </div>
       {/* <Modal description={description} /> */}
     </ListItem>
   );
 };
 
-// OneItem.propTypes = {
-//   item: PropTypes.shape({
-//     id: PropTypes.number,
-//     category: PropTypes.string,
-//     product_name: PropTypes.string,
-//     price: PropTypes.number,
-//     stars: PropTypes.number,
-//     image: PropTypes.string,
-//   }).isRequired,
-// };
-
-export default OneItem;
+export default Outfit;
