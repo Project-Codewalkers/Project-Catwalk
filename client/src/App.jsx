@@ -20,6 +20,9 @@ const App = () => {
   return (
     <StyledApp>
       <ProductDetail productId={productId} setProductId={setProductId} />
+      <br />
+      <br />
+      <br />
       <Carousel productId={productId} />
       <ReviewList id={productId} />
     </StyledApp>

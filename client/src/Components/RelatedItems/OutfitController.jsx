@@ -58,6 +58,19 @@ const RightArrowOutfit = styled.svg`
   height: 24px;
 `;
 
+const OutfitAdder = styled.div`
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  margin: 10px;
+  width: 302px;
+  background-color: lightgrey;
+  border: black solid 0.1em;
+  flex: 0 0 225px;
+  height: 340px;
+  margin: 5px;
+`;
+
 const OutfitController = ({ closet }) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
@@ -65,7 +78,7 @@ const OutfitController = ({ closet }) => {
     let btn = '';
     if (leftOutfit === 0) {
       btn = (
-        <LeftBtnOutfit disabled onClick={() => setLeftOutfit(leftOutfit + 420)} type="button">
+        <LeftBtnOutfit disabled onClick={() => setLeftOutfit(leftOutfit + 450)} type="button">
           <LeftArrowOutfit viewBox="0 0 24 24">
             <title>Left Scroll</title>
             <path d="M 17 2 L7 12 l 10 10" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
@@ -74,7 +87,7 @@ const OutfitController = ({ closet }) => {
       );
     } else {
       btn = (
-        <LeftBtnOutfit onClick={() => setLeftOutfit(leftOutfit + 420)} type="button">
+        <LeftBtnOutfit onClick={() => setLeftOutfit(leftOutfit + 450)} type="button">
           <LeftArrowOutfit id="carousel-left-arrow" viewBox="0 0 24 24">
             <title>Left Scroll</title>
             <path d="M 17 2 L7 12 l 10 10" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
@@ -89,7 +102,7 @@ const OutfitController = ({ closet }) => {
     let btn = '';
     if (leftOutfit === -1350) {
       btn = (
-        <RightBtnOutfit disabled onClick={() => setLeftOutfit(leftOutfit - 420)} type="button">
+        <RightBtnOutfit disabled onClick={() => setLeftOutfit(leftOutfit - 450)} type="button">
           <RightArrowOutfit id="carousel-right-arrow" viewBox="0 0 24 24">
             <title>Right Scroll</title>
             <path d="M 7 2 l 10 10 L 7 22" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
@@ -98,7 +111,7 @@ const OutfitController = ({ closet }) => {
       );
     } else {
       btn = (
-        <RightBtnOutfit onClick={() => setLeftOutfit(leftOutfit - 420)} type="button">
+        <RightBtnOutfit onClick={() => setLeftOutfit(leftOutfit - 450)} type="button">
           <RightArrowOutfit viewBox="0 0 24 24">
             <title>Right Scroll</title>
             <path d="M 7 2 l 10 10 L 7 22" fill="none" stroke="#2F3337" strokeWidth="2" strokeLinecap="round" />
@@ -107,6 +120,10 @@ const OutfitController = ({ closet }) => {
       );
     }
     return btn;
+  }
+
+  const OutfitAdder = () => {
+
   }
 
   return (
@@ -118,7 +135,11 @@ const OutfitController = ({ closet }) => {
         role="list"
       >
         <OutfitList closet={closet} />
-        Outfit List goes here
+        <OutfitAdder conClick={}>
+          +
+          <br />
+          Add To Outfit
+        </OutfitAdder>
       </CarouselListOutfit>
       {rightBtnOutfit()}
     </CarouselControllerOutfit>

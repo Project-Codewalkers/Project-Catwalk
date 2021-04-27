@@ -50,10 +50,12 @@ const Carousel = ({ productId }) => {
   useEffect(() => {
     api.productInformation(productId)
       .then((viewedProduct) => {
+        console.log(viewedProduct);
         const outfitPromises = viewedProduct.map((itemId) => (
           Promise.all([
             api.productStyles(itemId),
             api.getReviewMetadata(itemId),
+            api.productInformation(itemId),
           ])
         ));
         Promise.all(outfitPromises)
@@ -67,12 +69,17 @@ const Carousel = ({ productId }) => {
   }, [productId]);
 
   return (
-    <CarouselMain role="main">
-      <CarouselTitle>Related Items</CarouselTitle>
-      <RelatedController data={items} />
-      <CarouselTitle>Outfit Items</CarouselTitle>
-      <OutfitController closet={outfit} />
-    </CarouselMain>
+    <>
+      <CarouselMain role="main">
+        <CarouselTitle>Related Items</CarouselTitle>
+        <RelatedController data={items} />
+      </CarouselMain>
+      <br />
+      <CarouselMain>
+        <CarouselTitle>Outfit Items</CarouselTitle>
+        <OutfitController data={items} closet={outfit} />
+      </CarouselMain>
+    </>
   );
 };
 

@@ -54,6 +54,7 @@ const Outfit = ({ item }) => {
 
   return (
     <ListItem role="listitem">
+      {/* <div>+ Add to Outfit</div> */}
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
