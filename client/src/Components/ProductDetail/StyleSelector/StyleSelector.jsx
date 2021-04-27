@@ -13,6 +13,7 @@ const StyledStyleThumbnails = styled.div`
 const StyleSelector = ({
   styles, selectedStyle, setSelectedStyle, setSelectedPhoto,
 }) => {
+  if (!selectedStyle) { return <div />; }
   const styleName = selectedStyle.name ? selectedStyle.name.toUpperCase() : '';
   return (
     <div>
@@ -33,7 +34,7 @@ const StyleSelector = ({
         ))}
       </StyledStyleThumbnails>
     </div>
-  )
+  );
 };
 
 StyleSelector.propTypes = {
@@ -77,13 +78,13 @@ StyleSelector.propTypes = {
       size: PropTypes.string,
     })),
   }),
-  setSelectedStyle: PropTypes.func.isRequired,
   setSelectedPhoto: PropTypes.func.isRequired,
+  setSelectedStyle: PropTypes.func.isRequired,
 };
 
 StyleSelector.defaultProps = {
   styles: [],
-  selectedStyle: {},
+  selectedStyle: null,
 };
 
 export default StyleSelector;

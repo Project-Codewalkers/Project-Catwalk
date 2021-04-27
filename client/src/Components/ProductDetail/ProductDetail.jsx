@@ -7,6 +7,7 @@ import ProductInfo from './ProductInfo/ProductInfo';
 import StyleSelector from './StyleSelector/StyleSelector';
 import AddToCart from './AddToCart/AddToCart';
 import ProductOverview from './ProductOverview/ProductOverview';
+import TopBar from './TopBar';
 
 import api from '../../lib/api';
 
@@ -15,7 +16,7 @@ const StyledProductDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 0;
   position: relative;
   top: 0;
@@ -40,15 +41,15 @@ const InfoStyleCart = styled.div`
   /* border: 1px solid black; */
 `;
 
-const ProductDetail = ({ productId, setProductId }) => {
+const ProductDetail = ({
+  productId, setProductId, selectedStyle, setSelectedStyle,
+}) => {
   let defaultStyle = {};
 
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
   const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState({});
+  // const [selectedStyle, setSelectedStyle] = useState({});
   const [selectedPhoto, setSelectedPhoto] = useState({});
-
-  const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
     api.productInformation(productId)
@@ -76,26 +77,9 @@ const ProductDetail = ({ productId, setProductId }) => {
       .catch(() => setSelectedStyle(defaultStyle));
   }, [productId]);
 
-  const onSubmitSetProductId = (e) => {
-    e.preventDefault();
-    setSearchText('');
-    setProductId(Number(searchText));
-  };
-
   return (
     <StyledProductDetail>
-      <div>
-        <form
-          onSubmit={onSubmitSetProductId}
-          onChange={(e) => setSearchText(e.target.value)}
-        >
-          <div>Product Detail</div>
-          <input type="text" placeholder="product_id" />
-          <input type="submit" />
-          <span>This is just for testing. Will delete later.</span>
-        </form>
-      </div>
-
+      <TopBar productId={productId} setProductId={setProductId} />
       <ImagesInfoStyleCart>
         <ImageGallery
           selectedPhoto={selectedPhoto}
@@ -103,7 +87,11 @@ const ProductDetail = ({ productId, setProductId }) => {
           photos={selectedStyle ? selectedStyle.photos : []}
         />
         <InfoStyleCart>
-          <ProductInfo product={product} />
+          <ProductInfo
+            product={product}
+            productId={productId}
+            selectedStyle={selectedStyle}
+          />
           <StyleSelector
             styles={styles}
             selectedStyle={selectedStyle}
@@ -122,6 +110,31 @@ const ProductDetail = ({ productId, setProductId }) => {
 ProductDetail.propTypes = {
   productId: PropTypes.number.isRequired,
   setProductId: PropTypes.func.isRequired,
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(PropTypes.shape({
+      quantity: PropTypes.number,
+      size: PropTypes.string,
+    })),
+  }),
+  setSelectedStyle: PropTypes.func.isRequired,
+};
+
+ProductDetail.defaultProps = {
+  selectedStyle: null,
 };
 
 export default ProductDetail;
