@@ -29,7 +29,7 @@ const Features = styled.ul`
   flex-basis: 196px;
   min-width: 196px;
   margin: 10px;
-  padding: 30px;
+  padding: 5px 30px;
   @media (max-width: 838px) {
     border-top: 2px solid #525252;
   }
