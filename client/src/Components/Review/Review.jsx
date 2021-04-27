@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Stars, { avgStars } from '../RelatedItems/Stars';
 
 const StyledReview = styled.div`
 border: 12px;
@@ -17,7 +18,7 @@ const Review = ({
 
     <span>
       Rating
-      {rating}
+      <Stars stars={rating} />
     </span>
     <span>
       Name and date

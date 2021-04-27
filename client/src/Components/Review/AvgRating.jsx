@@ -1,17 +1,26 @@
 import React from 'react';
+import Stars, { avgStars } from '../RelatedItems/Stars';
 
-const AvgRating = ({ rating, character, rec }) =>
-// const { Fit: id, value } = character;
+const AvgRating = ({
+  rating, rec, fit, length, quality, comfort,
+}) =>
 
   (
     <div>
       <p>
-        rating
-        {/* {rating} */}
+        rating:
+        {' '}
+        {rating ? avgStars(rating) : rating}
       </p>
       <p>
         characteristics:
-        {character.characteristics ? ` Fit: ${character.characteristics.Fit.value} , Comfort: ${character.characteristics.Comfort.value}, Length: ${character.characteristics.Length.value}, Quality: ${character.characteristics.Quality.value} ` : `${character}`}
+        {fit}
+        {' '}
+        {length}
+        {' '}
+        {quality}
+        {' '}
+        {comfort}
       </p>
       <p>
         Recommended:
