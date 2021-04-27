@@ -39,6 +39,13 @@ function listProducts(page, count) {
   return fetchCall(resource, options);
 }
 
+function addToOutfit(productObj) {
+  const options = defaultPostOptions;
+  const resource = `${baseURL}/products`;
+  options.body = JSON.stringify(productObj);
+  return fetchCall(resource, options);
+}
+
 /**
  * Returns all product level information for a specified product id.
  * @param {number} product_id Required ID of the Product requested.
@@ -321,4 +328,5 @@ module.exports = {
   getCart,
   addToCart,
   logAnInteraction,
+  addToOutfit,
 };
