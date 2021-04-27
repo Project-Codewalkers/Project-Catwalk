@@ -3,20 +3,37 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledStyleThumbnail = styled.img`
-  height: 64px;
-  width: 64px;
+  /* height: 64px;
+  width: 64px; */
+  height: 100%;
+  width: 100%;
   justify-self: center;
   align-self: center;
   border: 1px solid #525252;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`;
+
+const StyledCheckmark = styled.img`
+  position: absolute;
+  height: 18px;
+  width: auto;
+  right: 0;
+  /* transform: translate(-50%, 0); */
+  /* display:none; */
+`;
+
+const ThumbContainer = styled.div`
+  position: relative;
+  height: 64px;
+  width: 64px;
+  margin: 15px;
 `;
 
 const Style = ({
   style, selected, setSelectedStyle, index, setSelectedPhoto,
 }) => (
-  <div
+  <ThumbContainer
     role="button"
     tabIndex={index + 10}
     onClick={() => {
@@ -29,11 +46,18 @@ const Style = ({
       setSelectedPhoto(style.photos[0]);
     }}
   >
+
+    {selected && (
+      <StyledCheckmark
+        src="/assets/Checkmark.svg"
+        alt="checkmark"
+      />
+    )}
     <StyledStyleThumbnail
       src={style.photos[0].thumbnail_url}
       alt={style.name}
     />
-  </div>
+  </ThumbContainer>
 );
 
 Style.propTypes = {
