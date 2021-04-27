@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReadReviews from './ReadReviews';
+import Price from './Price';
 
 const StyledProductInfo = styled.div`
   display: flex;
@@ -13,7 +14,7 @@ const ProductName = styled.h1`
   margin: 0.2em;
 `;
 
-const ProductInfo = ({ product, productId }) => (
+const ProductInfo = ({ product, productId, selectedStyle }) => (
   <StyledProductInfo>
     <ReadReviews productId={productId} />
     <div>
@@ -22,9 +23,10 @@ const ProductInfo = ({ product, productId }) => (
     <ProductName className="ProductName">
       {product.name ? product.name : ''}
     </ProductName>
-    <div>
-      {product.default_price ? `$${product.default_price}` : ''}
-    </div>
+    <Price
+      product={product}
+      selectedStyle={selectedStyle}
+    />
   </StyledProductInfo>
 );
 
@@ -41,10 +43,33 @@ ProductInfo.propTypes = {
       value: PropTypes.string,
     })),
   }),
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(PropTypes.shape({
+      quantity: PropTypes.number,
+      size: PropTypes.string,
+    })),
+  }),
+  productId: PropTypes.number,
 };
 
 ProductInfo.defaultProps = {
   product: {},
+  productId: null,
+  selectedStyle: null,
 };
 
 export default ProductInfo;
