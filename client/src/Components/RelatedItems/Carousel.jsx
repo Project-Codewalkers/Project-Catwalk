@@ -22,7 +22,7 @@ const CarouselTitle = styled.h2`
   margin: 10px 0px 20px 5px;
 `;
 
-const Carousel = ({ productId }) => {
+const Carousel = ({ productId, selectedStyle, setSelectedStyle }) => {
   const [items, setItems] = useState([]);
   const [outfit, setOutfit] = useState([]);
 
@@ -47,26 +47,30 @@ const Carousel = ({ productId }) => {
       });
   }, [productId]);
 
-  useEffect(() => {
-    api.productInformation(productId)
-      .then((viewedProduct) => {
-        console.log(viewedProduct);
-        const outfitPromises = viewedProduct.map((itemId) => (
-          Promise.all([
-            api.productStyles(itemId),
-            api.getReviewMetadata(itemId),
-            api.productInformation(itemId),
-          ])
-        ));
-        Promise.all(outfitPromises)
-          .then((outfitSelection) => {
-            setOutfit(outfitSelection);
-          });
-      })
-      .catch(() => {
-        setOutfit([]);
-      });
-  }, [productId]);
+  // useEffect(() => {
+  //   api.productInformation(productId)
+  //     .then((viewedProduct) => {
+  //       console.log(viewedProduct);
+  //       const outfitPromises = viewedProduct.map((itemId) => (
+  //         Promise.all([
+  //           api.productStyles(itemId),
+  //           api.getReviewMetadata(itemId),
+  //           api.productInformation(itemId),
+  //         ])
+  //       ));
+  //       Promise.all(outfitPromises)
+  //         .then((outfitSelection) => {
+  //           setOutfit(outfitSelection);
+  //         });
+  //     })
+  //     .catch(() => {
+  //       setOutfit([]);
+  //     });
+  // }, [productId]);
+
+  const newItem = (selectedStyle) => {
+    setSelectedStyle(selectedStyle);
+  };
 
   return (
     <>
@@ -77,7 +81,15 @@ const Carousel = ({ productId }) => {
       <br />
       <CarouselMain>
         <CarouselTitle>Outfit Items</CarouselTitle>
-        <OutfitController data={items} closet={outfit} />
+        <OutfitController
+          data={items}
+          closet={outfit}
+          setOutfit={setOutfit}
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+          productId={productId}
+          newItem={newItem}
+        />
       </CarouselMain>
     </>
   );

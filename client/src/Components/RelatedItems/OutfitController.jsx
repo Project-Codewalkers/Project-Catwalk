@@ -58,20 +58,7 @@ const RightArrowOutfit = styled.svg`
   height: 24px;
 `;
 
-const OutfitAdder = styled.div`
-  text-align: center;
-  vertical-align: middle;
-  padding: 10px;
-  margin: 10px;
-  width: 302px;
-  background-color: lightgrey;
-  border: black solid 0.1em;
-  flex: 0 0 225px;
-  height: 340px;
-  margin: 5px;
-`;
-
-const OutfitController = ({ closet }) => {
+const OutfitController = ({ data, closet, newItem }) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
   function leftBtnOutfit() {
@@ -122,10 +109,6 @@ const OutfitController = ({ closet }) => {
     return btn;
   }
 
-  const OutfitAdder = () => {
-
-  }
-
   return (
     <CarouselControllerOutfit>
       {leftBtnOutfit()}
@@ -134,12 +117,10 @@ const OutfitController = ({ closet }) => {
         style={{ left: `${`${leftOutfit}px`}` }}
         role="list"
       >
-        <OutfitList closet={closet} />
-        <OutfitAdder conClick={}>
-          +
-          <br />
-          Add To Outfit
-        </OutfitAdder>
+        <OutfitList
+          closet={closet}
+          newItem={newItem}
+        />
       </CarouselListOutfit>
       {rightBtnOutfit()}
     </CarouselControllerOutfit>

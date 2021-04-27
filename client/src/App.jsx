@@ -16,21 +16,24 @@ const StyledApp = styled.div`
 
 const App = () => {
   const [productId, setProductId] = useState(20100);
+  const [selectedStyle, setSelectedStyle] = useState(undefined);
 
   return (
-    <StyledApp>
-      <ProductDetail productId={productId} setProductId={setProductId} />
-      <br />
-      <br />
-      <br />
-      <Carousel productId={productId} />
+    <StyledApp data-testid="appComponent">
+      <ProductDetail
+        productId={productId}
+        setProductId={setProductId}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+      />
+      <Carousel
+        productId={productId}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+      />
       <ReviewList id={productId} />
     </StyledApp>
   );
-};
-
-App.defaultProps = {
-  productId: 20101,
 };
 
 export default App;

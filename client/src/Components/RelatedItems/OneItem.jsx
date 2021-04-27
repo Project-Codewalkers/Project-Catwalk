@@ -43,7 +43,6 @@ const Button = styled.button`
   vertical-align: top;
   text-align: right;
   color: rgb(244, 186, 49);
-  z-index: 1;
 `;
 
 const OneItem = ({ item }) => {
@@ -62,7 +61,7 @@ const OneItem = ({ item }) => {
   const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
   console.log(defaultStyle);
 
-  let switcher = () => {
+  const switcher = () => {
     modalSwitch === true ? setModalSwitch(false) : setModalSwitch(true);
     console.log(modalSwitch);
   };
@@ -79,12 +78,13 @@ const OneItem = ({ item }) => {
         <Price>{`Today: $${item[2].default_price}`}</Price>
         <Stars stars={item[1].ratings} />
         <Modal
-          modalSwitch={modalSwitch}
           url={url}
           category={item.category}
           name={item.name}
           price={item[2].default_price}
           stars={item[1].ratings}
+          modalSwitch={modalSwitch}
+          setModalSwitch={setModalSwitch}
         />
       </div>
       {/* <Modal description={description} /> */}
