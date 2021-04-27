@@ -26,7 +26,11 @@ const App = () => {
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
       />
-      <Carousel productId={productId} />
+      <Carousel
+        productId={productId}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+      />
       <ReviewList id={productId} />
     </StyledApp>
   );
