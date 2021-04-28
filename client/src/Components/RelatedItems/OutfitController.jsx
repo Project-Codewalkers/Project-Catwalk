@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import OutfitList from './OutfitList';
 
 const CarouselControllerOutfit = styled.div`
@@ -58,7 +59,21 @@ const RightArrowOutfit = styled.svg`
   height: 24px;
 `;
 
-const OutfitController = ({ outfit, newItem }) => {
+const OutfitAdder = styled.div`
+  padding: 10px;
+  margin: 10px;
+  width: 302px;
+  background-color: lightgrey;
+  border: black solid 0.1em;
+  flex: 0 0 225px;
+  height: 340px;
+  margin: 5px;
+  display: inline-flex;
+`;
+
+const OutfitController = ({
+  outfit, newItem, selectedStyle, reviewMeta, productInfo,
+}) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
   function leftBtnOutfit() {
@@ -122,21 +137,28 @@ const OutfitController = ({ outfit, newItem }) => {
         <OutfitList
           outfit={outfit}
           newItem={newItem}
-
+          selectedStyle={selectedStyle}
         />
+        <OutfitAdder
+          onClick={() => (newItem(selectedStyle, reviewMeta, productInfo))}
+        >
+          +
+          <br />
+          Add to Outfit
+        </OutfitAdder>
       </CarouselListOutfit>
       {rightBtnOutfit()}
     </CarouselControllerOutfit>
   );
 };
 
-OutfitController.propTypes = {
-  outfit: PropTypes.arrayOf(),
-  newItem: PropTypes.func.isRequired,
-};
+// OutfitController.propTypes = {
+//   outfit: PropTypes.arrayOf(),
+//   newItem: PropTypes.func.isRequired,
+// };
 
-OutfitController.defaultProps = {
-  outfit: PropTypes.arrayOf(),
-};
+// OutfitController.defaultProps = {
+//   outfit: PropTypes.arrayOf(),
+// };
 
 export default OutfitController;

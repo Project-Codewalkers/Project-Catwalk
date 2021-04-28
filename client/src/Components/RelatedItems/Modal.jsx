@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledModal = styled.div`
@@ -89,19 +90,19 @@ const Modal = ({ item, modalSwitch, setModalSwitch }) => {
   );
 };
 
-Modal.propTypes = {
-  item: PropTypes.shape({
-    category: PropTypes.string,
-    product_name: PropTypes.string,
-    price: PropTypes.number,
-    stars: PropTypes.number,
-  }),
-  modalSwitch: PropTypes.bool.isRequired,
-  setModalSwitch: PropTypes.func.isRequired,
-};
+// Modal.propTypes = {
+//   item: PropTypes.shape({
+//     category: PropTypes.string,
+//     product_name: PropTypes.string,
+//     price: PropTypes.number,
+//     stars: PropTypes.number,
+//   }),
+//   modalSwitch: PropTypes.bool.isRequired,
+//   setModalSwitch: PropTypes.func.isRequired,
+// };
 
-Modal.defaultProps = {
-  item: {},
-};
+// Modal.defaultProps = {
+//   item: {},
+// };
 
 export default Modal;

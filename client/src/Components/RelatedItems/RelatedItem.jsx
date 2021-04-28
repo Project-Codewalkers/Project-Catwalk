@@ -40,17 +40,18 @@ const Category = styled.div`
   font-size: 13px;
 `;
 
-const ModalSwap = styled.div`
+const ModalSwap = styled.button`
   vertical-align: top;
   text-align: right;
   color: rgb(244, 186, 49);
   cursor: pointer;
 `;
 
-const RelatedItem = ({ item }) => {
+const RelatedItem = ({ item, changeProduct }) => {
   const [modalSwitch, setModalSwitch] = useState(false);
   // url
   let defaultStyle;
+  // console.log('Log this: ', item);
   if (item && item[0]) {
     defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
     if (!defaultStyle) {
@@ -68,13 +69,8 @@ const RelatedItem = ({ item }) => {
     // console.log(modalSwitch);
   };
 
-  // const viewInProductDetails = () => {
-  //   console.log('Testing: ', setProductId);
-  //   setProductId(ListItem);
-  // };
-
   return (
-    <ListItem role="listitem">
+    <ListItem onClick={() => (changeProduct(item[1].product_id))} role="listitem">
       <ModalSwap onClick={switcher}>&#9733;</ModalSwap>
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">

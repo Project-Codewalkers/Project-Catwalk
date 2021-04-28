@@ -24,8 +24,11 @@ const CarouselTitle = styled.h2`
 
 const Carousel = ({
   productId,
-  setProductId,
+  productInfo,
   selectedStyle,
+  reviewMeta,
+  setProductId,
+  changeProduct,
 }) => {
   const [items, setItems] = useState([]);
   const [outfit, setOutfit] = useState([]);
@@ -51,34 +54,20 @@ const Carousel = ({
       });
   }, [productId]);
 
-  useEffect(() => {
-    api.productInformation(productId)
-      .then((viewedProduct) => {
-        // console.log(viewedProduct);
-        const outfitPromises = viewedProduct.map((itemId) => (
-          Promise.all([
-            api.productStyles(itemId),
-            api.getReviewMetadata(itemId),
-            api.productInformation(itemId),
-          ])
-        ));
-        Promise.all(outfitPromises)
-          .then((outfitSelection) => {
-            setOutfit(outfitSelection);
-          });
-      })
-      .catch(() => {
-        setOutfit([]);
-      });
-  }, [productId]);
-
-  const newItem = (fromProdOver) => {
-    if (!selectedStyle) { return; }
-    // console.log(selectedStyle);
+  // eslint-disable-next-line consistent-return
+  const newItem = (style, meta, info) => {
+    const outfitArr = [];
+    outfitArr.push(style, meta, info);
+    // console.log(outfitArr);
+    if (!style) { outfitArr.style = null; }
+    if (!meta) { outfitArr.meta = null; }
+    if (!info) { outfitArr.info = null; }
     const copy = outfit.slice();
-    copy.push(fromProdOver);
+    if (copy.includes(style)) {
+      return;
+    }
+    copy.push(outfitArr);
     setOutfit(copy);
-    // console.log(outfit);
   };
 
   return (
@@ -88,7 +77,7 @@ const Carousel = ({
         <RelatedController
           data={items}
           productId={productId}
-          setProductId={setProductId}
+          changeProduct={changeProduct}
         />
       </CarouselMain>
       <br />
@@ -97,9 +86,11 @@ const Carousel = ({
         <OutfitController
           data={items}
           outfit={outfit}
-          photos={selectedStyle ? selectedStyle.photos : []}
-          productId={productId}
+          productInfo={productInfo}
+          reviewMeta={reviewMeta}
+          selectedStyle={selectedStyle}
           newItem={newItem}
+          setProductId={setProductId}
         />
       </CarouselMain>
     </>
