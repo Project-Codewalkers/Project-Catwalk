@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Stars from './Stars';
 
 const ListItem = styled.div`
@@ -50,7 +50,15 @@ const Outfit = ({ item }) => {
   // defaultStyle = defaultStyle ? item[0][0] : {};
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
   const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
-  console.log(defaultStyle);
+  // console.log(defaultStyle);
+
+  // let price;
+  // if (item && item[4]) {
+  //   price = item[4].find((eachPrice) => eachPrice[sale_price]);
+  //   if (!price) {
+  //     price = item[0][4];
+  //   }
+  // }
 
   return (
     <ListItem role="listitem">
@@ -67,6 +75,16 @@ const Outfit = ({ item }) => {
       {/* <Modal description={description} /> */}
     </ListItem>
   );
+};
+
+Outfit.propTypes = {
+  item: PropTypes.arrayOf(PropTypes.shape({
+    find: PropTypes.func,
+    category: PropTypes.string,
+    name: PropTypes.string,
+    default_price: PropTypes.number,
+    ratings: PropTypes.number,
+  })).isRequired,
 };
 
 export default Outfit;

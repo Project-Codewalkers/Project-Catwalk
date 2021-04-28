@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledModal = styled.div`
@@ -22,13 +23,21 @@ const Box = styled.div`
   width: 50%;
 `;
 
-const Button = styled.button`
-  width: 10%;
+const Button = styled.div`
   vertical-align: top;
-  alignment: top, right;
+  text-align: right;
+  width: 5%;
+  cursor: pointer;
 `;
 
-const Modal = ({ url, category, name, price, stars, modalSwitch, setModalSwitch }) => {
+const Vertical = styled.div`
+  border-left: solid black 0.1em;
+  height: 50px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+`;
+
+const Modal = ({ item, modalSwitch, setModalSwitch }) => {
   if (!modalSwitch) {
     return null;
   }
@@ -36,11 +45,63 @@ const Modal = ({ url, category, name, price, stars, modalSwitch, setModalSwitch 
   return (
     <StyledModal>
       <Box>
-        <Button onClick={() => (setModalSwitch())}>Close</Button>
-        Modal says hello
+        <Button onClick={() => (setModalSwitch())}>x</Button>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {item[2].name}
+                <hr />
+              </th>
+              <Vertical />
+              <th>
+                Characteristics
+                <hr />
+              </th>
+              <Vertical />
+              <th>
+                Compared Item
+                <hr />
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{item[2].category}</td>
+              <Vertical />
+              <td>Category</td>
+              <Vertical />
+              <td>Something</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>{item[2].default_price}</td>
+              <Vertical />
+              <td>Price</td>
+              <Vertical />
+              <td>A Number</td>
+            </tr>
+          </tfoot>
+        </table>
       </Box>
     </StyledModal>
   );
+};
+
+Modal.propTypes = {
+  item: PropTypes.shape({
+    category: PropTypes.string,
+    product_name: PropTypes.string,
+    price: PropTypes.number,
+    stars: PropTypes.number,
+  }),
+  modalSwitch: PropTypes.bool.isRequired,
+  setModalSwitch: PropTypes.func.isRequired,
+};
+
+Modal.defaultProps = {
+  item: {},
 };
 
 export default Modal;

@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import OutfitList from './OutfitList';
 
 const CarouselControllerOutfit = styled.div`
@@ -58,7 +58,7 @@ const RightArrowOutfit = styled.svg`
   height: 24px;
 `;
 
-const OutfitController = ({ data, closet, newItem }) => {
+const OutfitController = ({ outfit, newItem }) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
   function leftBtnOutfit() {
@@ -109,6 +109,8 @@ const OutfitController = ({ data, closet, newItem }) => {
     return btn;
   }
 
+  // console.log(outfit);
+
   return (
     <CarouselControllerOutfit>
       {leftBtnOutfit()}
@@ -118,13 +120,23 @@ const OutfitController = ({ data, closet, newItem }) => {
         role="list"
       >
         <OutfitList
-          closet={closet}
+          outfit={outfit}
           newItem={newItem}
+
         />
       </CarouselListOutfit>
       {rightBtnOutfit()}
     </CarouselControllerOutfit>
   );
+};
+
+OutfitController.propTypes = {
+  outfit: PropTypes.arrayOf(),
+  newItem: PropTypes.func.isRequired,
+};
+
+OutfitController.defaultProps = {
+  outfit: PropTypes.arrayOf(),
 };
 
 export default OutfitController;

@@ -22,7 +22,11 @@ const CarouselTitle = styled.h2`
   margin: 10px 0px 20px 5px;
 `;
 
-const Carousel = ({ productId, selectedStyle, setSelectedStyle }) => {
+const Carousel = ({
+  productId,
+  setProductId,
+  selectedStyle,
+}) => {
   const [items, setItems] = useState([]);
   const [outfit, setOutfit] = useState([]);
 
@@ -47,46 +51,53 @@ const Carousel = ({ productId, selectedStyle, setSelectedStyle }) => {
       });
   }, [productId]);
 
-  // useEffect(() => {
-  //   api.productInformation(productId)
-  //     .then((viewedProduct) => {
-  //       console.log(viewedProduct);
-  //       const outfitPromises = viewedProduct.map((itemId) => (
-  //         Promise.all([
-  //           api.productStyles(itemId),
-  //           api.getReviewMetadata(itemId),
-  //           api.productInformation(itemId),
-  //         ])
-  //       ));
-  //       Promise.all(outfitPromises)
-  //         .then((outfitSelection) => {
-  //           setOutfit(outfitSelection);
-  //         });
-  //     })
-  //     .catch(() => {
-  //       setOutfit([]);
-  //     });
-  // }, [productId]);
+  useEffect(() => {
+    api.productInformation(productId)
+      .then((viewedProduct) => {
+        // console.log(viewedProduct);
+        const outfitPromises = viewedProduct.map((itemId) => (
+          Promise.all([
+            api.productStyles(itemId),
+            api.getReviewMetadata(itemId),
+            api.productInformation(itemId),
+          ])
+        ));
+        Promise.all(outfitPromises)
+          .then((outfitSelection) => {
+            setOutfit(outfitSelection);
+          });
+      })
+      .catch(() => {
+        setOutfit([]);
+      });
+  }, [productId]);
 
-  const newItem = (selectedStyle) => {
-    setSelectedStyle(selectedStyle);
+  const newItem = (fromProdOver) => {
+    if (!selectedStyle) { return; }
+    // console.log(selectedStyle);
+    const copy = outfit.slice();
+    copy.push(fromProdOver);
+    setOutfit(copy);
+    // console.log(outfit);
   };
 
   return (
     <>
       <CarouselMain role="main">
         <CarouselTitle>Related Items</CarouselTitle>
-        <RelatedController data={items} />
+        <RelatedController
+          data={items}
+          productId={productId}
+          setProductId={setProductId}
+        />
       </CarouselMain>
       <br />
       <CarouselMain>
         <CarouselTitle>Outfit Items</CarouselTitle>
         <OutfitController
           data={items}
-          closet={outfit}
-          setOutfit={setOutfit}
-          selectedStyle={selectedStyle}
-          setSelectedStyle={setSelectedStyle}
+          outfit={outfit}
+          photos={selectedStyle ? selectedStyle.photos : []}
           productId={productId}
           newItem={newItem}
         />

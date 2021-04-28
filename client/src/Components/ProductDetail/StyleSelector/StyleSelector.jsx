@@ -15,6 +15,7 @@ const StyleSelector = ({
 }) => {
   if (!selectedStyle) { return <div />; }
   const styleName = selectedStyle.name ? selectedStyle.name.toUpperCase() : '';
+  console.log('Checking: ', selectedStyle)
   return (
     <div>
       <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Outfit from './Outfit';
-import api from '../../lib/api';
 
 const OutfitAdder = styled.div`
   padding: 10px;
@@ -15,14 +15,18 @@ const OutfitAdder = styled.div`
   display: inline-flex;
 `;
 
-const OutfitList = ({ closet, selectedStyle, setSelectedStyle, productId, setOutfit, newItem }) => (
+const OutfitList = ({
+  outfit,
+  selectedStyle,
+  newItem,
+}) => (
   <div>
-    <OutfitAdder onClick={() => (newItem())}>
+    <OutfitAdder onClick={() => (newItem(selectedStyle))}>
       +
       <br />
       Add to Outfit
     </OutfitAdder>
-    {closet.map((item) => (
+    {outfit.map((item) => (
       <Outfit
         key={item[0].product_id}
         item={item}
@@ -30,5 +34,19 @@ const OutfitList = ({ closet, selectedStyle, setSelectedStyle, productId, setOut
     ))}
   </div>
 );
+
+OutfitList.propTypes = {
+  outfit: PropTypes.arrayOf().isRequired,
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+  }).isRequired,
+  newItem: PropTypes.func.isRequired,
+};
 
 export default OutfitList;

@@ -28,6 +28,7 @@ const App = () => {
       />
       <Carousel
         productId={productId}
+        setProductId={setProductId}
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
       />
