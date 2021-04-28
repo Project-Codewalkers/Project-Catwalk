@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -51,28 +51,17 @@ const ProductDetail = ({
   reviewMeta,
   avgRating,
 }) => {
-  const [selectedPhoto, setSelectedPhoto] = useState({});
- 
-  // console.log(selectedStyle);
-
-  // useEffect(() => {
-  //   api.productStyles(productId)
-  //     .then(() => {
-  //       if (defaultStyle.photos && defaultStyle.photos[0]) {
-  //         setSelectedPhoto(defaultStyle.photos[0]);
-  //       } else { setSelectedPhoto({}); }
-  //     })
-  //     .catch(() => setSelectedStyle(defaultStyle));
-  // }, [productId]);
+  const [selectedPhoto, rawSetSelectedPhoto] = useState({});
+  const setSelectedPhoto = useCallback((photo) => rawSetSelectedPhoto(photo), []);
 
   return (
     <StyledProductDetail>
       <TopBar productId={productId} setProductId={setProductId} />
       <ImagesInfoStyleCart>
         <ImageGallery
-          selectedPhoto={selectedPhoto}
-          setSelectedPhoto={setSelectedPhoto}
-          photos={selectedStyle ? selectedStyle.photos : []}
+          // selectedPhoto={selectedPhoto}
+          // setSelectedPhoto={setSelectedPhoto}
+          style={selectedStyle}
         />
         <InfoStyleCart>
           <ProductInfo
@@ -84,7 +73,7 @@ const ProductDetail = ({
             styles={styles}
             selectedStyle={selectedStyle}
             setSelectedStyle={setSelectedStyle}
-            setSelectedPhoto={setSelectedPhoto}
+            // setSelectedPhoto={setSelectedPhoto}
           />
           <AddToCart
             skusObj={selectedStyle && selectedStyle.skus ? selectedStyle.skus : {}}

@@ -11,18 +11,19 @@ const StyledStyleThumbnails = styled.div`
 `;
 
 const StyleSelector = ({
-  styles, selectedStyle, setSelectedStyle, setSelectedPhoto,
+  styles,
+  selectedStyle,
+  setSelectedStyle,
+  // setSelectedPhoto,
 }) => {
-  if (!selectedStyle) { return <div />; }
-  if (!(styles && styles.length > 0)) {
-    // if styles are falsey or length is zero, return an empy div.
-    return (<div />);
-  }
+  if (!styles || styles.length === 0) { return <div />; }
+
   const indexOfDefault = styles.findIndex((style) => style['default?']);
   if (indexOfDefault !== -1) {
     styles.unshift(...styles.splice(indexOfDefault, 1));
   }
-  const styleName = selectedStyle.name ? selectedStyle.name.toUpperCase() : '';
+
+  const styleName = selectedStyle && selectedStyle.name ? selectedStyle.name.toUpperCase() : '';
   return (
     <div>
       <div>
@@ -32,12 +33,12 @@ const StyleSelector = ({
       <StyledStyleThumbnails>
         {styles.map((each, index) => (
           <Style
-            key={each.style_id}
+            key={each.style_id && each.style_id}
             index={index + 1}
             style={each}
             setSelectedStyle={setSelectedStyle}
-            setSelectedPhoto={setSelectedPhoto}
-            selected={each.style_id === selectedStyle.style_id}
+            // setSelectedPhoto={setSelectedPhoto}
+            selected={(each && each.style_id) === (selectedStyle && selectedStyle.style_id)}
           />
         ))}
       </StyledStyleThumbnails>
@@ -86,7 +87,7 @@ StyleSelector.propTypes = {
       size: PropTypes.string,
     })),
   }),
-  setSelectedPhoto: PropTypes.func.isRequired,
+  // setSelectedPhoto: PropTypes.func.isRequired,
   setSelectedStyle: PropTypes.func.isRequired,
 };
 
