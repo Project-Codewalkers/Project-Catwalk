@@ -3,9 +3,8 @@ import React from 'react';
 import OneItem from './OneItem';
 
 const RelatedItemsList = ({ data }) => data.map((item) => (
-  <div>
+  <div key={item[1].product_id}>
     <OneItem
-      key={item[1].product_id}
       item={item}
     />
   </div>
