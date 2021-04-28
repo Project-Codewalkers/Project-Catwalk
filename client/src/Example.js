@@ -661,3 +661,14 @@ module.exports = {
   exampleGetReviewMetadata,
   reviewExample,
 };
+
+/*
+
+Notable edge cases to handle!!!
+-------------------------------------
+
+20101 has no photos.
+20110 has no styles.
+20106 has no default style.
+
+*/

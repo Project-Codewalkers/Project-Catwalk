@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
 import Carousel from './Components/RelatedItems/Carousel';
@@ -16,12 +16,19 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const [productId, setProductId] = useState(20100);
-  const [productInfo, setProductInfo] = useState(null);
-  const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState(null);
-  const [reviewMeta, setMeta] = useState(null);
-  const [avgRating, setAvgRating] = useState(null);
+  const [productId, rawSetProductId] = useState(20100);
+  const [productInfo, rawSetProductInfo] = useState(null);
+  const [styles, rawSetStyles] = useState([]);
+  const [selectedStyle, rawSetSelectedStyle] = useState(null);
+  const [reviewMeta, rawSetMeta] = useState(null);
+  const [avgRating, rawSetAvgRating] = useState(null);
+
+  const setProductId = useCallback((id) => rawSetProductId(id), []);
+  const setProductInfo = useCallback((id) => rawSetProductInfo(id), []);
+  const setStyles = useCallback((id) => rawSetStyles(id), []);
+  const setSelectedStyle = useCallback((id) => rawSetSelectedStyle(id), []);
+  const setMeta = useCallback((id) => rawSetMeta(id), []);
+  const setAvgRating = useCallback((id) => rawSetAvgRating(id), []);
 
   useEffect(() => {
     if (!productId) { return; }

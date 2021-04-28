@@ -59,11 +59,11 @@ const OneItem = ({ item }) => {
   // defaultStyle = defaultStyle ? item[0][0] : {};
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
   const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
-  console.log(defaultStyle);
+  // console.log(defaultStyle);
 
   const switcher = () => {
     modalSwitch === true ? setModalSwitch(false) : setModalSwitch(true);
-    console.log(modalSwitch);
+    // console.log(modalSwitch);
   };
 
   return (
