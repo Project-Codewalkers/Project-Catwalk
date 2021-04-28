@@ -17,7 +17,7 @@ const Review = ({
   <StyledReview>
 
     <span>
-      Rating
+      Rating:
       <Stars stars={rating} />
     </span>
     <span>

@@ -5,6 +5,7 @@ import AvgRating from './AvgRating';
 import api from '../../lib/api';
 import AddReview from './AddReview';
 import SortSelector from './SortSelect';
+import Stars, { avgStars } from '../RelatedItems/Stars';
 
 const ReviewList = ({ id }) => {
   // Hooks state goes here map over the list and render pass down into the review
@@ -58,11 +59,11 @@ const ReviewList = ({ id }) => {
       ))}
       <AvgRating
         key={metaReview.product_id}
-        rating={metaReview.ratings}// object
-        fit={metaReview.characteristics ? `Fit: ${metaReview.characteristics.Fit.value}` : ''} // for fit characteristics
-        comfort={metaReview.characteristics ? `Comfort: ${metaReview.characteristics.Comfort.value}` : ''} // for comfort
-        length={metaReview.characteristics ? `Length: ${metaReview.characteristics.Length.value}` : ''}
-        quality={metaReview.characteristics ? `Quality: ${metaReview.characteristics.Quality.value}` : ''}
+        rating={avgStars(metaReview.ratings)}// object
+        fit={metaReview.characteristics ? metaReview.characteristics.Fit && `Fit: ${metaReview.characteristics.Fit.value}` : null} // for fit characteristics
+        comfort={metaReview.characteristics ? metaReview.characteristics.Comfort && `Comfort: ${metaReview.characteristics.Comfort.value}` : null} // for comfort
+        length={metaReview.characteristics ? metaReview.characteristics.Length && `Length: ${metaReview.characteristics.Length.value}` : null}
+        quality={metaReview.characteristics ? metaReview.characteristics.Quality && `Quality: ${metaReview.characteristics.Quality.value}` : null}
         rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
       />
       {/* <AddReview /> */}
