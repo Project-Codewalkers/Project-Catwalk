@@ -18,6 +18,7 @@ const StyledApp = styled.div`
 const App = () => {
   const [productId, setProductId] = useState(20100);
   const [productInfo, setProductInfo] = useState(null);
+  const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const [reviewMeta, setMeta] = useState(null);
   const [avgRating, setAvgRating] = useState(null);
@@ -48,9 +49,12 @@ const App = () => {
 
     api.productStyles(productId)
       .then((productStyles) => {
-        let [defaultStyle] = productStyles;
-        defaultStyle = productStyles ? productStyles
-          .find((eachStyle) => eachStyle['default?']) : null;
+        setStyles(productStyles);
+        let defaultStyle = productStyles
+          .find((eachStyle) => eachStyle['default?']);
+        if (!defaultStyle) {
+          [defaultStyle] = productStyles;
+        }
         setSelectedStyle(defaultStyle);
       })
       .then(() => {
@@ -58,6 +62,7 @@ const App = () => {
       })
       .catch((err) => {
         // console.error('error fetching Product Styles', err);
+        setStyles([]);
         setSelectedStyle(null);
         throw err;
       });
@@ -68,6 +73,7 @@ const App = () => {
       <ProductDetail
         productId={productId}
         setProductId={setProductId}
+        styles={styles}
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
         productInfo={productInfo}
