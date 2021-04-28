@@ -57,15 +57,15 @@ const ReviewList = ({ id }) => {
           rating={item.rating}
         />
       ))}
-      <AvgRating
+      {/* <AvgRating
         key={metaReview.product_id}
         rating={avgStars(metaReview.ratings)}// object
-        fit={metaReview.characteristics ? metaReview.characteristics.Fit && `Fit: ${metaReview.characteristics.Fit.value}` : null} // for fit characteristics
-        comfort={metaReview.characteristics ? metaReview.characteristics.Comfort && `Comfort: ${metaReview.characteristics.Comfort.value}` : null} // for comfort
-        length={metaReview.characteristics ? metaReview.characteristics.Length && `Length: ${metaReview.characteristics.Length.value}` : null}
-        quality={metaReview.characteristics ? metaReview.characteristics.Quality && `Quality: ${metaReview.characteristics.Quality.value}` : null}
+        fit={metaReview.characteristics && metaReview.characteristics.Fit ? metaReview : null} // for fit characteristics
+        comfort={metaReview.characteristics && metaReview.characteristics.Comfort ? metaReview : null} // for comfort
+        length={metaReview.characteristics && metaReview.characteristics.Length ? `Length: ${metaReview.characteristics.Length.value}` : null}
+        quality={metaReview.characteristics && metaReview.characteristics.Quality ? `Quality: ${metaReview.characteristics.Quality.value}` : null}
         rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
-      />
+      /> */}
       {/* <AddReview /> */}
       <button type="button" onClick={() => setMoreReviews(moreReviews + 2)}>MORE REVIEWS</button>
     </div>

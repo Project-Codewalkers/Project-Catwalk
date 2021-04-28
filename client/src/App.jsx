@@ -5,6 +5,7 @@ import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
 import ReviewList from './Components/Review/ReviewList';
 // import api from './lib/api';
+import Modal from './Components/Review/Modal';
 
 const StyledApp = styled.div`
   display: flex;
@@ -32,6 +33,7 @@ const App = () => {
         setSelectedStyle={setSelectedStyle}
       />
       <ReviewList id={productId} />
+      <Modal />
     </StyledApp>
   );
 };

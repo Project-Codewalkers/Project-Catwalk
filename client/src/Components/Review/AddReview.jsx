@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 const AddReview = () => {
   const [show, setShow] = useState(false);
-  const [hide, setHide] = useState(true);
 
   useEffect(() => {
     const showModal = show ? 'modal display-block' : 'modal display-none';
