@@ -35,7 +35,7 @@ const Style = ({
 }) => (
   <ThumbContainer
     role="button"
-    tabIndex={index + 10}
+    tabIndex="0"
     onClick={() => {
       setSelectedStyle(style);
       // setSelectedPhoto(style.photos[0]);

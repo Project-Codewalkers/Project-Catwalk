@@ -13,7 +13,7 @@ const StyledThumbnailImage = styled.img`
 const ImageThumbnail = ({ photo, setSelectedPhoto, index }) => (
   <div
     role="button"
-    tabIndex={index}
+    tabIndex="0"
     onClick={() => setSelectedPhoto(photo)}
     onKeyDown={(e) => {
       if (e.code !== 'Enter' && e.code !== 'Space') { return; }
