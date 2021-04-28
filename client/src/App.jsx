@@ -57,9 +57,6 @@ const App = () => {
         }
         setSelectedStyle(defaultStyle);
       })
-      .then(() => {
-        setSelectedStyle(null);
-      })
       .catch((err) => {
         // console.error('error fetching Product Styles', err);
         setStyles([]);
