@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Stars, { avgStars } from '../RelatedItems/Stars';
 
 const StyledReview = styled.div`
 border: 12px;
@@ -11,13 +12,13 @@ flex-direction: column;
 `;
 
 const Review = ({
-  summary, body, date, name, helpful, rating, rec,
+  summary, body, date, name, helpful, rating, rec, pics, res,
 }) => (
   <StyledReview>
 
     <span>
-      Rating
-      {rating}
+      Rating:
+      <Stars stars={rating} />
     </span>
     <span>
       Name and date
@@ -38,6 +39,15 @@ const Review = ({
       {' '}
       {body}
     </p>
+    {res !== null ? (
+      <p>
+        {' '}
+        Response:
+        {' '}
+        {}
+      </p>
+    ) : ''}
+    {pics.map((photos) => (<img id="reviewPic" src={`${photos.url}`} alt="" key={photos.id} height="100" width="100" />))}
     <footer>
       {' '}
       helpful:
