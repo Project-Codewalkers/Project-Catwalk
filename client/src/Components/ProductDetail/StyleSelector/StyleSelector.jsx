@@ -14,6 +14,14 @@ const StyleSelector = ({
   styles, selectedStyle, setSelectedStyle, setSelectedPhoto,
 }) => {
   if (!selectedStyle) { return <div />; }
+  if (!(styles && styles.length > 0)) {
+    // if styles are falsey or length is zero, return an empy div.
+    return (<div />);
+  }
+  const indexOfDefault = styles.findIndex((style) => style['default?']);
+  if (indexOfDefault !== -1) {
+    styles.unshift(...styles.splice(indexOfDefault, 1));
+  }
   const styleName = selectedStyle.name ? selectedStyle.name.toUpperCase() : '';
   return (
     <div>
