@@ -3,35 +3,51 @@ import PropTypes from 'prop-types';
 import Review from './Review';
 import AvgRating from './AvgRating';
 import api from '../../lib/api';
+import AddReview from './AddReview';
+import SortSelector from './SortSelect';
+import Stars, { avgStars } from '../RelatedItems/Stars';
 
 const ReviewList = ({ id }) => {
   // Hooks state goes here map over the list and render pass down into the review
+  const count = 2;
   const [reviews, setReview] = useState([]);
   const [metaReview, setMeta] = useState({});
+  const [moreReviews, setMoreReviews] = useState(count);
+  const [sort, setSort] = useState('Relevant');
 
-  const sort = 'newest';
   const page = 1;
-  const count = 10;
   useEffect(() => {
-    api.listReviews(id, sort, page, count)
+    api.listReviews(id, sort, page, moreReviews)
       .then((product) => {
-        // console.log('list Reviews', product);
+        console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        // console.log('this is meta', meta);
+        console.log('this is meta', meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));
-  }, [id, sort, page, count]);
+  }, [id, sort, page, moreReviews]);
   return (
     <div id="reviews">
       <p> Reviews go here: </p>
+      <p>
+        Sorted by
+        {' '}
+        <select onChange={() => setSort()}>
+          <option value="Relevant">Relevant</option>
+          <option value="Newest">Newest</option>
+          <option value="Helpful">Helpful</option>
+        </select>
+      </p>
+
       {reviews.map((item) => (
         <Review
+          res={item.response}
           rec={item.recommend}
+          pics={item.photos}
           key={item.review_id}
           summary={item.summary}
           body={item.body}
@@ -43,10 +59,15 @@ const ReviewList = ({ id }) => {
       ))}
       <AvgRating
         key={metaReview.product_id}
-        //  rating={metaReview.ratings}// object
-        character={metaReview}// object
+        rating={avgStars(metaReview.ratings)}// object
+        fit={metaReview.characteristics ? metaReview.characteristics.Fit && `Fit: ${metaReview.characteristics.Fit.value}` : null} // for fit characteristics
+        comfort={metaReview.characteristics ? metaReview.characteristics.Comfort && `Comfort: ${metaReview.characteristics.Comfort.value}` : null} // for comfort
+        length={metaReview.characteristics ? metaReview.characteristics.Length && `Length: ${metaReview.characteristics.Length.value}` : null}
+        quality={metaReview.characteristics ? metaReview.characteristics.Quality && `Quality: ${metaReview.characteristics.Quality.value}` : null}
         rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
       />
+      {/* <AddReview /> */}
+      <button type="button" onClick={() => setMoreReviews(moreReviews + 2)}>MORE REVIEWS</button>
     </div>
   );
 };
