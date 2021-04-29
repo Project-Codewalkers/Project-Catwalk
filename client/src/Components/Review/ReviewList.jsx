@@ -19,13 +19,13 @@ const ReviewList = ({ id }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, moreReviews)
       .then((product) => {
-        console.log('list Reviews', product);
+        // console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));
     api.getReviewMetadata(id)
       .then((meta) => {
-        console.log('this is meta', meta);
+        // console.log('this is meta', meta);
         setMeta(meta);
       })
       .catch((err) => console.log(err));

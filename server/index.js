@@ -35,6 +35,24 @@ app.get(/\w+/, (req, res) => {
     });
 });
 
+app.post(/\w+/, (req, res) => {
+  const apiPath = `${API_URL}${req.url}`;
+  const { params } = req;
+  console.log('apiPath', apiPath, 'with params', params);
+  axios.post(apiPath, {
+    headers: Authentication,
+    params,
+  })
+    .then((response) => {
+      res.status(200).send(response.data);
+    })
+    .catch((error) => {
+      console.log('Error:');
+      // res.sendStatus(500);
+      res.status(500).send(error);
+    });
+});
+
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`listening on port ${PORT}`);
