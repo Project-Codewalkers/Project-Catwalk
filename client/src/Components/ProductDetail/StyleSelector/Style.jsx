@@ -12,6 +12,7 @@ const StyledStyleThumbnail = styled.img`
   border: 1px solid #525252;
   border-radius: 50%;
   object-fit: cover;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 const StyledCheckmark = styled.img`
@@ -83,7 +84,7 @@ Style.propTypes = {
   }).isRequired,
   selected: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
-  // setSelectedPhoto: PropTypes.func.isRequired,
+  setSelectedStyle: PropTypes.func.isRequired,
 };
 
 export default Style;
