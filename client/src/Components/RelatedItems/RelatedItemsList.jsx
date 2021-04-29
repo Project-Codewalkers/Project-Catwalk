@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import OneItem from './OneItem';
+import RelatedItem from './RelatedItem';
 
-const RelatedItemsList = ({ data }) => data.map((item) => (
-  <div key={item[1].product_id}>
-    <OneItem
+const RelatedItemsList = ({ data, changeProduct, productId }) => data.map((item) => (
+  <div>
+    <RelatedItem
+      key={item[1].product_id}
       item={item}
+      changeProduct={changeProduct}
+      productId={productId}
     />
   </div>
 ));
