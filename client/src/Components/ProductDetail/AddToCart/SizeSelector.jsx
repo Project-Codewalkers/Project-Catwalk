@@ -1,22 +1,58 @@
-import React from 'react';
-// import PropTypes from 'prop-types';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const StyledSizeSelector = styled.select`
+  flex: 2;
   height: 64px;
+  width: 100%;
   margin: 12px;
+  padding: 10px;
   border: 1px solid #525252;
   background: #FFF;
 `;
 
-const SizeSelector = () => (
-  <StyledSizeSelector>
-    <option value="">SELECT SIZE</option>
-    <option value="Small">Small</option>
-    <option value="Medium">Medium</option>
-    <option value="Large">Large</option>
-    <option value="OhMyGawd">OhMyGawd</option>
-  </StyledSizeSelector>
-);
+const SizeSelector = ({ productId, skus, setSize }) => {
+  useEffect(() => setSize(''), [productId]);
+
+  return (
+    <StyledSizeSelector
+      onChange={(e) => {
+        setSize(skus.find((eachSku) => eachSku.sku === e.target.value));
+      }}
+      disabled={!skus.length}
+    >
+      <option value="">
+        {skus.length > 0 ? 'SELECT SIZE' : 'OUT OF STOCK'}
+      </option>
+
+      { skus.map((sku) => (
+        <option key={sku.sku} value={sku.sku}>
+          {sku.size}
+        </option>
+      ))}
+
+    </StyledSizeSelector>
+  );
+};
+
+SizeSelector.propTypes = {
+  // skus: PropTypes.arrayOf(PropTypes.shape({
+  //   sku: PropTypes.string.isRequired,
+  //   quantity: PropTypes.number.isRequired,
+  //   size: PropTypes.string.isRequired,
+  // })),
+  productId: PropTypes.number.isRequired,
+  skus: PropTypes.arrayOf(PropTypes.shape({
+    sku: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    size: PropTypes.string.isRequired,
+  })),
+  setSize: PropTypes.func.isRequired,
+};
+
+SizeSelector.defaultProps = {
+  skus: [],
+};
 
 export default SizeSelector;

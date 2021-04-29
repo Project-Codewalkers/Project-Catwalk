@@ -45,10 +45,11 @@ const ReviewList = ({ id }) => {
 
       {reviews.map((item) => (
         <Review
+          id={item.review_id}
           res={item.response}
           rec={item.recommend}
           pics={item.photos}
-          key={item.review_id}
+          key={item.review_id+2}
           summary={item.summary}
           body={item.body}
           date={item.date}

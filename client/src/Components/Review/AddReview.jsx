@@ -12,7 +12,7 @@ const AddReview = () => {
 
   return (
     <div>
-      <button id="addReviewBtn" type='button' onClick={setShow(true)}> ADD REVIEW</button>
+      <button id="addReviewBtn" type="button" onClick={setShow(true)}> ADD REVIEW</button>
     </div>
   );
 };

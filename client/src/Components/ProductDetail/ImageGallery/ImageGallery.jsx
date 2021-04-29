@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -11,12 +11,18 @@ const StyledDefaultImage = styled.div`
   background: center / contain no-repeat url(${(props) => (props.imgURL)}), #EBEBEB;
 `;
 
-const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => {
-  const imgURL = selectedPhoto.url ? selectedPhoto.url : '';
+const ImageGallery = ({ style }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState(style && style.photos);
+
+  useEffect(() => {
+    setSelectedPhoto(style && style.photos[0]);
+  }, [style]);
+
+  const imgURL = (selectedPhoto && selectedPhoto.url) ? selectedPhoto.url : '';
   return (
     <StyledDefaultImage imgURL={imgURL} data-testid="defaultImage">
       <ImageThumbnails
-        photos={photos.filter((photo) => photo.thumbnail_url)}
+        photos={style && style.photos && style.photos.filter((photo) => photo.thumbnail_url)}
         setSelectedPhoto={setSelectedPhoto}
       />
     </StyledDefaultImage>
@@ -24,21 +30,43 @@ const ImageGallery = ({ photos, selectedPhoto, setSelectedPhoto }) => {
 };
 
 ImageGallery.propTypes = {
-  photos: PropTypes.arrayOf(PropTypes.shape({
-    thumbnail_url: PropTypes.string,
-    url: PropTypes.string,
-  })),
-  selectedPhoto: PropTypes.shape({
-    url: PropTypes.string,
-    thumbnail_url: PropTypes.string,
+  style: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(PropTypes.shape({
+      quantity: PropTypes.number,
+      size: PropTypes.string,
+    })),
   }),
-  setSelectedPhoto: PropTypes.func,
 };
 
 ImageGallery.defaultProps = {
-  photos: [],
-  selectedPhoto: { url: '', thumbnail_url: '' },
-  setSelectedPhoto: () => { },
+  style: {
+    style_id: null,
+    name: null,
+    original_price: null,
+    sale_price: null,
+    'default?': false,
+    photos: [
+      {
+        thumbnail_url: '',
+        url: '',
+      },
+    ],
+    skus: {},
+  },
 };
 
 export default ImageGallery;

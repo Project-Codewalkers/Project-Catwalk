@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Stars, { avgStars } from '../RelatedItems/Stars';
+import HelpfulReview from './HelpfulReview';
+import api from '../../lib/api';
 
 const StyledReview = styled.div`
 border: 12px;
@@ -12,7 +14,7 @@ flex-direction: column;
 `;
 
 const Review = ({
-  summary, body, date, name, helpful, rating, rec, pics, res,
+  summary, body, date, name, helpful, rating, rec, pics, res, id
 }) => (
   <StyledReview>
 
@@ -44,13 +46,14 @@ const Review = ({
         {' '}
         Response:
         {' '}
-        {}
+        {res }
       </p>
     ) : ''}
     {pics.map((photos) => (<img id="reviewPic" src={`${photos.url}`} alt="" key={photos.id} height="100" width="100" />))}
     <footer>
       {' '}
       helpful:
+      <button onClick={() => api.markReviewAsHelpful(id)}/>
       {helpful}
     </footer>
 

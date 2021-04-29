@@ -10,5 +10,4 @@ const helpful = ({ reviewId }) => (
       ))
   ))
 );
-
 export default helpful;
