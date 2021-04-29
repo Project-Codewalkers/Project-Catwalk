@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
-import Carousel from './Components/RelatedItems/Carousel';
+// import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
-import ReviewList from './Components/Review/ReviewList';
+// import ReviewList from './Components/Review/ReviewList';
 import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
 
@@ -34,7 +34,9 @@ const App = () => {
     if (!productId) { return; }
 
     api.productInformation(productId)
-      .then((productInformation) => setProductInfo(productInformation))
+      .then((productInformation) => {
+        setProductInfo(productInformation);
+      })
       .catch((err) => {
         // console.error('error fecthing Product Information', err);
         setProductInfo(null);
@@ -45,7 +47,7 @@ const App = () => {
       .then((meta) => {
         // console.log('this is meta', meta);
         setMeta(meta);
-        if (meta.reviews) { setAvgRating(avgStars(meta.ratings)); }
+        if (meta && meta.reviews) { setAvgRating(avgStars(meta.ratings)); }
       })
       .catch((err) => {
         // console.error('error fecthing Review Metadata', err);
@@ -57,6 +59,7 @@ const App = () => {
     api.productStyles(productId)
       .then((productStyles) => {
         setStyles(productStyles);
+        if (!Array.isArray(productStyles)) { return; }
         let defaultStyle = productStyles
           .find((eachStyle) => eachStyle['default?']);
         if (!defaultStyle) {
@@ -81,21 +84,21 @@ const App = () => {
       <ProductDetail
         productId={productId}
         setProductId={setProductId}
-        styles={styles}
+        // styles={styles}
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         avgRating={avgRating}
       />
-      <Carousel
+      {/* <Carousel
         productId={productId}
         changeProduct={changeProduct}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
       />
-      <ReviewList id={productId} />
+      <ReviewList id={productId} /> */}
     </StyledApp>
   );
 };
