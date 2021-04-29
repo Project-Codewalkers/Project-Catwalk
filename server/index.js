@@ -3,7 +3,6 @@ const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const axios = require('axios');
-// const { createProxyMiddleware } = require('http-proxy-middleware');
 const Authentication = require('./config.js');
 
 const app = express();

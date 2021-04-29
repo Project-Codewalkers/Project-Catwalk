@@ -1,15 +1,16 @@
 /* eslint-disable max-len */
 // const baseURL = 'http://localhost:3000';
 // const PORT = 3000;
+const axios = require('axios');
 
 const defaultGetOptions = {
-  method: 'get',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  mode: 'cors',
+  // method: 'get',
+  // headers: {
+  //   Accept: 'application/json',
+  //   'Content-Type': 'application/json',
+  //   'Access-Control-Allow-Origin': '*',
+  // },
+  // mode: 'cors',
 };
 
 const defaultPostOptions = {
@@ -29,8 +30,8 @@ function listProducts(page, count) {
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/products?${new URLSearchParams(params)}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -38,8 +39,8 @@ function addToOutfit(productObj) {
   const options = defaultPostOptions;
   const resource = '/products';
   options.body = JSON.stringify(productObj);
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.json())
     .catch((error) => error);
 }
 
@@ -51,8 +52,8 @@ function addToOutfit(productObj) {
 function productInformation(productId) {
   const options = defaultGetOptions;
   const resource = `/products/${productId}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -64,8 +65,8 @@ function productInformation(productId) {
 function productStyles(productId) {
   const options = defaultGetOptions;
   const resource = `/products/${productId}/styles`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .then(({ results }) => results)
     .catch((error) => error);
 }
@@ -78,8 +79,8 @@ function productStyles(productId) {
 function relatedProducts(productId) {
   const options = defaultGetOptions;
   const resource = `/products/${productId}/related`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -100,8 +101,8 @@ function listReviews(productId, sort = 'relevant', page, count) {
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/reviews?${new URLSearchParams(params)}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .then(({ results }) => results)
     .catch((error) => error);
 }
@@ -115,8 +116,8 @@ function getReviewMetadata(productId) {
   const options = defaultGetOptions;
   const params = { product_id: productId };
   const resource = `/reviews/meta?${new URLSearchParams(params)}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -138,8 +139,8 @@ function addAReview(reviewObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify(reviewObj);
   const resource = '/reviews';
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -152,8 +153,8 @@ function markReviewAsHelpful(reviewId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/reviews/${reviewId}/helpful`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -166,8 +167,8 @@ function reportReview(reviewId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/reviews/${reviewId}/report`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -184,8 +185,8 @@ function listQuestions(productId, page, count) {
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/qa/questions?${new URLSearchParams(params)}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -202,8 +203,8 @@ function answersList(questionId, page, count) {
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/qa/questions/${questionId}/answers?${new URLSearchParams(params)}`;
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -219,8 +220,8 @@ function addAQuestion(questionObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify(questionObj);
   const resource = '/qa/questions/';
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -239,8 +240,8 @@ function addAnAnswer(answerObj) {
   delete answerObj.questionId;
   options.body = JSON.stringify(answerObj);
   const resource = `/qa/questions/${questionId}`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -253,8 +254,8 @@ function markQuestionAsHelpful(questionId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/qa/questions/${questionId}/helpful`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -267,8 +268,8 @@ function reportQuestion(questionId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/qa/questions/${questionId}/report`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -281,8 +282,8 @@ function markAnswerAsHelpful(answerId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/qa/answers/${answerId}/helpful`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -295,8 +296,8 @@ function reportAnswer(answerId) {
   const options = defaultPostOptions;
   options.method = 'put';
   const resource = `/qa/answers/${answerId}/report`;
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -307,8 +308,8 @@ function reportAnswer(answerId) {
 function getCart() {
   const options = defaultGetOptions;
   const resource = '/cart';
-  return fetch(resource, options)
-    .then((response) => response.json())
+  return axios.get(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
@@ -323,9 +324,12 @@ function addToCart(skuId) {
   // options.body = { sku_id: skuId };
   // console.log('options.body', options.body);
   const resource = '/cart';
-  return fetch(resource, options)
-    .then((response) => response)
-    .catch((error) => console.error('there is an error'));
+  return axios.post(resource, {
+    ...options,
+    body: { sku_id: skuId },
+  })
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -339,8 +343,8 @@ function logAnInteraction(interactionObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify({ interactionObj });
   const resource = '/interactions';
-  return fetch(resource, options)
-    .then((response) => response)
+  return axios.post(resource, options)
+    .then((response) => response.data)
     .catch((error) => error);
 }
 
