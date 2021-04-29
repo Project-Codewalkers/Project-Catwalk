@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
-const baseURL = 'http://localhost:3000';
-// const baseURL = 'https://postman-echo.com/get';
+// const baseURL = 'http://localhost:3000';
 // const PORT = 3000;
 
 const defaultGetOptions = {
@@ -10,7 +9,7 @@ const defaultGetOptions = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
   },
-  mode: 'no-cors',
+  mode: 'cors',
 };
 
 const defaultPostOptions = {
@@ -35,13 +34,13 @@ function listProducts(page, count) {
   const params = {};
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
-  const resource = `${baseURL}/products?${new URLSearchParams(params)}`;
+  const resource = `/products?${new URLSearchParams(params)}`;
   return fetchCall(resource, options);
 }
 
 function addToOutfit(productObj) {
   const options = defaultPostOptions;
-  const resource = `${baseURL}/products`;
+  const resource = '/products';
   options.body = JSON.stringify(productObj);
   return fetchCall(resource, options);
 }
@@ -53,7 +52,7 @@ function addToOutfit(productObj) {
  */
 function productInformation(productId) {
   const options = defaultGetOptions;
-  const resource = `${baseURL}/products/${productId}`;
+  const resource = `/products/${productId}`;
   return fetchCall(resource, options);
 }
 
@@ -64,7 +63,7 @@ function productInformation(productId) {
  */
 function productStyles(productId) {
   const options = defaultGetOptions;
-  const resource = `${baseURL}/products/${productId}/styles`;
+  const resource = `/products/${productId}/styles`;
   return fetchCall(resource, options)
     .then(({ results }) => results);
 }
@@ -76,7 +75,7 @@ function productStyles(productId) {
  */
 function relatedProducts(productId) {
   const options = defaultGetOptions;
-  const resource = `${baseURL}/products/${productId}/related`;
+  const resource = `/products/${productId}/related`;
   return fetchCall(resource, options);
 }
 
@@ -96,7 +95,7 @@ function listReviews(productId, sort = 'relevant', page, count) {
   };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
-  const resource = `${baseURL}/reviews?${new URLSearchParams(params)}`;
+  const resource = `/reviews?${new URLSearchParams(params)}`;
   return fetchCall(resource, options)
     .then(({ results }) => results);
 }
@@ -109,7 +108,7 @@ function listReviews(productId, sort = 'relevant', page, count) {
 function getReviewMetadata(productId) {
   const options = defaultGetOptions;
   const params = { product_id: productId };
-  const resource = `${baseURL}/reviews/meta?${new URLSearchParams(params)}`;
+  const resource = `/reviews/meta?${new URLSearchParams(params)}`;
   return fetchCall(resource, options);
 }
 
@@ -130,7 +129,7 @@ function getReviewMetadata(productId) {
 function addAReview(reviewObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify(reviewObj);
-  const resource = `${baseURL}/reviews`;
+  const resource = '/reviews';
   return fetchCall(resource, options);
 }
 
@@ -142,7 +141,7 @@ function addAReview(reviewObj) {
 function markReviewAsHelpful(reviewId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/reviews/${reviewId}/helpful`;
+  const resource = `/reviews/${reviewId}/helpful`;
   return fetchCall(resource, options);
 }
 
@@ -154,7 +153,7 @@ function markReviewAsHelpful(reviewId) {
 function reportReview(reviewId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/reviews/${reviewId}/report`;
+  const resource = `/reviews/${reviewId}/report`;
   return fetchCall(resource, options);
 }
 
@@ -170,7 +169,7 @@ function listQuestions(productId, page, count) {
   const params = { product_id: productId, page, count };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
-  const resource = `${baseURL}/qa/questions?${new URLSearchParams(params)}`;
+  const resource = `/qa/questions?${new URLSearchParams(params)}`;
   return fetchCall(resource, options);
 }
 
@@ -186,7 +185,7 @@ function answersList(questionId, page, count) {
   const params = { page, count };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
-  const resource = `${baseURL}/qa/questions/${questionId}/answers?${new URLSearchParams(params)}`;
+  const resource = `/qa/questions/${questionId}/answers?${new URLSearchParams(params)}`;
   return fetchCall(resource, options);
 }
 
@@ -201,7 +200,7 @@ function answersList(questionId, page, count) {
 function addAQuestion(questionObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify(questionObj);
-  const resource = `${baseURL}/qa/questions/`;
+  const resource = '/qa/questions/';
   return fetchCall(resource, options);
 }
 
@@ -219,7 +218,7 @@ function addAnAnswer(answerObj) {
   // eslint-disable-next-line no-param-reassign
   delete answerObj.questionId;
   options.body = JSON.stringify(answerObj);
-  const resource = `${baseURL}/qa/questions/${questionId}`;
+  const resource = `/qa/questions/${questionId}`;
   return fetchCall(resource, options);
 }
 
@@ -231,7 +230,7 @@ function addAnAnswer(answerObj) {
 function markQuestionAsHelpful(questionId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/qa/questions/${questionId}/helpful`;
+  const resource = `/qa/questions/${questionId}/helpful`;
   return fetchCall(resource, options);
 }
 
@@ -243,7 +242,7 @@ function markQuestionAsHelpful(questionId) {
 function reportQuestion(questionId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/qa/questions/${questionId}/report`;
+  const resource = `/qa/questions/${questionId}/report`;
   return fetchCall(resource, options);
 }
 
@@ -255,7 +254,7 @@ function reportQuestion(questionId) {
 function markAnswerAsHelpful(answerId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/qa/answers/${answerId}/helpful`;
+  const resource = `/qa/answers/${answerId}/helpful`;
   return fetchCall(resource, options);
 }
 
@@ -267,7 +266,7 @@ function markAnswerAsHelpful(answerId) {
 function reportAnswer(answerId) {
   const options = defaultPostOptions;
   options.method = 'put';
-  const resource = `${baseURL}/qa/answers/${answerId}/report`;
+  const resource = `/qa/answers/${answerId}/report`;
   return fetchCall(resource, options);
 }
 
@@ -277,7 +276,7 @@ function reportAnswer(answerId) {
  */
 function getCart() {
   const options = defaultGetOptions;
-  const resource = `${baseURL}/cart`;
+  const resource = '/cart';
   return fetchCall(resource, options);
 }
 
@@ -288,9 +287,13 @@ function getCart() {
  */
 function addToCart(skuId) {
   const options = defaultPostOptions;
-  options.body = JSON.stringify({ skuId });
-  const resource = `${baseURL}/cart`;
-  return fetchCall(resource, options);
+  options.body = { sku_id: skuId };
+  // console.log('options.body', options.body);
+  const resource = '/cart';
+  return fetchCall(resource, {
+    ...options,
+    body: { sku_id: skuId },
+  });
 }
 
 /**
@@ -303,7 +306,7 @@ function addToCart(skuId) {
 function logAnInteraction(interactionObj) {
   const options = defaultPostOptions;
   options.body = JSON.stringify({ interactionObj });
-  const resource = `${baseURL}/interactions`;
+  const resource = '/interactions';
   return fetchCall(resource, options);
 }
 
