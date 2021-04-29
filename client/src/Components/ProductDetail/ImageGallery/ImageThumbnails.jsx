@@ -16,19 +16,24 @@ const StyledThumbnails = styled.div`
   z-index: 1;
 `;
 
-const ImageThumbnails = ({ photos, setSelectedPhoto }) => (
-  <StyledThumbnails data-testid="thumbnails">
-    {photos.slice(0, 7).map((photo, index) => (
-      <ImageThumbnail
-        data-testid="thumbnail"
-        key={photo.url}
-        index={index + 1}
-        photo={photo}
-        setSelectedPhoto={setSelectedPhoto}
-      />
-    ))}
-  </StyledThumbnails>
-);
+const ImageThumbnails = ({ photos, setSelectedPhoto }) => {
+  if (photos) {
+    return (
+      <StyledThumbnails data-testid="thumbnails">
+        {photos.slice(0, 7).map((photo, index) => (
+          <ImageThumbnail
+            data-testid="thumbnail"
+            key={photo.url}
+            index={index + 1}
+            photo={photo}
+            setSelectedPhoto={setSelectedPhoto}
+          />
+        ))}
+      </StyledThumbnails>
+    );
+  }
+  return (<div />);
+};
 
 ImageThumbnails.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.shape({

@@ -31,19 +31,19 @@ const ThumbContainer = styled.div`
 `;
 
 const Style = ({
-  style, selected, setSelectedStyle, index, setSelectedPhoto,
+  style, selected, setSelectedStyle, index,
 }) => (
   <ThumbContainer
     role="button"
     tabIndex={index + 10}
     onClick={() => {
       setSelectedStyle(style);
-      setSelectedPhoto(style.photos[0]);
+      // setSelectedPhoto(style.photos[0]);
     }}
     onKeyDown={(e) => {
       if (e.code !== 'Enter' && e.code !== 'Space') { return; }
       setSelectedStyle(style);
-      setSelectedPhoto(style.photos[0]);
+      // setSelectedPhoto(style.photos[0]);
     }}
   >
 
@@ -82,9 +82,8 @@ Style.propTypes = {
     })),
   }).isRequired,
   selected: PropTypes.bool.isRequired,
-  setSelectedStyle: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  setSelectedPhoto: PropTypes.func.isRequired,
+  // setSelectedPhoto: PropTypes.func.isRequired,
 };
 
 export default Style;
