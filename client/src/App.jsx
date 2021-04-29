@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import ProductDetail from './Components/ProductDetail/ProductDetail';
-// import Carousel from './Components/RelatedItems/Carousel';
+import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
-// import ReviewList from './Components/Review/ReviewList';
+import ReviewList from './Components/Review/ReviewList';
 import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
 
@@ -84,21 +84,21 @@ const App = () => {
       <ProductDetail
         productId={productId}
         setProductId={setProductId}
-        // styles={styles}
+        styles={styles}
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         avgRating={avgRating}
       />
-      {/* <Carousel
+      <Carousel
         productId={productId}
         changeProduct={changeProduct}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
       />
-      <ReviewList id={productId} /> */}
+      <ReviewList id={productId} />
     </StyledApp>
   );
 };
