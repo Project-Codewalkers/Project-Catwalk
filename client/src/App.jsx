@@ -72,6 +72,10 @@ const App = () => {
       });
   }, [productId]);
 
+  const changeProduct = (product) => {
+    setProductId(product);
+  };
+
   return (
     <StyledApp data-testid="appComponent">
       <ProductDetail
@@ -86,8 +90,10 @@ const App = () => {
       />
       <Carousel
         productId={productId}
+        changeProduct={changeProduct}
+        productInfo={productInfo}
+        reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
-        setSelectedStyle={setSelectedStyle}
       />
       <ReviewList id={productId} />
     </StyledApp>

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 import Stars from './Stars';
 
 const ListItem = styled.div`
@@ -37,20 +38,30 @@ const Category = styled.div`
   font-size: 13px;
 `;
 
-const Outfit = ({ item }) => {
+const Outfit = ({ item, selectedStyle }) => {
   // url
-  let defaultStyle;
-  if (item && item[0]) {
-    defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
-    if (!defaultStyle) {
-      // eslint-disable-next-line prefer-destructuring
-      defaultStyle = item[0][0];
-    }
-  }
+  // let defaultStyle;
+  // console.log('Log this: ', item);
+  // if (item && item[0]) {
+  //   defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
+  //   if (!defaultStyle) {
+  //     // eslint-disable-next-line prefer-destructuring
+  //     defaultStyle = item[0][0];
+  //   }
+  // }
   // defaultStyle = defaultStyle ? item[0][0] : {};
+
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
-  const url = defaultStyle ? defaultStyle.photos[0].url : noPic;
-  console.log(defaultStyle);
+  const url = selectedStyle ? selectedStyle.photos[0].thumbnail_url : noPic;
+  // console.log(selectedStyle);
+
+  // let price;
+  // if (item && item[4]) {
+  //   price = item[4].find((eachPrice) => eachPrice[sale_price]);
+  //   if (!price) {
+  //     price = item[0][4];
+  //   }
+  // }
 
   return (
     <ListItem role="listitem">
@@ -64,9 +75,18 @@ const Outfit = ({ item }) => {
         <Price>{`Today: $${item[2].default_price}`}</Price>
         <Stars stars={item[1].ratings} />
       </div>
-      {/* <Modal description={description} /> */}
     </ListItem>
   );
 };
+
+// Outfit.propTypes = {
+//   item: PropTypes.arrayOf(PropTypes.shape({
+//     find: PropTypes.func,
+//     category: PropTypes.string,
+//     name: PropTypes.string,
+//     default_price: PropTypes.number,
+//     ratings: PropTypes.number,
+//   })).isRequired,
+// };
 
 export default Outfit;
