@@ -81,7 +81,7 @@ const App = () => {
   }, [productId]);
 
   const changeProduct = (product) => {
-    setProductId(product);
+    setProductId(Number(product));
   };
 
   console.log(avgRating);
