@@ -1,14 +1,21 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import RelatedItem from './RelatedItem';
 
-const RelatedItemsList = ({ data, changeProduct, productId }) => data.map((item) => (
+const RelatedItemsList = ({
+  data, changeProduct, productId, avgRating, productInfo, selectedStyle, reviewMeta,
+}) => data.map((item) => (
   <div>
     <RelatedItem
-      key={item[1].product_id}
+      key={item[2].product_id}
       item={item}
       changeProduct={changeProduct}
       productId={productId}
+      avgRating={avgRating}
+      productInfo={productInfo}
+      reviewMeta={reviewMeta}
+      selectedStyle={selectedStyle}
     />
   </div>
 ));

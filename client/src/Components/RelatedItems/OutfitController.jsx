@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import OutfitList from './OutfitList';
 
 const CarouselControllerOutfit = styled.div`
@@ -18,8 +17,8 @@ const CarouselListOutfit = styled.div`
 
 const LeftBtnOutfit = styled.button`
   display:flex;
-  background-color: #fff;
-  border: 1px solid #dadcdf;
+  background-color: lightgrey;
+  border: 1px solid #797777;
   border-radius: 4px;
   width: 43px;
   height: 64px;
@@ -35,8 +34,8 @@ const LeftBtnOutfit = styled.button`
 
 const RightBtnOutfit = styled.button`
   display:flex;
-  background-color: #fff;
-  border: 1px solid #dadcdf;
+  background-color: lightgrey;
+  border: 1px solid #797777;
   border-radius: 4px;
   width: 43px;
   height: 64px;
@@ -60,19 +59,31 @@ const RightArrowOutfit = styled.svg`
 `;
 
 const OutfitAdder = styled.div`
-  padding: 10px;
-  margin: 10px;
-  width: 302px;
-  background-color: lightgrey;
-  border: black solid 0.1em;
+  /* vertical-align: middle; */
+  border: black solid 0em 0.1em 0em 0.1em;
   flex: 0 0 225px;
   height: 340px;
-  margin: 5px;
-  display: inline-flex;
+  width: 225px;
+  margin: 15px;
+  border-radius: 10px;
+  z-index: 1;
+  box-shadow: 0 2px 10px lightgrey;
+  text-align: center;
+  min-height: 10em;
+  display: table-cell;
+`;
+
+const Text = styled.div`
+  margin-top: 50%;
+  /* margin-left: 50%; */
+  margin-bottom: 50%;
+  margin-top: 50%;
+  text-align: center;
+  font-size: 30px;
 `;
 
 const OutfitController = ({
-  outfit, newItem, selectedStyle, reviewMeta, productInfo,
+  outfit, newItem, selectedStyle, reviewMeta, productInfo, deleteItem, outfitArr,
 }) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
@@ -137,14 +148,19 @@ const OutfitController = ({
         <OutfitList
           outfit={outfit}
           newItem={newItem}
+          deleteItem={deleteItem}
           selectedStyle={selectedStyle}
+          outfitArr={outfitArr}
         />
         <OutfitAdder
           onClick={() => (newItem(selectedStyle, reviewMeta, productInfo))}
         >
-          +
-          <br />
-          Add to Outfit
+          <Text>
+            +
+            <br />
+            <br />
+            Add to Outfit
+          </Text>
         </OutfitAdder>
       </CarouselListOutfit>
       {rightBtnOutfit()}
@@ -152,13 +168,84 @@ const OutfitController = ({
   );
 };
 
-// OutfitController.propTypes = {
-//   outfit: PropTypes.arrayOf(),
-//   newItem: PropTypes.func.isRequired,
-// };
+OutfitController.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  outfit: PropTypes.array.isRequired,
+  newItem: PropTypes.func.isRequired,
+  selectedStyle: PropTypes.shape({
+    style_id: PropTypes.number,
+    name: PropTypes.string,
+    original_price: PropTypes.string,
+    sale_price: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    'default?': PropTypes.bool,
+    photos: PropTypes.arrayOf(PropTypes.shape(
+      {
+        thumbnail_url: PropTypes.string,
+        url: PropTypes.string,
+      },
+    )),
+    skus: PropTypes.objectOf(
+      PropTypes.shape({
+        quantity: PropTypes.number.isRequired,
+        size: PropTypes.string.isRequired,
+      }),
+    ),
+  }),
+  reviewMeta: PropTypes.shape({
+    characterists: PropTypes.shape({
+      Comfort: PropTypes.shape({
+        id: PropTypes.number,
+        value: PropTypes.number,
+      }),
+      Fit: PropTypes.shape({
+        id: PropTypes.number,
+        value: PropTypes.number,
+      }),
+      Length: PropTypes.shape({
+        id: PropTypes.number,
+        value: PropTypes.number,
+      }),
+      Quality: PropTypes.shape({
+        id: PropTypes.number,
+        value: PropTypes.number,
+      }),
+    }),
+    product_id: PropTypes.number,
+    rating: PropTypes.shape({
+      3: PropTypes.number,
+      4: PropTypes.number,
+      5: PropTypes.number,
+    }),
+    recommended: PropTypes.shape({
+      false: PropTypes.number,
+      true: PropTypes.number,
+    }),
+  }),
+  productInfo: PropTypes.shape({
+    id: PropTypes.number,
+    campus: PropTypes.string,
+    name: PropTypes.string,
+    slogan: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    default_price: PropTypes.string,
+    created_at: PropTypes.string,
+    updated_at: PropTypes.string,
+    features: PropTypes.arrayOf(PropTypes.shape({
+      feature: PropTypes.string,
+      value: PropTypes.string,
+    })),
+  }),
+  deleteItem: PropTypes.func.isRequired,
+};
 
-// OutfitController.defaultProps = {
-//   outfit: PropTypes.arrayOf(),
-// };
+OutfitController.defaultProps = {
+  selectedStyle: PropTypes.null,
+  reviewMeta: PropTypes.null,
+  productInfo: PropTypes.null,
+};
 
 export default OutfitController;

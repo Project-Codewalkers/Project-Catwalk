@@ -18,8 +18,8 @@ const CarouselListRelated = styled.div`
 
 const LeftBtnRelated = styled.button`
   display:flex;
-  background-color: #fff;
-  border: 1px solid #dadcdf;
+  background-color: lightgrey;
+  border: 1px solid #797777;
   border-radius: 4px;
   width: 43px;
   height: 64px;
@@ -35,8 +35,8 @@ const LeftBtnRelated = styled.button`
 
 const RightBtnRelated = styled.button`
   display:flex;
-  background-color: #fff;
-  border: 1px solid #dadcdf;
+  background-color: lightgrey;
+  border: 1px solid #797777;
   border-radius: 4px;
   width: 43px;
   height: 64px;
@@ -59,7 +59,7 @@ const RightArrowRelated = styled.svg`
   height: 24px;
 `;
 
-const RelatedController = ({ data, changeProduct, productId }) => {
+const RelatedController = ({ data, changeProduct, productId, avgRating, productInfo, reviewMeta, selectedStyle }) => {
   const [leftRelated, setLeftRelated] = useState(0);
 
   // refactor into separate components later
@@ -119,7 +119,15 @@ const RelatedController = ({ data, changeProduct, productId }) => {
         style={{ left: `${`${leftRelated}px`}` }}
         role="list"
       >
-        <RelatedItemsList data={data} changeProduct={changeProduct} productId={productId} />
+        <RelatedItemsList
+          data={data}
+          changeProduct={changeProduct}
+          productId={productId}
+          avgRating={avgRating}
+          productInfo={productInfo}
+          reviewMeta={reviewMeta}
+          selectedStyle={selectedStyle}
+        />
       </CarouselListRelated>
       {rightBtnRelated()}
     </CarouselControllerRelated>
