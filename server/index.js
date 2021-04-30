@@ -42,8 +42,6 @@ app.post(/\w+/, (req, res) => {
     });
 });
 
-app.use('/(\\w)+', () => console.log(req.body) );
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`listening on port ${PORT}`);
