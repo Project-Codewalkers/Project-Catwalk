@@ -4,7 +4,7 @@ import ProductDetail from './Components/ProductDetail/ProductDetail';
 import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
 import ReviewList from './Components/Review/ReviewList';
-import { avgStars } from './Components/RelatedItems/Stars';
+import { avgStars, totalReviews } from './Components/RelatedItems/Stars';
 import api from './lib/api';
 import Modal from './Components/Review/Modal';
 
@@ -23,6 +23,7 @@ const App = () => {
   const [selectedStyle, rawSetSelectedStyle] = useState(null);
   const [reviewMeta, rawSetMeta] = useState(null);
   const [avgRating, rawSetAvgRating] = useState(null);
+  const [reviewCount, rawSetReviewCount] = useState(0);
 
   const setProductId = useCallback((id) => rawSetProductId(id), []);
   const setProductInfo = useCallback((id) => rawSetProductInfo(id), []);
@@ -30,6 +31,7 @@ const App = () => {
   const setSelectedStyle = useCallback((id) => rawSetSelectedStyle(id), []);
   const setMeta = useCallback((id) => rawSetMeta(id), []);
   const setAvgRating = useCallback((id) => rawSetAvgRating(id), []);
+  const setReviewCount = useCallback((id) => rawSetReviewCount(id), []);
 
   useEffect(() => {
     if (!productId) { return; }
@@ -39,19 +41,19 @@ const App = () => {
         setProductInfo(productInformation);
       })
       .catch((err) => {
-        // console.error('error fecthing Product Information', err);
         setProductInfo(null);
         throw err;
       });
 
     api.getReviewMetadata(productId)
       .then((meta) => {
-        // console.log('this is meta', meta);
         setMeta(meta);
-        if (meta && meta.reviews) { setAvgRating(avgStars(meta.ratings)); }
+        if (meta && meta.reviews) { 
+          setAvgRating(avgStars(meta.ratings));
+          setReviewCount(reviewCount(meta.ratings));
+        }
       })
       .catch((err) => {
-        // console.error('error fecthing Review Metadata', err);
         setMeta(null);
         setAvgRating(0);
         throw err;
@@ -72,7 +74,6 @@ const App = () => {
         setSelectedStyle(defaultStyle);
       })
       .catch((err) => {
-        // console.error('error fetching Product Styles', err);
         setStyles([]);
         setSelectedStyle(null);
         throw err;
@@ -99,8 +100,8 @@ const App = () => {
         selectedStyle={selectedStyle}
         setSelectedStyle={setSelectedStyle}
         productInfo={productInfo}
-        reviewMeta={reviewMeta}
         avgRating={avgRating}
+        reviewCount={reviewCount}
       />
       <Carousel
         productId={productId}

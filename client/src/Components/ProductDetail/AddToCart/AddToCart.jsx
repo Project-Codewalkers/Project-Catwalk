@@ -42,8 +42,8 @@ const AddToCart = ({ skusObj, productId }) => {
 AddToCart.propTypes = {
   skusObj: PropTypes.objectOf(
     PropTypes.shape({
-      quantity: PropTypes.number.isRequired,
-      size: PropTypes.string.isRequired,
+      quantity: PropTypes.number,
+      size: PropTypes.string,
     }),
   ),
   productId: PropTypes.number.isRequired,
