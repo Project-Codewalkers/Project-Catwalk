@@ -42,7 +42,7 @@ const ReviewList = ({ id, metaReview }) => {
           res={item.response}
           rec={item.recommend}
           pics={item.photos}
-          key={item.review_id+2}
+          key={item.review_id + 2}
           summary={item.summary}
           body={item.body}
           date={item.date}
@@ -51,16 +51,16 @@ const ReviewList = ({ id, metaReview }) => {
           rating={item.rating}
         />
       ))}
-      {/* <AvgRating
-        key={metaReview.product_id : null }
-        rating={avgStars(metaReview.ratings) : null}// object
-        fit={metaReview.characteristics && metaReview.characteristics.Fit ? metaReview : null} // for fit characteristics
-        comfort={metaReview.characteristics && metaReview.characteristics.Comfort ? metaReview : null} // for comfort
-        length={metaReview.characteristics && metaReview.characteristics.Length ? `Length: ${metaReview.characteristics.Length.value}` : null}
-        quality={metaReview.characteristics && metaReview.characteristics.Quality ? `Quality: ${metaReview.characteristics.Quality.value}` : null}
-        rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
-      /> */}
-      {/* <AddReview /> */}
+      <AvgRating
+        key={metaReview ? metaReview.product_id : null}
+        rating={metaReview ? avgStars(metaReview.ratings) : null}// object
+        fit={metaReview && metaReview.characteristics && metaReview.characteristics.Fit ? metaReview.characteristics.Fit : null} // for fit characteristics
+        comfort={metaReview && metaReview.characteristics && metaReview.characteristics.Comfort ? metaReview.characteristics.Comfort : null} // for comfort
+        length={metaReview && metaReview.characteristics && metaReview.characteristics.Length ? `Length: ${Number(metaReview.characteristics.Length.value).toFixed(1)}` : null}
+        quality={metaReview && metaReview.characteristics && metaReview.characteristics.Quality ? `Quality: ${Number(metaReview.characteristics.Quality.value).toFixed(1)}` : null}
+        rec={metaReview && metaReview.recommended ? metaReview.recommended.true > metaReview.recommended.false : null}
+      />
+      <AddReview />
       <button type="button" onClick={() => setMoreReviews(moreReviews + 2)}>MORE REVIEWS</button>
     </div>
   );

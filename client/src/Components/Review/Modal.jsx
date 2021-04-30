@@ -14,8 +14,8 @@ margin-left: -250px;
 margin-top: -250px;
 `;
 
-const Modal = ({ Content, id }) => {
-  const [viewable, setViewable] = useState(false);
+const Modal = ({ Content, id, show }) => {
+  //const [viewable, setViewable] = useState(false);
   const [name, setName] = useState('');
   const [rating, setRating] = useState(null);
   const [body, setBody] = useState('');
@@ -69,8 +69,9 @@ const Modal = ({ Content, id }) => {
     };
     postToServer(post);
   };
+  console.log(show);
 
-  if (viewable) {
+  if (show) {
     return (
       <StyledModal>
         <form id="addReviewForm" onSubmit={(e) => handleSubmit(e)}>
