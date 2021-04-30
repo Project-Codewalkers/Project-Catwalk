@@ -13,13 +13,13 @@ const AvgRating = ({
     <Stars stars={rating} />
     <p>
       characteristics:
-      {fit}
+      { fit && `Fit: ${fit.characteristics.Fit.value}`}
       {' '}
       {length}
       {' '}
       {quality}
       {' '}
-      {comfort}
+      {comfort && `Comfort: ${metaReview.characteristics.Comfort.value}`}
     </p>
     <p>
       Recommended:

@@ -7,11 +7,10 @@ import AddReview from './AddReview';
 import SortSelector from './SortSelect';
 import Stars, { avgStars } from '../RelatedItems/Stars';
 
-const ReviewList = ({ id }) => {
+const ReviewList = ({ id, metaReview }) => {
   // Hooks state goes here map over the list and render pass down into the review
   const count = 2;
   const [reviews, setReview] = useState([]);
-  const [metaReview, setMeta] = useState({});
   const [moreReviews, setMoreReviews] = useState(count);
   const [sort, setSort] = useState('Relevant');
 
@@ -19,14 +18,8 @@ const ReviewList = ({ id }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, moreReviews)
       .then((product) => {
-        console.log('list Reviews', product);
+        // console.log('list Reviews', product);
         setReview(product);
-      })
-      .catch((err) => console.log(err));
-    api.getReviewMetadata(id)
-      .then((meta) => {
-        console.log('this is meta', meta);
-        setMeta(meta);
       })
       .catch((err) => console.log(err));
   }, [id, sort, page, moreReviews]);
@@ -45,10 +38,11 @@ const ReviewList = ({ id }) => {
 
       {reviews.map((item) => (
         <Review
+          id={item.review_id}
           res={item.response}
           rec={item.recommend}
           pics={item.photos}
-          key={item.review_id}
+          key={item.review_id+2}
           summary={item.summary}
           body={item.body}
           date={item.date}
@@ -57,15 +51,15 @@ const ReviewList = ({ id }) => {
           rating={item.rating}
         />
       ))}
-      <AvgRating
-        key={metaReview.product_id}
-        rating={avgStars(metaReview.ratings)}// object
-        fit={metaReview.characteristics ? metaReview.characteristics.Fit && `Fit: ${metaReview.characteristics.Fit.value}` : null} // for fit characteristics
-        comfort={metaReview.characteristics ? metaReview.characteristics.Comfort && `Comfort: ${metaReview.characteristics.Comfort.value}` : null} // for comfort
-        length={metaReview.characteristics ? metaReview.characteristics.Length && `Length: ${metaReview.characteristics.Length.value}` : null}
-        quality={metaReview.characteristics ? metaReview.characteristics.Quality && `Quality: ${metaReview.characteristics.Quality.value}` : null}
+      {/* <AvgRating
+        key={metaReview.product_id : null }
+        rating={avgStars(metaReview.ratings) : null}// object
+        fit={metaReview.characteristics && metaReview.characteristics.Fit ? metaReview : null} // for fit characteristics
+        comfort={metaReview.characteristics && metaReview.characteristics.Comfort ? metaReview : null} // for comfort
+        length={metaReview.characteristics && metaReview.characteristics.Length ? `Length: ${metaReview.characteristics.Length.value}` : null}
+        quality={metaReview.characteristics && metaReview.characteristics.Quality ? `Quality: ${metaReview.characteristics.Quality.value}` : null}
         rec={metaReview.recommended === undefined ? 'empty' : metaReview.recommended.true > metaReview.recommended.false}
-      />
+      /> */}
       {/* <AddReview /> */}
       <button type="button" onClick={() => setMoreReviews(moreReviews + 2)}>MORE REVIEWS</button>
     </div>

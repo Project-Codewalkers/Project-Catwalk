@@ -6,6 +6,7 @@ import Carousel from './Components/RelatedItems/Carousel';
 import ReviewList from './Components/Review/ReviewList';
 import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
+import Modal from './Components/Review/Modal';
 
 const StyledApp = styled.div`
   display: flex;
@@ -34,7 +35,9 @@ const App = () => {
     if (!productId) { return; }
 
     api.productInformation(productId)
-      .then((productInformation) => setProductInfo(productInformation))
+      .then((productInformation) => {
+        setProductInfo(productInformation);
+      })
       .catch((err) => {
         // console.error('error fecthing Product Information', err);
         setProductInfo(null);
@@ -45,7 +48,7 @@ const App = () => {
       .then((meta) => {
         // console.log('this is meta', meta);
         setMeta(meta);
-        if (meta.reviews) { setAvgRating(avgStars(meta.ratings)); }
+        if (meta && meta.reviews) { setAvgRating(avgStars(meta.ratings)); }
       })
       .catch((err) => {
         // console.error('error fecthing Review Metadata', err);
@@ -56,7 +59,11 @@ const App = () => {
 
     api.productStyles(productId)
       .then((productStyles) => {
+        if (!productStyles) {
+          productStyles = [];
+        }
         setStyles(productStyles);
+        if (!Array.isArray(productStyles)) { return; }
         let defaultStyle = productStyles
           .find((eachStyle) => eachStyle['default?']);
         if (!defaultStyle) {
@@ -70,6 +77,7 @@ const App = () => {
         setSelectedStyle(null);
         throw err;
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
   const changeProduct = (product) => {
@@ -103,7 +111,8 @@ const App = () => {
         avgRating={avgRating}
         setImage={setImage}
       />
-      <ReviewList id={productId} />
+      <ReviewList id={productId} metaReview={reviewMeta} />
+      <Modal id={productId} />
     </StyledApp>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import api from '../../../lib/api';
 
 const StyledAddToBagButton = styled.button`
   flex: 1;
@@ -11,8 +12,23 @@ const StyledAddToBagButton = styled.button`
   background: #FFF;
 `;
 
+const addToCart = (skuId) => {
+  api.addToCart(skuId)
+    .then(() => {
+      api.getCart()
+        .then((result) => result)
+        .catch((err) => { throw err; });
+    })
+    .catch((err) => { throw err; });
+};
+
 const AddToBagButton = () => (
-  <StyledAddToBagButton type="button">ADD TO BAG</StyledAddToBagButton>
+  <StyledAddToBagButton
+    type="button"
+    onClick={() => { addToCart(638269); }}
+  >
+    ADD TO BAG
+  </StyledAddToBagButton>
 );
 
 export default AddToBagButton;
