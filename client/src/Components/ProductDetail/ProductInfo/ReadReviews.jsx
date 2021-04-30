@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import api from '../../../lib/api';
-import Stars, { avgStars, totalReviews } from '../../RelatedItems/Stars';
+import Stars from '../../RelatedItems/Stars';
 
 const StyledReadReviews = styled.div`
   display: flex;
@@ -11,22 +10,7 @@ const StyledReadReviews = styled.div`
   align-items: center;
 `;
 
-const ReadReviews = ({ productId }) => {
-  const [rating, setRating] = useState(null);
-  const [reviewCount, setReviewCount] = useState(null);
-
-  useEffect(() => {
-    if (!productId) { return setRating(0); }
-    return api.getReviewMetadata(productId)
-      .then(({ ratings }) => {
-        setRating(avgStars(ratings));
-        setReviewCount(totalReviews(ratings));
-      })
-      .catch(() => {
-        setRating(0);
-      });
-  }, [productId]);
-
+const ReadReviews = ({ reviewCount, avgRating }) => {
   if (reviewCount === null || reviewCount === 0) {
     return <div />;
   }
@@ -34,7 +18,7 @@ const ReadReviews = ({ productId }) => {
   return (
     <StyledReadReviews>
       <div style={{ margin: '5px 10px 5px 0', width: '83px' }}>
-        <Stars stars={rating} />
+        <Stars stars={avgRating} />
       </div>
       <div style={{ margin: '5px' }}>
         <a href="#reviews">
@@ -46,11 +30,13 @@ const ReadReviews = ({ productId }) => {
 };
 
 ReadReviews.propTypes = {
-  productId: PropTypes.number,
+  avgRating: PropTypes.number,
+  reviewCount: PropTypes.number,
 };
 
 ReadReviews.defaultProps = {
-  productId: null,
+  avgRating: 0,
+  reviewCount: 0,
 };
 
 export default ReadReviews;
