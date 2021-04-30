@@ -16,7 +16,7 @@ const StyledThumbnails = styled.div`
   z-index: 1;
 `;
 
-const ImageThumbnails = ({ photos, setSelectedPhoto }) => {
+const ImageThumbnails = ({ photos, setSelectedPhoto, selectedPhoto }) => {
   if (photos) {
     return (
       <StyledThumbnails data-testid="thumbnails">
@@ -27,6 +27,7 @@ const ImageThumbnails = ({ photos, setSelectedPhoto }) => {
             index={index + 1}
             photo={photo}
             setSelectedPhoto={setSelectedPhoto}
+            selectedPhoto={selectedPhoto}
           />
         ))}
       </StyledThumbnails>

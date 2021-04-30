@@ -12,7 +12,7 @@ const StyledDefaultImage = styled.div`
 `;
 
 const ImageGallery = ({ style }) => {
-  const [selectedPhoto, setSelectedPhoto] = useState(style && style.photos);
+  const [selectedPhoto, setSelectedPhoto] = useState(style && style.photos[0]);
 
   useEffect(() => {
     setSelectedPhoto(style && style.photos[0]);
@@ -24,6 +24,7 @@ const ImageGallery = ({ style }) => {
       <ImageThumbnails
         photos={style && style.photos && style.photos.filter((photo) => photo.thumbnail_url)}
         setSelectedPhoto={setSelectedPhoto}
+        selectedPhoto={selectedPhoto}
       />
     </StyledDefaultImage>
   );
