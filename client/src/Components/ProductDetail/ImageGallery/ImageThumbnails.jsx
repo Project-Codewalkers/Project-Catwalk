@@ -41,12 +41,19 @@ ImageThumbnails.propTypes = {
     thumbnail_url: PropTypes.string,
     url: PropTypes.string,
   })),
-  setSelectedPhoto: PropTypes.func,
+  selectedPhoto: PropTypes.shape({
+    thumbnail_url: PropTypes.string,
+    url: PropTypes.string,
+  }),
+  setSelectedPhoto: PropTypes.func.isRequired,
 };
 
 ImageThumbnails.defaultProps = {
   photos: [],
-  setSelectedPhoto: () => { },
+  selectedPhoto: {
+    thumbnail_url: '',
+    url: '',
+  },
 };
 
 export default ImageThumbnails;
