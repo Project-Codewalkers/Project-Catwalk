@@ -48,13 +48,13 @@ const DeleteBtn = styled.div`
   z-index: 1;
 `;
 
-const Outfit = ({ item, deleteItem, key }) => {
+const Outfit = ({ item, deleteItem, index, }) => {
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
   const url = item[1] ? item[1].photos[0].thumbnail_url : noPic;
 
   return (
     <ListItem role="listitem">
-      <DeleteBtn onClick={() => (deleteItem(key))}>&#8855;</DeleteBtn>
+      <DeleteBtn onClick={() => (deleteItem(index))}>&#8855;</DeleteBtn>
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
