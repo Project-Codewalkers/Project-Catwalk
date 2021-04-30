@@ -13,21 +13,13 @@ const StyledAddToBagButton = styled.button`
 `;
 
 const addToCart = (skuId) => {
-  // console.log(`adding ${skuId} to cart`);
   api.addToCart(skuId)
     .then(() => {
-      console.log('getting cart');
       api.getCart()
-        // console.log('cart response (AddToBag)', response)
-        // response.json(), response.json, JSON.stringify(response));
-        .then((result) => console.log('cart', result.map((item) => `${item.sku_id}: ${item.count}`)))
-        .catch((err) => {
-          console.error('getCart error', JSON.stringify(err), err);
-        });
+        .then((result) => result)
+        .catch((err) => { throw err; });
     })
-    .catch((err) => {
-      console.log('addToCart error', JSON.stringify(err), err);
-    });
+    .catch((err) => { throw err; });
 };
 
 const AddToBagButton = () => (
