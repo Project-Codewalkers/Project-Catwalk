@@ -6,6 +6,7 @@ import Carousel from './Components/RelatedItems/Carousel';
 import ReviewList from './Components/Review/ReviewList';
 import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
+import Modal from './Components/Review/Modal';
 
 const StyledApp = styled.div`
   display: flex;
@@ -58,6 +59,9 @@ const App = () => {
 
     api.productStyles(productId)
       .then((productStyles) => {
+        if (!productStyles) {
+          productStyles = [];
+        }
         setStyles(productStyles);
         if (!Array.isArray(productStyles)) { return; }
         let defaultStyle = productStyles
@@ -99,7 +103,8 @@ const App = () => {
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
       />
-      <ReviewList id={productId} />
+      <ReviewList id={productId} metaReview={reviewMeta} />
+      <Modal id={productId} />
     </StyledApp>
   );
 };
