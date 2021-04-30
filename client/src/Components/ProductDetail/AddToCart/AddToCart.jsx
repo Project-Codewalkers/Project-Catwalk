@@ -47,7 +47,7 @@ const AddToCart = ({ skusObj, productId }) => {
         <SizeSelector
           productId={productId}
           skus={skus}
-          // skus={skus.map((style) => style.size)}
+          setPleaseSelectVisibility={setPleaseSelectVisibility}
           selectedSize={selectedSize}
           setSize={setSize}
         />
