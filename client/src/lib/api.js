@@ -320,14 +320,9 @@ function getCart() {
  */
 function addToCart(skuId) {
   const options = defaultPostOptions;
-  options.body = JSON.stringify({ sku_id: skuId });
-  // options.body = { sku_id: skuId };
-  // console.log('options.body', options.body);
+  const data = { sku_id: skuId };
   const resource = '/cart';
-  return axios.post(resource, {
-    ...options,
-    body: { sku_id: skuId },
-  })
+  return axios.post(resource, data, options)
     .then((response) => response.data)
     .catch((error) => error);
 }

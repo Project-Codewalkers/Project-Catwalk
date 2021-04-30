@@ -36,12 +36,13 @@ app.get(/\w+/, (req, res) => {
 
 app.post(/\w+/, (req, res) => {
   const apiPath = `${API_URL}${req.url}`;
-  const { params } = req;
-  console.log('apiPath', apiPath, 'with params', params);
-  axios.post(apiPath, {
-    headers: Authentication,
-    params,
-  })
+  // const { params } = req;
+  // const data = req.data ? req.data : {};
+  // const data = { 'sku_id': 638269 };
+  // console.log('data', data);
+  console.log('apiPath', apiPath);
+  // console.log('with params', params);
+  axios.post(apiPath, req.body, { headers: Authentication })
     .then((response) => {
       res.status(200).send(response.data);
     })
