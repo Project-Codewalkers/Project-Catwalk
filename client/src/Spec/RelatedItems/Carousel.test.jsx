@@ -9,6 +9,6 @@ global.fetch = jest.fn().mockResolvedValue('fakeData');
 describe('Carousel', () => {
   test('it should render Related Items', () => {
     render(<Carousel />);
-    expect(screen.getByText('Related Items')).toBeInTheDocument();
+    expect(screen.getByText('Related Products')).toBeInTheDocument();
   });
 });
