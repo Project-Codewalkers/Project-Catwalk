@@ -6,6 +6,19 @@ import AddToBagButton from './AddToBagButton';
 import StarButton from './StarButton';
 
 const AddToCart = ({ skusObj, productId }) => {
+  const addToCart = (skuId, quantity) => {
+    if (true) { return; }
+    for (let i = 0; i < quantity; i += 1) {
+      api.addToCart(skuId)
+        .then(() => {
+          api.getCart()
+            .then((result) => console.log(result))
+            .catch((err) => { throw err; });
+        })
+        .catch((err) => { throw err; });
+    }
+  };
+
   const [selectedSize, setSize] = useState(undefined);
   const [quantity, setQuantity] = useState(1);
   if (!skusObj || Object.keys(skusObj).length === 0) { return <div />; }
@@ -29,10 +42,15 @@ const AddToCart = ({ skusObj, productId }) => {
         <QtySelector
           availableQty={Number(selectedSize && selectedSize.quantity)}
           setQuantity={setQuantity}
+          quantity={quantity}
         />
       </div>
       <div style={{ display: 'flex', width: '100%' }}>
-        <AddToBagButton />
+        <AddToBagButton
+          skuId={selectedSize && selectedSize.sku}
+          quantity={quantity}
+          addToCart={addToCart}
+        />
         <StarButton />
       </div>
     </div>
