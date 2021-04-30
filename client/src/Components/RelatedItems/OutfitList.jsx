@@ -1,30 +1,22 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// import styled from 'styled-components';
 // import PropTypes from 'prop-types';
 import Outfit from './Outfit';
-
-// const OutfitAdder = styled.div`
-//   padding: 10px;
-//   margin: 10px;
-//   width: 302px;
-//   background-color: lightgrey;
-//   border: black solid 0.1em;
-//   flex: 0 0 225px;
-//   height: 340px;
-//   margin: 5px;
-//   display: inline-flex;
-// `;
 
 const OutfitList = ({
   outfit,
   selectedStyle,
-}) => outfit.map((item) => (
+  deleteItem,
+  outfitArr,
+}) => outfit.map((item, i) => (
   <div>
     <Outfit
-      key={item[1].product_id}
+      key={item[1].id}
+      index={i}
       item={item}
+      deleteItem={deleteItem}
       selectedStyle={selectedStyle}
+      outfitArr={outfitArr}
     />
   </div>
 ));

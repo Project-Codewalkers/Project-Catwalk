@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React from 'react';
 // import PropTypes from 'prop-types';
@@ -7,12 +8,12 @@ const StyledModal = styled.div`
   position: fixed;
   top: 0; bottom: 0; right: 0; left: 0;
   background-color: transparent;
-  z-index: 1;
+  z-index: 3;
 `;
 
 const Box = styled.div`
   color: black;
-  background-color: white;
+  background-color: lightgrey;
   display: flex;
   flex-flow: column nowrap;
   padding: 15px;
@@ -25,10 +26,11 @@ const Box = styled.div`
 `;
 
 const Button = styled.div`
-  vertical-align: top;
-  text-align: right;
+  position: absolute;
   width: 5%;
   cursor: pointer;
+  top: 120px;
+  right: 320px;
 `;
 
 const Vertical = styled.div`
@@ -38,7 +40,9 @@ const Vertical = styled.div`
   padding-bottom: 0px;
 `;
 
-const Modal = ({ item, modalSwitch, setModalSwitch }) => {
+const Modal = ({
+  item, modalSwitch, setModalSwitch, fit, comfort, quality, length, fitCurrent, comfortCurrent, qualityCurrent, lengthCurrent, currentItem,
+}) => {
   if (!modalSwitch) {
     return null;
   }
@@ -61,7 +65,7 @@ const Modal = ({ item, modalSwitch, setModalSwitch }) => {
               </th>
               <Vertical />
               <th>
-                Compared Item
+                {currentItem[2].name}
                 <hr />
               </th>
             </tr>
@@ -72,18 +76,44 @@ const Modal = ({ item, modalSwitch, setModalSwitch }) => {
               <Vertical />
               <td>Category</td>
               <Vertical />
-              <td>Something</td>
+              <td>{currentItem[2].category}</td>
             </tr>
-          </tbody>
-          <tfoot>
             <tr>
               <td>{item[2].default_price}</td>
               <Vertical />
               <td>Price</td>
               <Vertical />
-              <td>A Number</td>
+              <td>{currentItem[2].default_price}</td>
             </tr>
-          </tfoot>
+            <tr>
+              <td>{fit}</td>
+              <Vertical />
+              <td>Fit</td>
+              <Vertical />
+              <td>{fitCurrent}</td>
+            </tr>
+            <tr>
+              <td>{length}</td>
+              <Vertical />
+              <td>Length</td>
+              <Vertical />
+              <td>{lengthCurrent}</td>
+            </tr>
+            <tr>
+              <td>{comfort}</td>
+              <Vertical />
+              <td>Comfort</td>
+              <Vertical />
+              <td>{comfortCurrent}</td>
+            </tr>
+            <tr>
+              <td>{quality}</td>
+              <Vertical />
+              <td>Quality</td>
+              <Vertical />
+              <td>{qualityCurrent}</td>
+            </tr>
+          </tbody>
         </table>
       </Box>
     </StyledModal>
