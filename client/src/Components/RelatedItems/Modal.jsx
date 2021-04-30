@@ -12,6 +12,7 @@ const StyledModal = styled.div`
 `;
 
 const Box = styled.div`
+  position: relative;
   color: black;
   background-color: lightgrey;
   display: flex;
@@ -29,8 +30,8 @@ const Button = styled.div`
   position: absolute;
   width: 5%;
   cursor: pointer;
-  top: 120px;
-  right: 320px;
+  top: 10px;
+  right: 10px;
 `;
 
 const Vertical = styled.div`
