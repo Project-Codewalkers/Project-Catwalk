@@ -18,7 +18,7 @@ const ReviewList = ({ id, metaReview }) => {
   useEffect(() => {
     api.listReviews(id, sort, page, moreReviews)
       .then((product) => {
-        console.log('list Reviews', product);
+        // console.log('list Reviews', product);
         setReview(product);
       })
       .catch((err) => console.log(err));

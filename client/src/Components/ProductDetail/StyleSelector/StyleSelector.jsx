@@ -94,6 +94,7 @@ StyleSelector.propTypes = {
 StyleSelector.defaultProps = {
   styles: [],
   selectedStyle: null,
+  setSelectedStyle: () => {console.log('trying to set style');}
 };
 
 export default StyleSelector;

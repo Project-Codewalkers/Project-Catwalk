@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Stars from './Stars';
@@ -39,16 +39,19 @@ const Price = styled.div`
 const Category = styled.div`
   font-size: 13px;
 `;
-const Button = styled.button`
+
+const ModalSwap = styled.button`
   vertical-align: top;
   text-align: right;
   color: rgb(244, 186, 49);
+  cursor: pointer;
 `;
 
-const OneItem = ({ item }) => {
+const RelatedItem = ({ item, changeProduct }) => {
   const [modalSwitch, setModalSwitch] = useState(false);
   // url
   let defaultStyle;
+  // console.log('Log this: ', item);
   if (item && item[0]) {
     defaultStyle = item[0].find((eachStyle) => eachStyle['default?']);
     if (!defaultStyle) {
@@ -67,8 +70,8 @@ const OneItem = ({ item }) => {
   };
 
   return (
-    <ListItem role="listitem">
-      <Button onClick={switcher}>&#9733;</Button>
+    <ListItem onClick={() => (changeProduct(item[1].product_id))} role="listitem">
+      <ModalSwap onClick={switcher}>&#9733;</ModalSwap>
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
@@ -78,16 +81,11 @@ const OneItem = ({ item }) => {
         <Price>{`Today: $${item[2].default_price}`}</Price>
         <Stars stars={item[1].ratings} />
         <Modal
-          url={url}
-          category={item.category}
-          name={item.name}
-          price={item[2].default_price}
-          stars={item[1].ratings}
+          item={item}
           modalSwitch={modalSwitch}
           setModalSwitch={setModalSwitch}
         />
       </div>
-      {/* <Modal description={description} /> */}
     </ListItem>
   );
 };
@@ -103,4 +101,4 @@ const OneItem = ({ item }) => {
 //   }).isRequired,
 // };
 
-export default OneItem;
+export default RelatedItem;

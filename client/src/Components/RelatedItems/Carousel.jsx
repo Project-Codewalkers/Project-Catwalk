@@ -22,7 +22,14 @@ const CarouselTitle = styled.h2`
   margin: 10px 0px 20px 5px;
 `;
 
-const Carousel = ({ productId, selectedStyle, setSelectedStyle }) => {
+const Carousel = ({
+  productId,
+  productInfo,
+  selectedStyle,
+  reviewMeta,
+  setProductId,
+  changeProduct,
+}) => {
   const [items, setItems] = useState([]);
   const [outfit, setOutfit] = useState([]);
 
@@ -47,48 +54,43 @@ const Carousel = ({ productId, selectedStyle, setSelectedStyle }) => {
       });
   }, [productId]);
 
-  // useEffect(() => {
-  //   api.productInformation(productId)
-  //     .then((viewedProduct) => {
-  //       console.log(viewedProduct);
-  //       const outfitPromises = viewedProduct.map((itemId) => (
-  //         Promise.all([
-  //           api.productStyles(itemId),
-  //           api.getReviewMetadata(itemId),
-  //           api.productInformation(itemId),
-  //         ])
-  //       ));
-  //       Promise.all(outfitPromises)
-  //         .then((outfitSelection) => {
-  //           setOutfit(outfitSelection);
-  //         });
-  //     })
-  //     .catch(() => {
-  //       setOutfit([]);
-  //     });
-  // }, [productId]);
-
-  const newItem = (selectedStyle) => {
-    setSelectedStyle(selectedStyle);
+  // eslint-disable-next-line consistent-return
+  const newItem = (style, meta, info) => {
+    const outfitArr = [];
+    outfitArr.push(style, meta, info);
+    // console.log(outfitArr);
+    if (!style) { outfitArr.style = null; }
+    if (!meta) { outfitArr.meta = null; }
+    if (!info) { outfitArr.info = null; }
+    const copy = outfit.slice();
+    if (copy.includes(style)) {
+      return;
+    }
+    copy.push(outfitArr);
+    setOutfit(copy);
   };
 
   return (
     <>
       <CarouselMain role="main">
         <CarouselTitle>Related Items</CarouselTitle>
-        <RelatedController data={items} />
+        <RelatedController
+          data={items}
+          productId={productId}
+          changeProduct={changeProduct}
+        />
       </CarouselMain>
       <br />
       <CarouselMain>
         <CarouselTitle>Outfit Items</CarouselTitle>
         <OutfitController
           data={items}
-          closet={outfit}
-          setOutfit={setOutfit}
+          outfit={outfit}
+          productInfo={productInfo}
+          reviewMeta={reviewMeta}
           selectedStyle={selectedStyle}
-          setSelectedStyle={setSelectedStyle}
-          productId={productId}
           newItem={newItem}
+          setProductId={setProductId}
         />
       </CarouselMain>
     </>

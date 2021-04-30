@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// import PropTypes from 'prop-types';
 import RelatedItemsList from './RelatedItemsList';
 
 const CarouselControllerRelated = styled.div`
@@ -58,7 +59,7 @@ const RightArrowRelated = styled.svg`
   height: 24px;
 `;
 
-const RelatedController = ({ data }) => {
+const RelatedController = ({ data, changeProduct, productId }) => {
   const [leftRelated, setLeftRelated] = useState(0);
 
   // refactor into separate components later
@@ -118,21 +119,21 @@ const RelatedController = ({ data }) => {
         style={{ left: `${`${leftRelated}px`}` }}
         role="list"
       >
-        <RelatedItemsList data={data} />
+        <RelatedItemsList data={data} changeProduct={changeProduct} productId={productId} />
       </CarouselListRelated>
       {rightBtnRelated()}
     </CarouselControllerRelated>
   );
 };
 
-// Controller.propTypes = {
+// RelatedController.propTypes = {
 //   data: PropTypes.arrayOf(PropTypes.shape({
 //     'default?': PropTypes.bool,
 //     category: PropTypes.string,
-//     product_name: PropTypes.string,
-//     price: PropTypes.number,
-//     stars: PropTypes.number,
-//     image: PropTypes.string,
+//     name: PropTypes.string,
+//     default_price: PropTypes.number,
+//     ratings: PropTypes.number,
+//     url: PropTypes.string,
 //   })).isRequired,
 // };
 

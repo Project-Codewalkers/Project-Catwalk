@@ -1,27 +1,7 @@
 /* eslint-disable max-len */
 // const baseURL = 'http://localhost:3000';
 // const PORT = 3000;
-
-const defaultGetOptions = {
-  method: 'get',
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-  },
-  mode: 'cors',
-};
-
-const defaultPostOptions = {
-  ...defaultGetOptions,
-  method: 'post',
-};
-
-function fetchCall(resource, options) {
-  return fetch(resource, options)
-    .then((response) => response.json())
-    .catch((error) => error);
-}
+const axios = require('axios');
 
 /**
  * Retrieves the list of products.
@@ -30,19 +10,13 @@ function fetchCall(resource, options) {
  * @returns {Promise<object>} Promise which resolves to an array of items as objects.
  */
 function listProducts(page, count) {
-  const options = defaultGetOptions;
   const params = {};
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/products?${new URLSearchParams(params)}`;
-  return fetchCall(resource, options);
-}
-
-function addToOutfit(productObj) {
-  const options = defaultPostOptions;
-  const resource = '/products';
-  options.body = JSON.stringify(productObj);
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -51,9 +25,10 @@ function addToOutfit(productObj) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function productInformation(productId) {
-  const options = defaultGetOptions;
   const resource = `/products/${productId}`;
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -62,10 +37,11 @@ function productInformation(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function productStyles(productId) {
-  const options = defaultGetOptions;
   const resource = `/products/${productId}/styles`;
-  return fetchCall(resource, options)
-    .then(({ results }) => results);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .then(({ results }) => results)
+    .catch((error) => error);
 }
 
 /**
@@ -74,9 +50,10 @@ function productStyles(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function relatedProducts(productId) {
-  const options = defaultGetOptions;
   const resource = `/products/${productId}/related`;
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -88,16 +65,14 @@ function relatedProducts(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function listReviews(productId, sort = 'relevant', page, count) {
-  const options = defaultGetOptions;
-  const params = {
-    product_id: productId,
-    sort,
-  };
+  const params = { product_id: productId, sort };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/reviews?${new URLSearchParams(params)}`;
-  return fetchCall(resource, options)
-    .then(({ results }) => results);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .then(({ results }) => results)
+    .catch((error) => error);
 }
 
 /**
@@ -106,10 +81,11 @@ function listReviews(productId, sort = 'relevant', page, count) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function getReviewMetadata(productId) {
-  const options = defaultGetOptions;
   const params = { product_id: productId };
   const resource = `/reviews/meta?${new URLSearchParams(params)}`;
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -127,10 +103,11 @@ function getReviewMetadata(productId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function addAReview(reviewObj) {
-  const options = defaultPostOptions;
-  options.body = JSON.stringify(reviewObj);
+  const data = reviewObj;
   const resource = '/reviews';
-  return fetchCall(resource, options);
+  return axios.post(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -139,10 +116,11 @@ function addAReview(reviewObj) {
  * @returns {Response<Object>} Returns a response object.
  */
 function markReviewAsHelpful(reviewId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { review_id: reviewId };
   const resource = `/reviews/${reviewId}/helpful`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -151,10 +129,11 @@ function markReviewAsHelpful(reviewId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function reportReview(reviewId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { review_id: reviewId };
   const resource = `/reviews/${reviewId}/report`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -165,12 +144,13 @@ function reportReview(reviewId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function listQuestions(productId, page, count) {
-  const options = defaultGetOptions;
   const params = { product_id: productId, page, count };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/qa/questions?${new URLSearchParams(params)}`;
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -181,12 +161,13 @@ function listQuestions(productId, page, count) {
  * @returns {Promise<object>} Promise which resolves to an object representing the given product.
  */
 function answersList(questionId, page, count) {
-  const options = defaultGetOptions;
   const params = { page, count };
   if (typeof page === 'number') { params.page = page; }
   if (typeof count === 'number') { params.count = count; }
   const resource = `/qa/questions/${questionId}/answers?${new URLSearchParams(params)}`;
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -198,10 +179,11 @@ function answersList(questionId, page, count) {
  * @returns {Response<object>}
  */
 function addAQuestion(questionObj) {
-  const options = defaultPostOptions;
-  options.body = JSON.stringify(questionObj);
+  const data = questionObj;
   const resource = '/qa/questions/';
-  return fetchCall(resource, options);
+  return axios.post(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -213,13 +195,14 @@ function addAQuestion(questionObj) {
  * @returns {Response<object>}
  */
 function addAnAnswer(answerObj) {
-  const options = defaultPostOptions;
   const { questionId } = answerObj;
   // eslint-disable-next-line no-param-reassign
   delete answerObj.questionId;
-  options.body = JSON.stringify(answerObj);
+  const data = answerObj;
   const resource = `/qa/questions/${questionId}`;
-  return fetchCall(resource, options);
+  return axios.post(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -228,10 +211,11 @@ function addAnAnswer(answerObj) {
  * @returns {Response<Object>} Returns a response object.
  */
 function markQuestionAsHelpful(questionId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { question_id: questionId };
   const resource = `/qa/questions/${questionId}/helpful`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -240,10 +224,11 @@ function markQuestionAsHelpful(questionId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function reportQuestion(questionId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { question_id: questionId };
   const resource = `/qa/questions/${questionId}/report`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -252,10 +237,11 @@ function reportQuestion(questionId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function markAnswerAsHelpful(answerId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { answer_id: answerId };
   const resource = `/qa/answers/${answerId}/helpful`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -264,10 +250,11 @@ function markAnswerAsHelpful(answerId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function reportAnswer(answerId) {
-  const options = defaultPostOptions;
-  options.method = 'put';
+  const data = { answer_id: answerId };
   const resource = `/qa/answers/${answerId}/report`;
-  return fetchCall(resource, options);
+  return axios.put(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -275,9 +262,10 @@ function reportAnswer(answerId) {
  * @returns {Promise<object>} Promise which resolves to an object representing the products and count in the cart..
  */
 function getCart() {
-  const options = defaultGetOptions;
   const resource = '/cart';
-  return fetchCall(resource, options);
+  return axios.get(resource)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -286,14 +274,11 @@ function getCart() {
  * @returns {Response<Object>} Returns a response object.
  */
 function addToCart(skuId) {
-  const options = defaultPostOptions;
-  options.body = { sku_id: skuId };
-  // console.log('options.body', options.body);
+  const data = { sku_id: skuId };
   const resource = '/cart';
-  return fetchCall(resource, {
-    ...options,
-    body: { sku_id: skuId },
-  });
+  return axios.post(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 /**
@@ -304,10 +289,11 @@ function addToCart(skuId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function logAnInteraction(interactionObj) {
-  const options = defaultPostOptions;
-  options.body = JSON.stringify({ interactionObj });
+  const data = { interactionObj };
   const resource = '/interactions';
-  return fetchCall(resource, options);
+  return axios.post(resource, data)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 module.exports = {
@@ -331,5 +317,4 @@ module.exports = {
   getCart,
   addToCart,
   logAnInteraction,
-  addToOutfit,
 };
