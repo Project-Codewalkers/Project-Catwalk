@@ -19,18 +19,26 @@ app.use(express.static(fullPath));
 app.get(/\w+/, (req, res) => {
   const apiPath = `${API_URL}${req.url}`;
   const { params } = req;
-  // console.log('apiPath', apiPath);
-  // console.log('with params', params);
   axios.get(apiPath, {
     headers: Authentication,
+    params,
   })
     .then((response) => {
-      // console.log('got response');
       res.status(200).send(response.data);
     })
     .catch((error) => {
-      // console.error('Error with the get request');
-      res.status(500).send('error');
+      res.status(500).send(error);
+    });
+});
+
+app.post(/\w+/, (req, res) => {
+  const apiPath = `${API_URL}${req.url}`;
+  axios.post(apiPath, req.body, { headers: Authentication })
+    .then((response) => {
+      res.status(200).send(response.data);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
     });
 });
 

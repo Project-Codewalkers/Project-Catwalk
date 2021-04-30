@@ -73,6 +73,7 @@ const App = () => {
         setSelectedStyle(null);
         throw err;
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
   const changeProduct = (product) => {
