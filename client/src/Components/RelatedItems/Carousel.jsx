@@ -62,13 +62,11 @@ const Carousel = ({
   //   productInfo,
   // ];
   let count = {id: 1};
-  const storageDevice = [];
-  localStorage.setItem('storageDevice', JSON.stringify(storageDevice));
 
   // eslint-disable-next-line consistent-return
   const newItem = (style, meta, info) => {
     const outfitArr = [];
-    outfitArr.push({ id: 1 }, style, meta, info);
+    outfitArr.push(count.id, style, meta, info);
     // console.log(outfitArr);
     if (!style) { outfitArr.style = null; }
     if (!meta) { outfitArr.meta = null; }
@@ -76,16 +74,13 @@ const Carousel = ({
     const copy = outfit.slice();
     if (copy.includes(outfitArr.meta)) {
       return outfit;
-    // eslint-disable-next-line no-else-return
-    } else {
-      copy.push(outfitArr);
     }
+    copy.push(outfitArr);
     setOutfit(copy);
     count.id += 1;
     // eslint-disable-next-line no-plusplus
     // storageDevice.push(localStorage.setItem(`${outfitArr.count.id}`, JSON.stringify(outfitArr)));
-    localStorage.setItem('currentItem', JSON.stringify(outfit));
-
+    localStorage.setItem('currentItem', JSON.stringify(outfit))
     // localStorage.clear();
   };
 
@@ -93,11 +88,9 @@ const Carousel = ({
     const copy = outfit.slice();
     copy.splice(item, 1);
     setOutfit(copy);
-    // localStorage.removeItem(`${outfitArr.productInfo.product_id}`);
-    // const index = getLocalStorage
-    //             .findIndex(item => item == id_of_the_user_to_remove);
+    localStorage.setItem('currentItem', JSON.stringify(outfit))
+    // localStorage.setItem('currentItem', JSON.stringify(outfit));
   };
-// localStorage.clear();
 
   useEffect(() => {
     const temp = localStorage.getItem('currentItem');
