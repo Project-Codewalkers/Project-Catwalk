@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import api from '../../../lib/api';
 
 const StyledAddToBagButton = styled.button`
   flex: 1;
@@ -17,7 +16,6 @@ const AddToBagButton = ({ addToCart }) => (
   <StyledAddToBagButton
     type="button"
     onClick={() => { addToCart(); }}
-    // onClick={() => { addToCart(skuId, quantity); }}
   >
     ADD TO BAG
   </StyledAddToBagButton>
