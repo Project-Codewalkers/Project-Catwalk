@@ -24,9 +24,9 @@ const AddToCart = ({ skusObj, productId }) => {
     for (let i = 0; i < quantity; i += 1) {
       api.addToCart(selectedSize.sku)
         .then(() => {
-          api.getCart()
-            .then((result) => console.log(result))
-            .catch((err) => { throw err; });
+          // api.getCart()
+          //   .then((result) => console.log(result))
+          //   .catch((err) => { throw err; });
         })
         .catch((err) => { throw err; });
     }
@@ -57,10 +57,12 @@ const AddToCart = ({ skusObj, productId }) => {
           quantity={quantity}
         />
       </div>
-      <div style={{ display: 'flex', width: '100%' }}>
-        <AddToBagButton
-          addToCart={addToCart}
-        />
+      <div style={{ display: 'flex', width: '100%', justifyContent: 'flex-end' }}>
+        {skus.length > 0 && (
+          <AddToBagButton
+            addToCart={addToCart}
+          />
+        )}
         <StarButton />
       </div>
     </div>
