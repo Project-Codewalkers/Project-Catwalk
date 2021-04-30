@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import SizeSelector from './SizeSelector';
 import QtySelector from './QtySelector';
 import AddToBagButton from './AddToBagButton';
 import StarButton from './StarButton';
+import api from '../../../lib/api';
+
+const PleaseSelect = styled.div`
+  font-weight: normal;
+  color: red;
+  margin: 5px 12px;
+`;
 
 const AddToCart = ({ skusObj, productId }) => {
-  const addToCart = (skuId, quantity) => {
-    if (true) { return; }
+  const [selectedSize, setSize] = useState(undefined);
+  const [quantity, setQuantity] = useState(1);
+  const [pleaseSelectVisible, setPleaseSelectVisibility] = useState(false);
+
+  const addToCart = () => {
+    if (!selectedSize) { setPleaseSelectVisibility(true); }
+    if (!(selectedSize && selectedSize.sku && quantity)) { return; }
     for (let i = 0; i < quantity; i += 1) {
-      api.addToCart(skuId)
+      api.addToCart(selectedSize.sku)
         .then(() => {
           api.getCart()
             .then((result) => console.log(result))
@@ -19,8 +32,6 @@ const AddToCart = ({ skusObj, productId }) => {
     }
   };
 
-  const [selectedSize, setSize] = useState(undefined);
-  const [quantity, setQuantity] = useState(1);
   if (!skusObj || Object.keys(skusObj).length === 0) { return <div />; }
   const skus = Object.entries(skusObj)
     .map((sku) => ({
@@ -31,6 +42,7 @@ const AddToCart = ({ skusObj, productId }) => {
     .filter((sku) => sku.quantity > 0);
   return (
     <div style={{ maxWidth: '600px', fontWeight: 'bold' }}>
+      {pleaseSelectVisible && <PleaseSelect>Please select size</PleaseSelect>}
       <div style={{ display: 'flex', width: '100%' }}>
         <SizeSelector
           productId={productId}
@@ -47,8 +59,6 @@ const AddToCart = ({ skusObj, productId }) => {
       </div>
       <div style={{ display: 'flex', width: '100%' }}>
         <AddToBagButton
-          skuId={selectedSize && selectedSize.sku}
-          quantity={quantity}
           addToCart={addToCart}
         />
         <StarButton />
