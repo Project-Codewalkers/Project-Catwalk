@@ -15,7 +15,7 @@ margin-top: -250px;
 `;
 
 const Modal = ({ Content, id }) => {
-  const [viewable, setViewable] = useState(true);
+  const [viewable, setViewable] = useState(false);
   const [name, setName] = useState('');
   const [rating, setRating] = useState(null);
   const [body, setBody] = useState('');
@@ -30,27 +30,27 @@ const Modal = ({ Content, id }) => {
 
   const postToServer = (toPost) => (
     console.log(toPost)
-    //api.addAReview(toPost)
+    // api.addAReview(toPost)
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('event', e);
-    console.log('name', e.target[0].value, name);// name
-    console.log('email', e.target[1].value, email);// email
+    // console.log('event', e);
+    // console.log('name', e.target[0].value, name);// name
+    // console.log('email', e.target[1].value, email);// email
     setRating(e.target[1].value);
-    console.log('review', e.target[2].value, body); // review / body
+    // console.log('review', e.target[2].value, body); // review / body
     setRec(e.target[4].value);
-    console.log('rec', e.target[3].value, rec); // rec
-    console.log('rating', e.target[4].value, rating); // rating
+    // console.log('rec', e.target[3].value, rec); // rec
+    // console.log('rating', e.target[4].value, rating); // rating
     setComf(e.target[5].value);
-    console.log('comfort', e.target[5].value, comfort); // comfort
+    // console.log('comfort', e.target[5].value, comfort); // comfort
     setLength(e.target[6].value);
-    console.log('length', e.target[6].value), length; // length
+    // console.log('length', e.target[6].value), length; // length
     setQuality(e.target[7].value);
-    console.log('quality', e.target[7].value, quality); // quality
-    console.log('fit', e.target[8].value, fit); // fit
-    console.log('sum', e.target[9].value);
+    // console.log('quality', e.target[7].value, quality); // quality
+    // console.log('fit', e.target[8].value, fit); // fit
+    // console.log('sum', e.target[9].value);
     // e.target.reset();
     const post = {
       review_id: id,
@@ -60,6 +60,12 @@ const Modal = ({ Content, id }) => {
       body: e.target[2].value,
       name: e.target[0].value,
       email: e.target[1].value,
+      characteristics: {
+        fit: e.target[8].value,
+        Comfort: e.target[5].value,
+        Length: e.target[6].value,
+        Quality: e.target[7].value,
+      },
     };
     postToServer(post);
   };

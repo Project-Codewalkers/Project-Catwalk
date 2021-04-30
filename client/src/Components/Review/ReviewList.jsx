@@ -7,11 +7,10 @@ import AddReview from './AddReview';
 import SortSelector from './SortSelect';
 import Stars, { avgStars } from '../RelatedItems/Stars';
 
-const ReviewList = ({ id }) => {
+const ReviewList = ({ id, metaReview }) => {
   // Hooks state goes here map over the list and render pass down into the review
   const count = 2;
   const [reviews, setReview] = useState([]);
-  const [metaReview, setMeta] = useState({});
   const [moreReviews, setMoreReviews] = useState(count);
   const [sort, setSort] = useState('Relevant');
 
@@ -21,12 +20,6 @@ const ReviewList = ({ id }) => {
       .then((product) => {
         console.log('list Reviews', product);
         setReview(product);
-      })
-      .catch((err) => console.log(err));
-    api.getReviewMetadata(id)
-      .then((meta) => {
-        console.log('this is meta', meta);
-        setMeta(meta);
       })
       .catch((err) => console.log(err));
   }, [id, sort, page, moreReviews]);
@@ -59,8 +52,8 @@ const ReviewList = ({ id }) => {
         />
       ))}
       {/* <AvgRating
-        key={metaReview.product_id}
-        rating={avgStars(metaReview.ratings)}// object
+        key={metaReview.product_id : null }
+        rating={avgStars(metaReview.ratings) : null}// object
         fit={metaReview.characteristics && metaReview.characteristics.Fit ? metaReview : null} // for fit characteristics
         comfort={metaReview.characteristics && metaReview.characteristics.Comfort ? metaReview : null} // for comfort
         length={metaReview.characteristics && metaReview.characteristics.Length ? `Length: ${metaReview.characteristics.Length.value}` : null}
