@@ -47,6 +47,7 @@ const Modal = ({
   if (!modalSwitch) {
     return null;
   }
+  console.log(length);
 
   return (
     <StyledModal>
@@ -87,32 +88,32 @@ const Modal = ({
               <td>{currentItem[2].default_price}</td>
             </tr>
             <tr>
-              <td>{fit}</td>
+              <td>{Number(fit).toFixed(1)}</td>
               <Vertical />
               <td>Fit</td>
               <Vertical />
-              <td>{fitCurrent}</td>
+              <td>{Number(fitCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{length}</td>
+              <td>{length ? Number(length).toFixed(1) : '--'}</td>
               <Vertical />
               <td>Length</td>
               <Vertical />
-              <td>{lengthCurrent}</td>
+              <td>{Number(lengthCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{comfort}</td>
+              <td>{Number(comfort).toFixed(1)}</td>
               <Vertical />
               <td>Comfort</td>
               <Vertical />
-              <td>{comfortCurrent}</td>
+              <td>{Number(comfortCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{quality}</td>
+              <td>{Number(quality).toFixed(1)}</td>
               <Vertical />
               <td>Quality</td>
               <Vertical />
-              <td>{qualityCurrent}</td>
+              <td>{Number(qualityCurrent).toFixed(1)}</td>
             </tr>
           </tbody>
         </table>
