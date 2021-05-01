@@ -96,44 +96,33 @@ const App = () => {
   const changeProduct = (product) => {
     setProductId(Number(product));
   };
-
   const setImage = (item) => {
     setSelectedStyle(item);
   };
 
   return (
     <StyledApp data-testid="appComponent">
-
-      <div className="module" module="Product Detail">
-        <ProductDetail
-          productId={productId}
-          setProductId={setProductId}
-          styles={styles}
-          selectedStyle={selectedStyle}
-          setSelectedStyle={setSelectedStyle}
-          productInfo={productInfo}
-          avgRating={avgRating}
-          reviewCount={reviewCount}
-        />
-      </div>
-
-      <div className="module" module="Related Items & Comparison">
-        <Carousel
-          productId={productId}
-          changeProduct={changeProduct}
-          productInfo={productInfo}
-          reviewMeta={reviewMeta}
-          selectedStyle={selectedStyle}
-          avgRating={avgRating}
-          setImage={setImage}
-        />
-      </div>
-
-      <div className="module" module="Ratings & Reviews">
-        <ReviewList id={productId} metaReview={reviewMeta} />
-        <Modal id={productId} />
-      </div>
-
+      <ProductDetail
+        productId={productId}
+        setProductId={setProductId}
+        styles={styles}
+        selectedStyle={selectedStyle}
+        setSelectedStyle={setSelectedStyle}
+        productInfo={productInfo}
+        reviewMeta={reviewMeta}
+        avgRating={avgRating}
+      />
+      <Carousel
+        productId={productId}
+        changeProduct={changeProduct}
+        productInfo={productInfo}
+        reviewMeta={reviewMeta}
+        selectedStyle={selectedStyle}
+        avgRating={avgRating}
+        setImage={setImage}
+      />
+      <ReviewList id={productId} metaReview={reviewMeta} />
+      <Modal product={productId} />
     </StyledApp>
   );
 };

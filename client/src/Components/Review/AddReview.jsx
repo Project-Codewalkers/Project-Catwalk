@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import Modal from './Modal';
 
 const AddReview = () => {
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const showModal = show ? 'modal display-block' : 'modal display-none';
-
-  }, [show]);
-
-  //const span = document.getElementById('close')[0];
+  const showModal = () => (
+    show === true ? setShow(false) : setShow(true)
+  );
 
   return (
     <div>
-      <button id="addReviewBtn" type="button" onClick={setShow(true)}> ADD REVIEW</button>
+      <button id="addReviewBtn" type="button" onClick={showModal}> ADD REVIEW</button>
+      <Modal show={show} />
     </div>
   );
 };

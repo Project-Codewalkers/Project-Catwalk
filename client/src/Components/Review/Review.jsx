@@ -1,36 +1,28 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Stars, { avgStars } from '../RelatedItems/Stars';
+import api from '../../lib/api';
 
-const StyledReview = styled.div`
-border: 12px;
-border-color: black;
-display:flex;
-justify-content: center;
-align-items: center;
+const StyledReview = styled.span`
+display: flex;
+border: 2px outset black;
 flex-direction: column;
+justify-content: flex-end;
+flex-flow: column wrap;
+padding: 5px;
 `;
 
 const Review = ({
   summary, body, date, name, helpful, rating, rec, pics, res, id,
 }) => {
   const helpfulRev = (reviewId) => (
-    console.log(reviewId)
-    // api.markReviewAsHelpful(reviewId)
-    //   .then(() => (
-    //     console.log('Thank you for your input')
-    //   ))
-
+    api.markReviewAsHelpful(reviewId)
   );
 
   const reportRev = (reviewId) => (
-    console.log(reviewId)
-    // api.reportReview(reviewId)
-    //   .then(() => (
-    //     console.log('This review has been reported')
-    //   ))
-
+    api.reportReview(reviewId)
   );
+
   const format = new Date(date);
 
   return (
@@ -41,7 +33,6 @@ const Review = ({
         <Stars stars={rating} />
       </span>
       <span>
-        Name and date
         {' '}
         {`${name} , ${format}`}
       </span>
@@ -69,14 +60,13 @@ const Review = ({
       ) : ''}
       {pics.map((photos) => (<img id="reviewPic" src={`${photos.url}`} alt="" key={photos.id} height="100" width="100" />))}
       <footer>
-        helpful:
         {' '}
-        <button onClick={() => helpfulRev(id)}>helpful</button>
+        <button type="button" onClick={() => helpfulRev(id)}>Helpful</button>
         {' '}
-        {helpful}
+        {`(${helpful})`}
         {' '}
         {' '}
-        <button onClick={() => reportRev(id)}>Report</button>
+        <button type="button" onClick={() => reportRev(id)}>Report</button>
       </footer>
 
     </StyledReview>
