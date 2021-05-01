@@ -59,7 +59,7 @@ const RightArrowRelated = styled.svg`
   height: 24px;
 `;
 
-const RelatedController = ({ data, changeProduct, productId, avgRating, productInfo, reviewMeta, selectedStyle }) => {
+const RelatedController = ({ data, changeProduct, productId, productInfo, reviewMeta, selectedStyle }) => {
   const [leftRelated, setLeftRelated] = useState(0);
 
   // refactor into separate components later
@@ -123,7 +123,6 @@ const RelatedController = ({ data, changeProduct, productId, avgRating, productI
           data={data}
           changeProduct={changeProduct}
           productId={productId}
-          avgRating={avgRating}
           productInfo={productInfo}
           reviewMeta={reviewMeta}
           selectedStyle={selectedStyle}

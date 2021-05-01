@@ -83,7 +83,7 @@ const Text = styled.div`
 `;
 
 const OutfitController = ({
-  outfit, newItem, selectedStyle, reviewMeta, productInfo, deleteItem, outfitArr,
+  outfit, newItem, selectedStyle, reviewMeta, productInfo, deleteItem,
 }) => {
   const [leftOutfit, setLeftOutfit] = useState(0);
 
@@ -150,7 +150,6 @@ const OutfitController = ({
           newItem={newItem}
           deleteItem={deleteItem}
           selectedStyle={selectedStyle}
-          outfitArr={outfitArr}
         />
         <OutfitAdder
           onClick={() => (newItem(selectedStyle, reviewMeta, productInfo))}
@@ -213,15 +212,15 @@ OutfitController.propTypes = {
         value: PropTypes.number,
       }),
     }),
-    product_id: PropTypes.number,
+    product_id: PropTypes.string,
     rating: PropTypes.shape({
       3: PropTypes.number,
       4: PropTypes.number,
       5: PropTypes.number,
     }),
     recommended: PropTypes.shape({
-      false: PropTypes.number,
-      true: PropTypes.number,
+      false: PropTypes.string,
+      true: PropTypes.string,
     }),
   }),
   productInfo: PropTypes.shape({
@@ -244,7 +243,7 @@ OutfitController.propTypes = {
 
 OutfitController.defaultProps = {
   selectedStyle: PropTypes.null,
-  reviewMeta: PropTypes.null,
+  reviewMeta: PropTypes.string,
   productInfo: PropTypes.null,
 };
 

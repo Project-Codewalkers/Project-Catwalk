@@ -1,3 +1,4 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -48,9 +49,10 @@ const DeleteBtn = styled.div`
   z-index: 1;
 `;
 
-const Outfit = ({ item, deleteItem, index, }) => {
+const Outfit = ({ item, deleteItem, index }) => {
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
-  const url = item[1] ? item[1].photos[0].thumbnail_url : noPic;
+  const url = item.style ? item.style.photos[0].thumbnail_url : noPic;
+  console.log(typeof (item.style.style_id));
 
   return (
     <ListItem role="listitem">
@@ -58,26 +60,34 @@ const Outfit = ({ item, deleteItem, index, }) => {
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
-          {item[3].category}
+          {item.info.category}
         </Category>
-        <Name>{item[2].name}</Name>
-        <Price>{`Today: $${item[3].default_price}`}</Price>
-        <Stars stars={item[2].ratings} />
+        <Name>{item.info.name}</Name>
+        <Price>{`Today: $${item.info.default_price}`}</Price>
+        <Stars stars={item.meta.ratings} />
       </div>
     </ListItem>
   );
 };
 
 Outfit.propTypes = {
-  item: PropTypes.arrayOf(PropTypes.shape({
-    photos: PropTypes.shape(),
-    product_id: PropTypes.number,
-    category: PropTypes.string,
-    name: PropTypes.string,
-    default_price: PropTypes.number,
-    ratings: PropTypes.number,
+  item: PropTypes.PropTypes.shape({
+    style: PropTypes.shape({
+      photos: PropTypes.arrayOf(PropTypes.shape({
+        thumbnail_url: PropTypes.string,
+      })),
+    }),
+    info: PropTypes.shape({
+      product_id: PropTypes.number,
+      category: PropTypes.string,
+      name: PropTypes.string,
+      default_price: PropTypes.string,
+    }),
+    meta: PropTypes.shape({
+      ratings: PropTypes.object,
+    }),
     find: PropTypes.func,
-  })).isRequired,
+  }).isRequired,
   selectedStyle: PropTypes.shape({
     style_id: PropTypes.number,
     name: PropTypes.string,
@@ -95,17 +105,19 @@ Outfit.propTypes = {
     )),
     skus: PropTypes.objectOf(
       PropTypes.shape({
-        quantity: PropTypes.number.isRequired,
-        size: PropTypes.string.isRequired,
+        quantity: PropTypes.number,
+        size: PropTypes.string,
       }),
     ),
   }),
   deleteItem: PropTypes.func,
+  index: PropTypes.number.isRequired,
 };
 
 Outfit.defaultProps = {
   selectedStyle: null,
   deleteItem: null,
+
 };
 
 export default Outfit;

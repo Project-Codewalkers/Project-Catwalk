@@ -53,7 +53,7 @@ const ModalSwap = styled.div`
 `;
 
 const RelatedItem = ({
-  item, changeProduct, avgRating, productInfo, reviewMeta, selectedStyle,
+  item, changeProduct, productInfo, reviewMeta, selectedStyle,
 }) => {
   const [modalSwitch, setModalSwitch] = useState(false);
   // url
@@ -97,7 +97,6 @@ const RelatedItem = ({
         item={item}
         modalSwitch={modalSwitch}
         setModalSwitch={setModalSwitch}
-        avgRating={avgRating}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}

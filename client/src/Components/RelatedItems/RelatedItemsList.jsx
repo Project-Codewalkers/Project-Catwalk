@@ -4,15 +4,14 @@ import React from 'react';
 import RelatedItem from './RelatedItem';
 
 const RelatedItemsList = ({
-  data, changeProduct, productId, avgRating, productInfo, selectedStyle, reviewMeta,
+  data, changeProduct, productId, productInfo, selectedStyle, reviewMeta,
 }) => data.map((item) => (
   <div>
     <RelatedItem
-      key={item[2].product_id}
+      key={item[0][0].style_id && item[0][0].style_id}
       item={item}
       changeProduct={changeProduct}
       productId={productId}
-      avgRating={avgRating}
       productInfo={productInfo}
       reviewMeta={reviewMeta}
       selectedStyle={selectedStyle}

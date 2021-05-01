@@ -84,12 +84,6 @@ const App = () => {
     setProductId(product);
   };
 
-  console.log(avgRating);
-
-  const setImage = (item) => {
-    setSelectedStyle(item);
-  };
-
   return (
     <StyledApp data-testid="appComponent">
       <ProductDetail
@@ -100,7 +94,6 @@ const App = () => {
         setSelectedStyle={setSelectedStyle}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
-        avgRating={avgRating}
       />
       <Carousel
         productId={productId}
@@ -108,8 +101,6 @@ const App = () => {
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
-        avgRating={avgRating}
-        setImage={setImage}
       />
       <ReviewList id={productId} metaReview={reviewMeta} />
       <Modal id={productId} />
