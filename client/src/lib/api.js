@@ -289,7 +289,7 @@ function addToCart(skuId) {
  * @returns {Response<Object>} Returns a response object.
  */
 function logAnInteraction(interactionObj) {
-  const data = { interactionObj };
+  const data = interactionObj;
   const resource = '/interactions';
   return axios.post(resource, data)
     .then((response) => response.data)

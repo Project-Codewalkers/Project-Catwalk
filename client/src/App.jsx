@@ -48,7 +48,7 @@ const App = () => {
     api.getReviewMetadata(productId)
       .then((meta) => {
         setMeta(meta);
-        if (meta && meta.reviews) { 
+        if (meta && meta.reviews) {
           setAvgRating(avgStars(meta.ratings));
           setReviewCount(reviewCount(meta.ratings));
         }
@@ -78,14 +78,24 @@ const App = () => {
         setSelectedStyle(null);
         throw err;
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
+
+  useEffect(() => {
+    window.addEventListener('click', (e) => {
+      const element = e.target.outerHTML;
+      const widget = e.target.closest('.module').attributes.module.value;
+      const time = new Date().toTimeString();
+      api.logAnInteraction({ element, widget, time })
+        .catch((err) => {
+          throw err;
+        });
+    });
+  }, []);
 
   const changeProduct = (product) => {
     setProductId(Number(product));
   };
-
-  console.log(avgRating);
 
   const setImage = (item) => {
     setSelectedStyle(item);
@@ -93,27 +103,37 @@ const App = () => {
 
   return (
     <StyledApp data-testid="appComponent">
-      <ProductDetail
-        productId={productId}
-        setProductId={setProductId}
-        styles={styles}
-        selectedStyle={selectedStyle}
-        setSelectedStyle={setSelectedStyle}
-        productInfo={productInfo}
-        avgRating={avgRating}
-        reviewCount={reviewCount}
-      />
-      <Carousel
-        productId={productId}
-        changeProduct={changeProduct}
-        productInfo={productInfo}
-        reviewMeta={reviewMeta}
-        selectedStyle={selectedStyle}
-        avgRating={avgRating}
-        setImage={setImage}
-      />
-      <ReviewList id={productId} metaReview={reviewMeta} />
-      <Modal id={productId} />
+
+      <div className="module" module="Product Detail">
+        <ProductDetail
+          productId={productId}
+          setProductId={setProductId}
+          styles={styles}
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+          productInfo={productInfo}
+          avgRating={avgRating}
+          reviewCount={reviewCount}
+        />
+      </div>
+
+      <div className="module" module="Related Items & Comparison">
+        <Carousel
+          productId={productId}
+          changeProduct={changeProduct}
+          productInfo={productInfo}
+          reviewMeta={reviewMeta}
+          selectedStyle={selectedStyle}
+          avgRating={avgRating}
+          setImage={setImage}
+        />
+      </div>
+
+      <div className="module" module="Ratings & Reviews">
+        <ReviewList id={productId} metaReview={reviewMeta} />
+        <Modal id={productId} />
+      </div>
+
     </StyledApp>
   );
 };
