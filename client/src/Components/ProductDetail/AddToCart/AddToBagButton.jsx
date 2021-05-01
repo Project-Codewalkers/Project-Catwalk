@@ -10,12 +10,18 @@ const StyledAddToBagButton = styled.button`
   text-align: left;
   border: 1px solid #525252;
   background: #FFF;
+  cursor: pointer;
+  &:active{
+    box-shadow: inset 0px 2px 8px rgba(82, 82, 82, 0.5);
+  }
 `;
 
 const AddToBagButton = ({ addToCart }) => (
   <StyledAddToBagButton
     type="button"
-    onClick={() => { addToCart(); }}
+    onClick={() => {
+      addToCart();
+    }}
   >
     ADD TO BAG
   </StyledAddToBagButton>

@@ -10,6 +10,7 @@ const StyledSizeSelector = styled.select`
   padding: 10px;
   border: 1px solid #525252;
   background: #FFF;
+  cursor: pointer;
 `;
 
 const SizeSelector = ({
