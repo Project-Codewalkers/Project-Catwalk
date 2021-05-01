@@ -4,7 +4,7 @@ import ProductDetail from './Components/ProductDetail/ProductDetail';
 import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
 import ReviewList from './Components/Review/ReviewList';
-import { avgStars, totalReviews } from './Components/RelatedItems/Stars';
+import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
 import Modal from './Components/Review/Modal';
 
@@ -17,7 +17,8 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const [productId, rawSetProductId] = useState(20100);
+  const initId = Number(window.location.pathname.replace(/\//g, ''));
+  const [productId, rawSetProductId] = useState(initId || 20100);
   const [productInfo, rawSetProductInfo] = useState(null);
   const [styles, rawSetStyles] = useState([]);
   const [selectedStyle, rawSetSelectedStyle] = useState(null);

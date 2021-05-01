@@ -14,7 +14,7 @@ const fullPath = path.join(__dirname, '/../client/dist');
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.static(fullPath));
+app.use(/(\/\d{5}|$|\/$)/, express.static(fullPath));
 
 app.get(/\w+/, (req, res) => {
   const apiPath = `${API_URL}${req.url}`;
