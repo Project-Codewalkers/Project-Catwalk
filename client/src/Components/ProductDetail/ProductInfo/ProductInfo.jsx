@@ -14,11 +14,21 @@ const ProductName = styled.h1`
   margin: 0.2em;
 `;
 
-const ProductInfo = ({ product, productId, selectedStyle }) => {
+const ProductInfo = ({
+  product,
+  productId,
+  selectedStyle,
+  reviewCount,
+  avgRating,
+}) => {
   if (!product) { return <div />; }
   return (
     <StyledProductInfo>
-      <ReadReviews productId={productId} />
+      <ReadReviews
+        productId={productId}
+        reviewCount={reviewCount}
+        avgRating={avgRating}
+      />
       <div>
         <strong>{product.category ? product.category.toUpperCase() : 'CATEGORY'}</strong>
       </div>
@@ -67,12 +77,16 @@ ProductInfo.propTypes = {
     })),
   }),
   productId: PropTypes.number,
+  avgRating: PropTypes.number,
+  reviewCount: PropTypes.number,
 };
 
 ProductInfo.defaultProps = {
   product: {},
   productId: null,
   selectedStyle: null,
+  avgRating: 0,
+  reviewCount: 0,
 };
 
 export default ProductInfo;

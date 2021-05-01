@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -9,14 +9,11 @@ import AddToCart from './AddToCart/AddToCart';
 import ProductOverview from './ProductOverview/ProductOverview';
 import TopBar from './TopBar';
 
-import api from '../../lib/api';
-
 const StyledProductDetail = styled.div`
   width: clamp(320px, 100%, 1280px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* border: 1px solid black; */
   padding: 0;
   position: relative;
   top: 0;
@@ -28,7 +25,6 @@ const ImagesInfoStyleCart = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  /* border: 1px solid black; */
 `;
 
 const InfoStyleCart = styled.div`
@@ -38,7 +34,6 @@ const InfoStyleCart = styled.div`
   justify-content: space-evenly;
   margin: 32px;
   width: 100%;
-  /* border: 1px solid black; */
 `;
 
 const ProductDetail = ({
@@ -48,44 +43,38 @@ const ProductDetail = ({
   productInfo,
   selectedStyle,
   setSelectedStyle,
-  reviewMeta,
   avgRating,
-}) => {
-  const [selectedPhoto, rawSetSelectedPhoto] = useState({});
-  const setSelectedPhoto = useCallback((photo) => rawSetSelectedPhoto(photo), []);
-
-  return (
-    <StyledProductDetail>
-      <TopBar productId={productId} setProductId={setProductId} />
-      <ImagesInfoStyleCart>
-        <ImageGallery
-          // selectedPhoto={selectedPhoto}
-          // setSelectedPhoto={setSelectedPhoto}
-          style={selectedStyle}
+  reviewCount,
+}) => (
+  <StyledProductDetail>
+    <TopBar productId={productId} setProductId={setProductId} />
+    <ImagesInfoStyleCart>
+      <ImageGallery
+        style={selectedStyle}
+      />
+      <InfoStyleCart>
+        <ProductInfo
+          product={productInfo}
+          productId={productId}
+          selectedStyle={selectedStyle}
+          avgRating={avgRating}
+          reviewCount={reviewCount}
         />
-        <InfoStyleCart>
-          <ProductInfo
-            product={productInfo}
-            productId={productId}
-            selectedStyle={selectedStyle}
-          />
-          <StyleSelector
-            styles={styles}
-            selectedStyle={selectedStyle}
-            setSelectedStyle={setSelectedStyle}
-            // setSelectedPhoto={setSelectedPhoto}
-          />
-          <AddToCart
-            skusObj={selectedStyle && selectedStyle.skus ? selectedStyle.skus : {}}
-            productId={productId}
-          />
-        </InfoStyleCart>
-      </ImagesInfoStyleCart>
+        <StyleSelector
+          styles={styles}
+          selectedStyle={selectedStyle}
+          setSelectedStyle={setSelectedStyle}
+        />
+        <AddToCart
+          skusObj={selectedStyle && selectedStyle.skus ? selectedStyle.skus : {}}
+          productId={productId}
+        />
+      </InfoStyleCart>
+    </ImagesInfoStyleCart>
 
-      <div><ProductOverview product={productInfo} /></div>
-    </StyledProductDetail>
-  );
-};
+    <div><ProductOverview product={productInfo} /></div>
+  </StyledProductDetail>
+);
 
 ProductDetail.propTypes = {
   productId: PropTypes.number.isRequired,
@@ -142,27 +131,14 @@ ProductDetail.propTypes = {
     )),
     skus: PropTypes.objectOf(
       PropTypes.shape({
-        quantity: PropTypes.number.isRequired,
-        size: PropTypes.string.isRequired,
+        quantity: PropTypes.number,
+        size: PropTypes.string,
       }),
     ),
   }),
   setSelectedStyle: PropTypes.func.isRequired,
-  reviewMeta: PropTypes.shape({
-    product_id: PropTypes.string,
-    ratings: PropTypes.objectOf(PropTypes.string),
-    recommended: PropTypes.shape({
-      false: PropTypes.string,
-      true: PropTypes.string,
-    }),
-    characteristics: PropTypes.objectOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        value: PropTypes.string,
-      }),
-    ),
-  }),
   avgRating: PropTypes.number,
+  reviewCount: PropTypes.number,
 };
 
 ProductDetail.defaultProps = {
@@ -180,21 +156,8 @@ ProductDetail.defaultProps = {
   },
   styles: [],
   selectedStyle: null,
-  reviewMeta: {
-    product_id: null,
-    ratings: {},
-    recommended: {
-      false: '0',
-      true: '0',
-    },
-    characteristics: PropTypes.objectOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        value: PropTypes.string,
-      }),
-    ),
-  },
   avgRating: 0,
+  reviewCount: 0,
 };
 
 export default ProductDetail;

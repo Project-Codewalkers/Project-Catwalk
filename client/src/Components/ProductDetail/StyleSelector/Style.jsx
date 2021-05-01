@@ -13,6 +13,9 @@ const StyledStyleThumbnail = styled.img`
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform: ${(props) => (props.selected ? 'scale(1.2)' : 'scale(1)')};
 `;
 
 const StyledCheckmark = styled.img`
@@ -20,8 +23,7 @@ const StyledCheckmark = styled.img`
   height: 18px;
   width: auto;
   right: 0;
-  /* transform: translate(-50%, 0); */
-  /* display:none; */
+  z-index:1;
 `;
 
 const ThumbContainer = styled.div`
@@ -57,6 +59,7 @@ const Style = ({
     <StyledStyleThumbnail
       src={style.photos[0].thumbnail_url}
       alt={style.name}
+      selected={selected}
     />
   </ThumbContainer>
 );

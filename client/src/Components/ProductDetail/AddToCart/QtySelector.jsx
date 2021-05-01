@@ -12,11 +12,12 @@ const StyledQtySelector = styled.select`
   background: #FFF;
 `;
 
-const QtySelector = ({ availableQty, setQuantity }) => {
+const QtySelector = ({ availableQty, setQuantity, quantity }) => {
   if (availableQty) {
     return (
       <StyledQtySelector
-        onChange={(e) => setQuantity(e.target.value)}
+        value={quantity}
+        onChange={(e) => setQuantity(Number(e.target.value))}
       >
         {'x'.repeat(Math.min(availableQty, 15)).split('').map((c, i) => i + 1)
           .map((num) => (
@@ -35,6 +36,7 @@ const QtySelector = ({ availableQty, setQuantity }) => {
 QtySelector.propTypes = {
   availableQty: PropTypes.number,
   setQuantity: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 QtySelector.defaultProps = {
