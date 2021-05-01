@@ -17,10 +17,7 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const initId = Number(window
-    && window.location
-    && window.location.pathname
-    && window.location.pathname.replaceAll('/', ''));
+  const initId = Number(window.location.pathname.replace(/\//g, ''));
   const [productId, rawSetProductId] = useState(initId || 20100);
   const [productInfo, rawSetProductInfo] = useState(null);
   const [styles, rawSetStyles] = useState([]);
