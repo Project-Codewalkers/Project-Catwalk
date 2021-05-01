@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import logo from '/assets/Logo.svg';
-// import searchIcon from '/assets/SearchIcon.svg';
+
 
 const StyledTopBar = styled.div`
   display: flex;
