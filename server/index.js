@@ -33,7 +33,7 @@ app.get(/\w+/, (req, res) => {
 
 app.post(/\w+/, (req, res) => {
   const apiPath = `${API_URL}${req.url}`;
-  axios.post(apiPath, req.body, { headers: Authentication })
+  axios.put(apiPath, req.body, { headers: Authentication })
     .then((response) => {
       res.status(200).send(response.data);
     })
