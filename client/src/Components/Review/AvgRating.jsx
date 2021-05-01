@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Stars from '../RelatedItems/Stars';
 
 const StyledAvg = styled.span`
@@ -38,4 +39,22 @@ const AvgRating = ({
     </div>
   </StyledAvg>
 );
+
+// AvgRating.propTypes = {
+//   rating: PropTypes.number,
+//   rec: PropTypes.string,
+//   fit: PropTypes.string,
+//   length: PropTypes.string,
+//   quality: PropTypes.string,
+//   comfort: PropTypes.string,
+// };
+
+// AvgRating.defaultProps = {
+//   rating: 0,
+//   rec: '',
+//   fit: '',
+//   length: '',
+//   quality: '',
+//   comfort: '',
+// };
 export default AvgRating;
