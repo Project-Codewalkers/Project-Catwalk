@@ -17,7 +17,8 @@ const StyledApp = styled.div`
 `;
 
 const App = () => {
-  const [productId, rawSetProductId] = useState(20100);
+  const initId = Number(window.location.pathname.replaceAll('/', ''));
+  const [productId, rawSetProductId] = useState(initId || 20100);
   const [productInfo, rawSetProductInfo] = useState(null);
   const [styles, rawSetStyles] = useState([]);
   const [selectedStyle, rawSetSelectedStyle] = useState(null);
