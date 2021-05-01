@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import api from '../../lib/api';
+import api from '../../lib/api.js';
 
 const StyledModal = styled.div`
 height: 500px;
 width: 500px;
-background:red;
+background: gray;
 position: fixed;
 top: 50%;
 left: 50%;
@@ -14,8 +13,8 @@ margin-left: -250px;
 margin-top: -250px;
 `;
 
-const Modal = ({ Content, id, show }) => {
-  //const [viewable, setViewable] = useState(false);
+const Modal = ({ Content, product, show }) => {
+  const [viewable, setViewable] = useState(false);
   const [name, setName] = useState('');
   const [rating, setRating] = useState(null);
   const [body, setBody] = useState('');
@@ -29,31 +28,13 @@ const Modal = ({ Content, id, show }) => {
   const [summary, setSummary] = useState('');
 
   const postToServer = (toPost) => (
-    console.log(toPost)
-    // api.addAReview(toPost)
+    api.addAReview(toPost)
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log('event', e);
-    // console.log('name', e.target[0].value, name);// name
-    // console.log('email', e.target[1].value, email);// email
-    setRating(e.target[1].value);
-    // console.log('review', e.target[2].value, body); // review / body
-    setRec(e.target[4].value);
-    // console.log('rec', e.target[3].value, rec); // rec
-    // console.log('rating', e.target[4].value, rating); // rating
-    setComf(e.target[5].value);
-    // console.log('comfort', e.target[5].value, comfort); // comfort
-    setLength(e.target[6].value);
-    // console.log('length', e.target[6].value), length; // length
-    setQuality(e.target[7].value);
-    // console.log('quality', e.target[7].value, quality); // quality
-    // console.log('fit', e.target[8].value, fit); // fit
-    // console.log('sum', e.target[9].value);
-    // e.target.reset();
     const post = {
-      review_id: id,
+      review_id: product,
       rating: e.target[4].value,
       summary: e.target[9].value,
       recommend: e.target[3].value,
@@ -69,7 +50,6 @@ const Modal = ({ Content, id, show }) => {
     };
     postToServer(post);
   };
-  console.log(show);
 
   if (show) {
     return (

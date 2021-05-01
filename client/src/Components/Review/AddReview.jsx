@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from './Modal';
 
 const AddReview = () => {
   const [show, setShow] = useState(false);
 
-  const showModal = () => {
-     show === true ? setShow(false) : setShow(true);
-    console.log(show);
-  };
-
-  //const span = document.getElementById('close')[0];
+  const showModal = () => (
+    show === true ? setShow(false) : setShow(true)
+  );
 
   return (
     <div>

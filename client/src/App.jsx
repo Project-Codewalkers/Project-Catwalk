@@ -83,9 +83,6 @@ const App = () => {
   const changeProduct = (product) => {
     setProductId(product);
   };
-
-  console.log(avgRating);
-
   const setImage = (item) => {
     setSelectedStyle(item);
   };
@@ -112,7 +109,7 @@ const App = () => {
         setImage={setImage}
       />
       <ReviewList id={productId} metaReview={reviewMeta} />
-      <Modal id={productId} />
+      <Modal product={productId} />
     </StyledApp>
   );
 };
