@@ -60,6 +60,8 @@ const TopBar = ({ productId, setProductId }) => {
         alt="logo"
         style={{
           color: 'white',
+          width: '64px',
+          height: '32px',
           margin: '20px',
         }}
       />
@@ -77,7 +79,7 @@ const TopBar = ({ productId, setProductId }) => {
             style={{
               color: 'white',
               height: '20px',
-              width: 'auto',
+              width: '20px',
             }}
           />
         </StyledButton>
