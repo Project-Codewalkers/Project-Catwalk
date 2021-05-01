@@ -7,15 +7,13 @@ const OutfitList = ({
   selectedStyle,
   deleteItem,
 }) => outfit.map((item, i) => (
-  <div>
-    <Outfit
-      key={item.style.style_id}
-      index={i}
-      item={item}
-      deleteItem={deleteItem}
-      selectedStyle={selectedStyle}
-    />
-  </div>
+  <Outfit
+    key={item.style.style_id}
+    index={i}
+    item={item}
+    deleteItem={deleteItem}
+    selectedStyle={selectedStyle}
+  />
 ));
 
 OutfitList.propTypes = {

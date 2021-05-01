@@ -52,7 +52,6 @@ const DeleteBtn = styled.div`
 const Outfit = ({ item, deleteItem, index }) => {
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
   const url = item.style ? item.style.photos[0].thumbnail_url : noPic;
-  console.log(typeof (item.style.style_id));
 
   return (
     <ListItem role="listitem">
@@ -88,7 +87,7 @@ Outfit.propTypes = {
     }),
     find: PropTypes.func,
   }).isRequired,
-  selectedStyle: PropTypes.shape({
+  style: PropTypes.shape({
     style_id: PropTypes.number,
     name: PropTypes.string,
     original_price: PropTypes.string,
@@ -115,7 +114,7 @@ Outfit.propTypes = {
 };
 
 Outfit.defaultProps = {
-  selectedStyle: null,
+  style: null,
   deleteItem: null,
 
 };
