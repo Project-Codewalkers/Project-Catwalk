@@ -4,7 +4,7 @@ import ProductDetail from './Components/ProductDetail/ProductDetail';
 import Carousel from './Components/RelatedItems/Carousel';
 // import RelatedItems from './Components/RelatedItems/RelatedItems';
 import ReviewList from './Components/Review/ReviewList';
-import { avgStars, totalReviews } from './Components/RelatedItems/Stars';
+import { avgStars } from './Components/RelatedItems/Stars';
 import api from './lib/api';
 import Modal from './Components/Review/Modal';
 
