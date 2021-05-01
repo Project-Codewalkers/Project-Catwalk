@@ -5,8 +5,9 @@ import Stars from '../RelatedItems/Stars';
 
 const StyledAvg = styled.span`
 display: flex;
-border: 2px outset gray;
+border: 2px outset ;
 padding: 10px;
+margin: 10px;
 `;
 
 const AvgRating = ({
