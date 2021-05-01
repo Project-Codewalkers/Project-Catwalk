@@ -33,18 +33,6 @@ app.get(/\w+/, (req, res) => {
 
 app.post(/\w+/, (req, res) => {
   const apiPath = `${API_URL}${req.url}`;
-  axios.put(apiPath, req.body, { headers: Authentication })
-    .then((response) => {
-      res.status(200).send(response.data);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
-});
-
-
-app.put(/\w+/, (req, res) => {
-  const apiPath = `${API_URL}${req.url}`;
   axios.post(apiPath, req.body, { headers: Authentication })
     .then((response) => {
       res.status(200).send(response.data);
@@ -54,6 +42,16 @@ app.put(/\w+/, (req, res) => {
     });
 });
 
+app.put(/\w+/, (req, res) => {
+  const apiPath = `${API_URL}${req.url}`;
+  axios.putt(apiPath, req.body, { headers: Authentication })
+    .then((response) => {
+      res.status(200).send(response.data);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
