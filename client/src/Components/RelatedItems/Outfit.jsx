@@ -1,7 +1,8 @@
 /* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Stars from './Stars';
 
 const ListItem = styled.div`
@@ -69,54 +70,54 @@ const Outfit = ({ item, deleteItem, index }) => {
   );
 };
 
-Outfit.propTypes = {
-  item: PropTypes.PropTypes.shape({
-    style: PropTypes.shape({
-      photos: PropTypes.arrayOf(PropTypes.shape({
-        thumbnail_url: PropTypes.string,
-      })),
-    }),
-    info: PropTypes.shape({
-      product_id: PropTypes.number,
-      category: PropTypes.string,
-      name: PropTypes.string,
-      default_price: PropTypes.string,
-    }),
-    meta: PropTypes.shape({
-      ratings: PropTypes.object,
-    }),
-    find: PropTypes.func,
-  }).isRequired,
-  style: PropTypes.shape({
-    style_id: PropTypes.number,
-    name: PropTypes.string,
-    original_price: PropTypes.string,
-    sale_price: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    'default?': PropTypes.bool,
-    photos: PropTypes.arrayOf(PropTypes.shape(
-      {
-        thumbnail_url: PropTypes.string,
-        url: PropTypes.string,
-      },
-    )),
-    skus: PropTypes.objectOf(
-      PropTypes.shape({
-        quantity: PropTypes.number,
-        size: PropTypes.string,
-      }),
-    ),
-  }),
-  deleteItem: PropTypes.func,
-  index: PropTypes.number.isRequired,
-};
+// Outfit.propTypes = {
+//   item: PropTypes.PropTypes.shape({
+//     style: PropTypes.shape({
+//       photos: PropTypes.arrayOf(PropTypes.shape({
+//         thumbnail_url: PropTypes.string,
+//       })),
+//     }),
+//     info: PropTypes.shape({
+//       product_id: PropTypes.number,
+//       category: PropTypes.string,
+//       name: PropTypes.string,
+//       default_price: PropTypes.string,
+//     }),
+//     meta: PropTypes.shape({
+//       ratings: PropTypes.object,
+//     }),
+//     find: PropTypes.func,
+//   }).isRequired,
+//   style: PropTypes.shape({
+//     style_id: PropTypes.number,
+//     name: PropTypes.string,
+//     original_price: PropTypes.string,
+//     sale_price: PropTypes.oneOfType([
+//       PropTypes.string,
+//       PropTypes.object,
+//     ]),
+//     'default?': PropTypes.bool,
+//     photos: PropTypes.arrayOf(PropTypes.shape(
+//       {
+//         thumbnail_url: PropTypes.string,
+//         url: PropTypes.string,
+//       },
+//     )),
+//     skus: PropTypes.objectOf(
+//       PropTypes.shape({
+//         quantity: PropTypes.number,
+//         size: PropTypes.string,
+//       }),
+//     ),
+//   }),
+//   deleteItem: PropTypes.func,
+//   index: PropTypes.number.isRequired,
+// };
 
-Outfit.defaultProps = {
-  style: null,
-  deleteItem: null,
+// Outfit.defaultProps = {
+//   style: null,
+//   deleteItem: null,
 
-};
+// };
 
 export default Outfit;
