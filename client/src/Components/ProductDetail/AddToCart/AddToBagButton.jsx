@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import api from '../../../lib/api';
+import PropTypes from 'prop-types';
 
 const StyledAddToBagButton = styled.button`
   flex: 1;
@@ -10,25 +10,25 @@ const StyledAddToBagButton = styled.button`
   text-align: left;
   border: 1px solid #525252;
   background: #FFF;
+  cursor: pointer;
+  &:active{
+    box-shadow: inset 0px 2px 8px rgba(82, 82, 82, 0.5);
+  }
 `;
 
-const addToCart = (skuId) => {
-  api.addToCart(skuId)
-    .then(() => {
-      api.getCart()
-        .then((result) => result)
-        .catch((err) => { throw err; });
-    })
-    .catch((err) => { throw err; });
-};
-
-const AddToBagButton = () => (
+const AddToBagButton = ({ addToCart }) => (
   <StyledAddToBagButton
     type="button"
-    onClick={() => { addToCart(638269); }}
+    onClick={() => {
+      addToCart();
+    }}
   >
     ADD TO BAG
   </StyledAddToBagButton>
 );
+
+AddToBagButton.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default AddToBagButton;

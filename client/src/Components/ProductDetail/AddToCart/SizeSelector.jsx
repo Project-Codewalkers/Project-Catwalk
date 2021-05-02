@@ -10,14 +10,22 @@ const StyledSizeSelector = styled.select`
   padding: 10px;
   border: 1px solid #525252;
   background: #FFF;
+  cursor: pointer;
 `;
 
-const SizeSelector = ({ productId, skus, setSize }) => {
-  useEffect(() => setSize(''), [productId]);
+const SizeSelector = ({
+  productId,
+  skus,
+  setSize,
+  setPleaseSelectVisibility,
+}) => {
+  useEffect(() => setSize(''), [productId, setSize]);
 
   return (
     <StyledSizeSelector
+      id="sizeSelect"
       onChange={(e) => {
+        setPleaseSelectVisibility(false);
         setSize(skus.find((eachSku) => eachSku.sku === e.target.value));
       }}
       disabled={!skus.length}
@@ -49,6 +57,7 @@ SizeSelector.propTypes = {
     size: PropTypes.string.isRequired,
   })),
   setSize: PropTypes.func.isRequired,
+  setPleaseSelectVisibility: PropTypes.func.isRequired,
 };
 
 SizeSelector.defaultProps = {

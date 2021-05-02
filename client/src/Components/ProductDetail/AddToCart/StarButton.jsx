@@ -8,6 +8,10 @@ const StyledStarButton = styled.button`
   padding: 10px;
   border: 1px solid #525252;
   background: #FFF;
+  cursor: pointer;
+  &:active{
+    box-shadow: inset 0px 2px 8px rgba(82, 82, 82, 0.5);
+  }
 `;
 
 const StarButton = () => (

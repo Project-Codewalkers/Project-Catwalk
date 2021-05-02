@@ -12,18 +12,19 @@ const StyledDefaultImage = styled.div`
 `;
 
 const ImageGallery = ({ style }) => {
-  const [selectedPhoto, setSelectedPhoto] = useState(style && style.photos);
+  const [selectedPhoto, setSelectedPhoto] = useState(style && style.photos[0]);
 
   useEffect(() => {
     setSelectedPhoto(style && style.photos[0]);
   }, [style]);
 
-  const imgURL = (selectedPhoto && selectedPhoto.url) ? selectedPhoto.url : '';
+  const imgURL = (selectedPhoto && selectedPhoto.thumbnail_url) ? selectedPhoto.thumbnail_url : '';
   return (
     <StyledDefaultImage imgURL={imgURL} data-testid="defaultImage">
       <ImageThumbnails
         photos={style && style.photos && style.photos.filter((photo) => photo.thumbnail_url)}
         setSelectedPhoto={setSelectedPhoto}
+        selectedPhoto={selectedPhoto}
       />
     </StyledDefaultImage>
   );

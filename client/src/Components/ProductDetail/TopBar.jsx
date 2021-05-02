@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import logo from '/assets/Logo.svg';
-// import searchIcon from '/assets/SearchIcon.svg';
+
 
 const StyledTopBar = styled.div`
   display: flex;
@@ -61,6 +60,8 @@ const TopBar = ({ productId, setProductId }) => {
         alt="logo"
         style={{
           color: 'white',
+          width: '64px',
+          height: '32px',
           margin: '20px',
         }}
       />
@@ -78,7 +79,7 @@ const TopBar = ({ productId, setProductId }) => {
             style={{
               color: 'white',
               height: '20px',
-              width: 'auto',
+              width: '20px',
             }}
           />
         </StyledButton>
