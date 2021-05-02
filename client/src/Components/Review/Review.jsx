@@ -10,6 +10,7 @@ flex-direction: column;
 justify-content: flex-end;
 flex-flow: column wrap;
 padding: 5px;
+margin: 5px;
 `;
 
 const Review = ({

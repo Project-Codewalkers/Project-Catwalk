@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import api from '../../lib/api.js';
+import PropTypes from 'prop-types';
+import api from '../../lib/api';
 
 const StyledModal = styled.div`
 height: 500px;
@@ -13,7 +15,7 @@ margin-left: -250px;
 margin-top: -250px;
 `;
 
-const Modal = ({ Content, product, show }) => {
+const Modal = ({ product, show }) => {
   const [viewable, setViewable] = useState(false);
   const [name, setName] = useState('');
   const [rating, setRating] = useState(null);
@@ -56,7 +58,7 @@ const Modal = ({ Content, product, show }) => {
       <StyledModal>
         <form id="addReviewForm" onSubmit={(e) => handleSubmit(e)}>
           <h2>Write Your Review</h2>
-          <label>
+          <label htmlFor="name">
             Name:
             {' '}
             <input
@@ -65,7 +67,7 @@ const Modal = ({ Content, product, show }) => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
-          <label>
+          <label htmlFor="email">
             Email:
             {' '}
             <input
@@ -74,7 +76,7 @@ const Modal = ({ Content, product, show }) => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </label>
-          <label>
+          <label htmlFor="review">
             Review:
             {' '}
             <input
@@ -83,7 +85,7 @@ const Modal = ({ Content, product, show }) => {
               onChange={(e) => setBody(e.target.value)}
             />
           </label>
-          <label>
+          <label htmlFor="recommended">
             Recommended:
             {' '}
             <select rec={rec}>
@@ -91,7 +93,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="false">False</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="rating">
             Rating:
             {' '}
             <select rating={rating}>
@@ -102,7 +104,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="5">5</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="comfort">
             Comfort:
             {' '}
             <select comfort={comfort}>
@@ -113,7 +115,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="5">5</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="length">
             Length:
             {' '}
             <select length={length}>
@@ -124,7 +126,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="5">5</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="quality">
             Quality:
             {' '}
             <select quality={quality}>
@@ -135,7 +137,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="5">5</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="fit">
             Fit:
             {' '}
             <select fit={fit}>
@@ -146,7 +148,7 @@ const Modal = ({ Content, product, show }) => {
               <option value="5">5</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="summary">
             Summary:
             {' '}
             <input
@@ -162,5 +164,10 @@ const Modal = ({ Content, product, show }) => {
   }
   return null;
 };
+
+// Modal.propTypes = {
+//   product: PropTypes.number.isRequired,
+//   show: PropTypes.bool.isRequired,
+// };
 
 export default Modal;
