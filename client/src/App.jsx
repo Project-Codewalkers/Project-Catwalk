@@ -99,31 +99,6 @@ const App = () => {
   const changeProduct = (product) => {
     setProductId(Number(product));
   };
-<<<<<<< HEAD
-
-  return (
-    <StyledApp data-testid="appComponent">
-      <ProductDetail
-        productId={productId}
-        setProductId={setProductId}
-        styles={styles}
-        selectedStyle={selectedStyle}
-        setSelectedStyle={setSelectedStyle}
-        productInfo={productInfo}
-        reviewMeta={reviewMeta}
-        avgRating={avgRating}
-      />
-      <Carousel
-        productId={productId}
-        changeProduct={changeProduct}
-        productInfo={productInfo}
-        reviewMeta={reviewMeta}
-        selectedStyle={selectedStyle}
-      />
-      <ReviewList id={productId} metaReview={reviewMeta} />
-      <Modal id={productId} />
-    </StyledApp>
-=======
   const setImage = (item) => {
     setSelectedStyle(item);
   };
@@ -158,7 +133,6 @@ const App = () => {
         <Modal id={productId} />
       </div>
     </StyledApp >
->>>>>>> main
   );
 };
 
