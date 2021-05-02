@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -87,32 +88,32 @@ const Modal = ({
               <td>{currentItem[2].default_price}</td>
             </tr>
             <tr>
-              <td>{fit}</td>
+              <td>{Number(fit).toFixed(1)}</td>
               <Vertical />
               <td>Fit</td>
               <Vertical />
-              <td>{fitCurrent}</td>
+              <td>{Number(fitCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{length}</td>
+              <td>{length ? Number(length).toFixed(1) : '--'}</td>
               <Vertical />
               <td>Length</td>
               <Vertical />
-              <td>{lengthCurrent}</td>
+              <td>{Number(lengthCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{comfort}</td>
+              <td>{Number(comfort).toFixed(1)}</td>
               <Vertical />
               <td>Comfort</td>
               <Vertical />
-              <td>{comfortCurrent}</td>
+              <td>{Number(comfortCurrent).toFixed(1)}</td>
             </tr>
             <tr>
-              <td>{quality}</td>
+              <td>{Number(quality).toFixed(1)}</td>
               <Vertical />
               <td>Quality</td>
               <Vertical />
-              <td>{qualityCurrent}</td>
+              <td>{Number(qualityCurrent).toFixed(1)}</td>
             </tr>
           </tbody>
         </table>
@@ -122,18 +123,68 @@ const Modal = ({
 };
 
 // Modal.propTypes = {
-//   item: PropTypes.shape({
+//   item: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+//     name: PropTypes.string,
+//   })),
+//   PropTypes.arrayOf(PropTypes.shape({
+//     ratings: PropTypes.number,
+//     product_id: PropTypes.number,
+//     characterists: PropTypes.shape({
+//       fit: PropTypes.string,
+//       comfort: PropTypes.string,
+//       quality: PropTypes.string,
+//       length: PropTypes.string,
+//     }),
+//   })),
+//   PropTypes.shape({
+//     default_price: PropTypes.number,
+//     category: PropTypes.string,
+//     name: PropTypes.string,
+//     ratings: PropTypes.number,
+//   }),
+//   ),
+
+//   currentItem: PropTypes.arrayOf(PropTypes.shape({
+//     name: PropTypes.string,
+//     default_price: PropTypes.string,
 //     category: PropTypes.string,
 //     product_name: PropTypes.string,
 //     price: PropTypes.number,
 //     stars: PropTypes.number,
+//   })),
+//   fitCurrent: PropTypes.shape({
+//     value: PropTypes.number,
+//   }),
+//   comfortCurrent: PropTypes.shape({
+//     value: PropTypes.number,
+//   }),
+//   qualityCurrent: PropTypes.shape({
+//     value: PropTypes.number,
+//   }),
+//   lengthCurrent: PropTypes.shape({
+//     value: PropTypes.number,
 //   }),
 //   modalSwitch: PropTypes.bool.isRequired,
 //   setModalSwitch: PropTypes.func.isRequired,
+//   fit: PropTypes.string,
+//   comfort: PropTypes.string,
+//   quality: PropTypes.string,
+//   length: PropTypes.string,
+//   ratings: PropTypes.number,
 // };
 
 // Modal.defaultProps = {
-//   item: {},
+//   item: [[{}]],
+//   currentItem: PropTypes.null,
+//   fit: PropTypes.null,
+//   comfort: PropTypes.null,
+//   quality: PropTypes.null,
+//   length: PropTypes.null,
+//   fitCurrent: PropTypes.null,
+//   comfortCurrent: PropTypes.null,
+//   qualityCurrent: PropTypes.null,
+//   lengthCurrent: PropTypes.null,
+//   ratings: PropTypes.null,
 // };
 
 export default Modal;

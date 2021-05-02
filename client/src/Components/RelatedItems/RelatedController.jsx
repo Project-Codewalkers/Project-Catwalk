@@ -59,7 +59,14 @@ const RightArrowRelated = styled.svg`
   height: 24px;
 `;
 
-const RelatedController = ({ data, changeProduct, productId, avgRating, productInfo, reviewMeta, selectedStyle }) => {
+const RelatedController = ({
+  data,
+  changeProduct,
+  productId,
+  productInfo,
+  reviewMeta,
+  selectedStyle,
+}) => {
   const [leftRelated, setLeftRelated] = useState(0);
 
   // refactor into separate components later
@@ -123,7 +130,6 @@ const RelatedController = ({ data, changeProduct, productId, avgRating, productI
           data={data}
           changeProduct={changeProduct}
           productId={productId}
-          avgRating={avgRating}
           productInfo={productInfo}
           reviewMeta={reviewMeta}
           selectedStyle={selectedStyle}
@@ -143,6 +149,82 @@ const RelatedController = ({ data, changeProduct, productId, avgRating, productI
 //     ratings: PropTypes.number,
 //     url: PropTypes.string,
 //   })).isRequired,
+//   changeProduct: PropTypes.func,
+//   productId: PropTypes.number.isRequired,
+//   productInfo: PropTypes.shape({
+//     id: PropTypes.number,
+//     campus: PropTypes.string,
+//     name: PropTypes.string,
+//     slogan: PropTypes.string,
+//     description: PropTypes.string,
+//     category: PropTypes.string,
+//     default_price: PropTypes.string,
+//     created_at: PropTypes.string,
+//     updated_at: PropTypes.string,
+//     features: PropTypes.arrayOf(PropTypes.shape({
+//       feature: PropTypes.string,
+//       value: PropTypes.string,
+//     })),
+//   }),
+//   reviewMeta: PropTypes.shape({
+//     characterists: PropTypes.shape({
+//       Comfort: PropTypes.shape({
+//         id: PropTypes.number,
+//         value: PropTypes.number,
+//       }),
+//       Fit: PropTypes.shape({
+//         id: PropTypes.number,
+//         value: PropTypes.number,
+//       }),
+//       Length: PropTypes.shape({
+//         id: PropTypes.number,
+//         value: PropTypes.number,
+//       }),
+//       Quality: PropTypes.shape({
+//         id: PropTypes.number,
+//         value: PropTypes.number,
+//       }),
+//     }),
+//     product_id: PropTypes.string,
+//     rating: PropTypes.shape({
+//       3: PropTypes.number,
+//       4: PropTypes.number,
+//       5: PropTypes.number,
+//     }),
+//     recommended: PropTypes.shape({
+//       false: PropTypes.string,
+//       true: PropTypes.string,
+//     }),
+//   }),
+//   selectedStyle: PropTypes.shape({
+//     style_id: PropTypes.number,
+//     name: PropTypes.string,
+//     original_price: PropTypes.string,
+//     sale_price: PropTypes.oneOfType([
+//       PropTypes.string,
+//       PropTypes.object,
+//     ]),
+//     'default?': PropTypes.bool,
+//     photos: PropTypes.arrayOf(PropTypes.shape(
+//       {
+//         thumbnail_url: PropTypes.string,
+//         url: PropTypes.string,
+//       },
+//     )),
+//     skus: PropTypes.objectOf(
+//       PropTypes.shape({
+//         quantity: PropTypes.number.isRequired,
+//         size: PropTypes.string.isRequired,
+//       }),
+//     ),
+//   }),
+// };
+
+// RelatedController.defaultProps = {
+//   changeProduct: PropTypes.null,
+//   productInfo: PropTypes.null,
+//   reviewMeta: PropTypes.null,
+//   selectedStyle: PropTypes.null,
 // };
 
 export default RelatedController;

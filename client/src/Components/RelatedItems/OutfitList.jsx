@@ -7,32 +7,36 @@ const OutfitList = ({
   outfit,
   selectedStyle,
   deleteItem,
-  outfitArr,
 }) => outfit.map((item, i) => (
-  <div>
+  <div key={item.style.style_id}>
     <Outfit
-      key={item[1].id}
       index={i}
       item={item}
       deleteItem={deleteItem}
       selectedStyle={selectedStyle}
-      outfitArr={outfitArr}
     />
   </div>
 ));
 
 // OutfitList.propTypes = {
-//   outfit: PropTypes.arrayOf().isRequired,
-//   selectedStyle: PropTypes.shape({
-//     style_id: PropTypes.number,
-//     name: PropTypes.string,
-//     original_price: PropTypes.string,
-//     sale_price: PropTypes.oneOfType([
-//       PropTypes.string,
-//       PropTypes.object,
-//     ]),
-//   }).isRequired,
+//   outfit: PropTypes.arrayOf(PropTypes.shape({
+//     style: PropTypes.shape({
+//       style_id: PropTypes.number,
+//       name: PropTypes.string,
+//       original_price: PropTypes.string,
+//       sale_price: PropTypes.oneOfType([
+//         PropTypes.string,
+//         PropTypes.object,
+//       ]),
+//     }),
+//   })),
 //   newItem: PropTypes.func.isRequired,
+
 // };
+
+Outfit.defaultProps = {
+  outfit: [],
+  // selectedStyle: PropTypes.null,
+};
 
 export default OutfitList;

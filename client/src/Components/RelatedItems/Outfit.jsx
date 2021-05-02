@@ -1,6 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Stars from './Stars';
 
 const ListItem = styled.div`
@@ -48,9 +50,9 @@ const DeleteBtn = styled.div`
   z-index: 1;
 `;
 
-const Outfit = ({ item, deleteItem, index, }) => {
+const Outfit = ({ item, deleteItem, index }) => {
   const noPic = 'https://i.ytimg.com/vi/-Cv68B-F5B0/maxresdefault.jpg';
-  const url = item[1] ? item[1].photos[0].thumbnail_url : noPic;
+  const url = item.style ? item.style.photos[0].thumbnail_url : noPic;
 
   return (
     <ListItem role="listitem">
@@ -58,54 +60,64 @@ const Outfit = ({ item, deleteItem, index, }) => {
       <Image src={url} alt="carousel-item" />
       <div className="carousel-item-body">
         <Category className="item-body-category">
-          {item[3].category}
+          {item.info.category}
         </Category>
-        <Name>{item[2].name}</Name>
-        <Price>{`Today: $${item[3].default_price}`}</Price>
-        <Stars stars={item[2].ratings} />
+        <Name>{item.info.name}</Name>
+        <Price>{`Today: $${item.info.default_price}`}</Price>
+        <Stars stars={item.meta.ratings} />
       </div>
     </ListItem>
   );
 };
 
-Outfit.propTypes = {
-  item: PropTypes.arrayOf(PropTypes.shape({
-    photos: PropTypes.shape(),
-    product_id: PropTypes.number,
-    category: PropTypes.string,
-    name: PropTypes.string,
-    default_price: PropTypes.number,
-    ratings: PropTypes.number,
-    find: PropTypes.func,
-  })).isRequired,
-  selectedStyle: PropTypes.shape({
-    style_id: PropTypes.number,
-    name: PropTypes.string,
-    original_price: PropTypes.string,
-    sale_price: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    'default?': PropTypes.bool,
-    photos: PropTypes.arrayOf(PropTypes.shape(
-      {
-        thumbnail_url: PropTypes.string,
-        url: PropTypes.string,
-      },
-    )),
-    skus: PropTypes.objectOf(
-      PropTypes.shape({
-        quantity: PropTypes.number.isRequired,
-        size: PropTypes.string.isRequired,
-      }),
-    ),
-  }),
-  deleteItem: PropTypes.func,
-};
+// Outfit.propTypes = {
+//   item: PropTypes.PropTypes.shape({
+//     style: PropTypes.shape({
+//       photos: PropTypes.arrayOf(PropTypes.shape({
+//         thumbnail_url: PropTypes.string,
+//       })),
+//     }),
+//     info: PropTypes.shape({
+//       product_id: PropTypes.number,
+//       category: PropTypes.string,
+//       name: PropTypes.string,
+//       default_price: PropTypes.string,
+//     }),
+//     meta: PropTypes.shape({
+//       ratings: PropTypes.object,
+//     }),
+//     find: PropTypes.func,
+//   }).isRequired,
+//   style: PropTypes.shape({
+//     style_id: PropTypes.number,
+//     name: PropTypes.string,
+//     original_price: PropTypes.string,
+//     sale_price: PropTypes.oneOfType([
+//       PropTypes.string,
+//       PropTypes.object,
+//     ]),
+//     'default?': PropTypes.bool,
+//     photos: PropTypes.arrayOf(PropTypes.shape(
+//       {
+//         thumbnail_url: PropTypes.string,
+//         url: PropTypes.string,
+//       },
+//     )),
+//     skus: PropTypes.objectOf(
+//       PropTypes.shape({
+//         quantity: PropTypes.number,
+//         size: PropTypes.string,
+//       }),
+//     ),
+//   }),
+//   deleteItem: PropTypes.func,
+//   index: PropTypes.number.isRequired,
+// };
 
-Outfit.defaultProps = {
-  selectedStyle: null,
-  deleteItem: null,
-};
+// Outfit.defaultProps = {
+//   style: null,
+//   deleteItem: null,
+
+// };
 
 export default Outfit;

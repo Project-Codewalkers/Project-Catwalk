@@ -18,7 +18,7 @@ const ImageGallery = ({ style }) => {
     setSelectedPhoto(style && style.photos[0]);
   }, [style]);
 
-  const imgURL = (selectedPhoto && selectedPhoto.url) ? selectedPhoto.url : '';
+  const imgURL = (selectedPhoto && selectedPhoto.thumbnail_url) ? selectedPhoto.thumbnail_url : '';
   return (
     <StyledDefaultImage imgURL={imgURL} data-testid="defaultImage">
       <ImageThumbnails

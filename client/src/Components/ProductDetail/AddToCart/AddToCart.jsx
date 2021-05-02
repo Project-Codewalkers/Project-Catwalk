@@ -5,6 +5,7 @@ import SizeSelector from './SizeSelector';
 import QtySelector from './QtySelector';
 import AddToBagButton from './AddToBagButton';
 import StarButton from './StarButton';
+import SocialMedia from './SocialMedia';
 import api from '../../../lib/api';
 
 const PleaseSelect = styled.div`
@@ -65,6 +66,7 @@ const AddToCart = ({ skusObj, productId }) => {
         )}
         <StarButton />
       </div>
+      <SocialMedia />
     </div>
   );
 };
