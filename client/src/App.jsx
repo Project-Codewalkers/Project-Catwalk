@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import ProductDetail from './Components/ProductDetail/ProductDetail';

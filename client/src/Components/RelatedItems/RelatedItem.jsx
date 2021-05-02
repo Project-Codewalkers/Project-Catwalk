@@ -53,7 +53,7 @@ const ModalSwap = styled.div`
 `;
 
 const RelatedItem = ({
-  item, changeProduct, avgRating, productInfo, reviewMeta, selectedStyle,
+  item, changeProduct, productInfo, reviewMeta, selectedStyle,
 }) => {
   const [modalSwitch, setModalSwitch] = useState(false);
   // url
@@ -88,7 +88,7 @@ const RelatedItem = ({
   return (
     <ListItem>
       <ModalSwap onClick={switcher}>&#9733;</ModalSwap>
-      <Image src={url} alt="carousel-item" onClick={() => (changeProduct(item[1].product_id))} role="listitem" />
+      <Image src={url} alt="carousel-item" onClick={() => (changeProduct(Number(item[1].product_id)))} role="listitem" />
       <Category>{item[2].category}</Category>
       <Name>{item[2].name}</Name>
       <Price>{`Today: $${item[2].default_price}`}</Price>
@@ -97,7 +97,6 @@ const RelatedItem = ({
         item={item}
         modalSwitch={modalSwitch}
         setModalSwitch={setModalSwitch}
-        avgRating={avgRating}
         productInfo={productInfo}
         reviewMeta={reviewMeta}
         selectedStyle={selectedStyle}
@@ -117,15 +116,106 @@ const RelatedItem = ({
   );
 };
 
-// OneItem.propTypes = {
-//   item: PropTypes.shape({
+// RelatedItem.propTypes = {
+//   item: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
+//     photos: PropTypes.arrayOf(PropTypes.shape({
+//       thumbnail_url: PropTypes.string,
+//       url: PropTypes.string,
+//     })),
+//   })),
+//   PropTypes.objectOf({
+//     characteristics: PropTypes.shape({
+//       Fit: PropTypes.shape({}),
+//       Comfort: PropTypes.shape({}),
+//       Quality: PropTypes.shape({}),
+//       Length: PropTypes.shape({}),
+//     }),
+//   })).isRequired,
+//   find: PropTypes.func,
+//   product_id: PropTypes.number,
+//   name: PropTypes.string,
+//   default_price: PropTypes.string,
+//   id: PropTypes.number,
+//   category: PropTypes.string,
+//   product_name: PropTypes.string,
+//   price: PropTypes.number,
+//   stars: PropTypes.number,
+//   image: PropTypes.string,
+//   changeProduct: PropTypes.func.isRequired,
+// selectedStyle: PropTypes.shape({
+//   style_id: PropTypes.number,
+//   name: PropTypes.string,
+//   original_price: PropTypes.string,
+//   sale_price: PropTypes.oneOfType([
+//     PropTypes.string,
+//     PropTypes.object,
+//   ]),
+//   'default?': PropTypes.bool,
+//   photos: PropTypes.arrayOf(PropTypes.shape(
+//     {
+//       thumbnail_url: PropTypes.string,
+//       url: PropTypes.string,
+//     },
+//   )),
+//   skus: PropTypes.objectOf(
+//     PropTypes.shape({
+//       quantity: PropTypes.number.isRequired,
+//       size: PropTypes.string.isRequired,
+//     }),
+//   ),
+// }),
+// reviewMeta: PropTypes.shape({
+//   characterists: PropTypes.shape({
+//     Comfort: PropTypes.shape({
+//       id: PropTypes.number,
+//       value: PropTypes.number,
+//     }),
+//     Fit: PropTypes.shape({
+//       id: PropTypes.number,
+//       value: PropTypes.number,
+//     }),
+//     Length: PropTypes.shape({
+//       id: PropTypes.number,
+//       value: PropTypes.number,
+//     }),
+//     Quality: PropTypes.shape({
+//       id: PropTypes.number,
+//       value: PropTypes.number,
+//     }),
+//   }),
+//   product_id: PropTypes.string,
+//   rating: PropTypes.shape({
+//     3: PropTypes.number,
+//     4: PropTypes.number,
+//     5: PropTypes.number,
+//   }),
+//   recommended: PropTypes.shape({
+//     false: PropTypes.string,
+//     true: PropTypes.string,
+//   }),
+// }),
+//   productInfo: PropTypes.shape({
 //     id: PropTypes.number,
+//     campus: PropTypes.string,
+//     name: PropTypes.string,
+//     slogan: PropTypes.string,
+//     description: PropTypes.string,
 //     category: PropTypes.string,
-//     product_name: PropTypes.string,
-//     price: PropTypes.number,
-//     stars: PropTypes.number,
-//     image: PropTypes.string,
-//   }).isRequired,
+//     default_price: PropTypes.string,
+//     created_at: PropTypes.string,
+//     updated_at: PropTypes.string,
+//     features: PropTypes.arrayOf(PropTypes.shape({
+//       feature: PropTypes.string,
+//       value: PropTypes.string,
+//     })),
+//   }),
+// };
+
+// RelatedItem.defaultProps = {
+//   productInfo: PropTypes.null,
+//   reviewMeta: PropTypes.null,
+//   selectedStyle: PropTypes.null,
+//   find: PropTypes.null,
 // };
 
 export default RelatedItem;

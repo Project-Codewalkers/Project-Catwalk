@@ -1,18 +1,17 @@
 /* eslint-disable max-len */
-/* eslint-disable react/prop-types */
+/* esling-disable react/prop-types */
 import React from 'react';
+// import PropTypes from 'prop-types';
 import RelatedItem from './RelatedItem';
 
 const RelatedItemsList = ({
-  data, changeProduct, productId, avgRating, productInfo, selectedStyle, reviewMeta,
+  data, changeProduct, productId, productInfo, selectedStyle, reviewMeta,
 }) => data.map((item) => (
-  <div>
+  <div key={item[0][0].style_id + 2}>
     <RelatedItem
-      key={item[2].product_id}
       item={item}
       changeProduct={changeProduct}
       productId={productId}
-      avgRating={avgRating}
       productInfo={productInfo}
       reviewMeta={reviewMeta}
       selectedStyle={selectedStyle}
@@ -29,6 +28,10 @@ const RelatedItemsList = ({
 //     stars: PropTypes.number,
 //     image: PropTypes.string,
 //   })).isRequired,
+// };
+
+// RelatedItemsList.propTypes = {
+//   item: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({}))),
 // };
 
 export default RelatedItemsList;
