@@ -23,3 +23,5 @@ node_modules/
 
 # Private Token
 /server/config.js
+
+package-lock.json
